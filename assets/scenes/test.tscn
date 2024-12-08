@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgge5vyx1ibdk"]
+[gd_scene load_steps=4 format=3 uid="uid://cgge5vyx1ibdk"]
 
 [ext_resource type="Texture2D" uid="uid://2tgqwirevaog" path="res://assets/tempAssets/member-superlative-certificate_duo-1.png" id="1_s17bp"]
-[ext_resource type="Texture2D" uid="uid://70ypirtyon6o" path="res://assets/tempAssets/clothing1.png" id="2_fxjq2"]
-[ext_resource type="Texture2D" uid="uid://dugj52snndt4h" path="res://assets/tempAssets/clothing2.png" id="3_yjhnq"]
-[ext_resource type="Texture2D" uid="uid://gmubw8y7s3i0" path="res://assets/tempAssets/clothing3.png" id="4_fjkb0"]
-[ext_resource type="Texture2D" uid="uid://b255tolcj0hwk" path="res://assets/tempAssets/clothing4.png" id="5_ertwi"]
-[ext_resource type="Texture2D" uid="uid://u62yflmx5yjp" path="res://assets/tempAssets/clothing5.png" id="6_xowlt"]
+[ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="3_v75vj"]
 [ext_resource type="Script" path="res://assets/tempAssets/Conductor.gd" id="7_xejf7"]
 
 [node name="TestScene" type="Node2D"]
@@ -47,66 +43,9 @@ shortcut_keys_enabled = false
 
 [node name="ItemCanvas" type="CanvasLayer" parent="BaseCanvas"]
 
-[node name="ItemList" type="ItemList" parent="BaseCanvas/ItemCanvas"]
-offset_top = 646.0
-offset_right = 1922.0
-offset_bottom = 1170.0
-select_mode = 1
-item_count = 2
-max_columns = 3
-item_0/icon = ExtResource("2_fxjq2")
+[node name="Button" type="Button" parent="BaseCanvas/ItemCanvas"]
+offset_right = 8.0
+offset_bottom = 8.0
 
-[node name="Button" type="Button" parent="BaseCanvas/ItemCanvas/ItemList"]
-visible = false
-offset_left = 98.0
-offset_top = 112.0
-offset_right = 354.0
-offset_bottom = 368.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("2_fxjq2")
-expand_icon = true
-
-[node name="Button2" type="Button" parent="BaseCanvas/ItemCanvas/ItemList"]
-visible = false
-offset_left = 525.0
-offset_top = 116.0
-offset_right = 781.0
-offset_bottom = 372.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("3_yjhnq")
-expand_icon = true
-
-[node name="Button3" type="Button" parent="BaseCanvas/ItemCanvas/ItemList"]
-visible = false
-offset_left = 924.0
-offset_top = 118.0
-offset_right = 1180.0
-offset_bottom = 374.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("4_fjkb0")
-expand_icon = true
-
-[node name="Button4" type="Button" parent="BaseCanvas/ItemCanvas/ItemList"]
-visible = false
-offset_left = 1306.0
-offset_top = 120.0
-offset_right = 1562.0
-offset_bottom = 376.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("5_ertwi")
-expand_icon = true
-
-[node name="Button5" type="Button" parent="BaseCanvas/ItemCanvas/ItemList"]
-visible = false
-offset_left = 1629.0
-offset_top = 120.0
-offset_right = 1885.0
-offset_bottom = 376.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("6_xowlt")
-expand_icon = true
+[node name="Clothing" parent="." instance=ExtResource("3_v75vj")]
+position = Vector2(-468, 170)
