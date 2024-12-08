@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl83tqtg4c65f"]
+[gd_scene load_steps=6 format=3 uid="uid://bl83tqtg4c65f"]
 
+[ext_resource type="Script" path="res://assets/scripts/beginning_cutscene.gd" id="1_be16r"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="1_pmglt"]
 [ext_resource type="Texture2D" uid="uid://lcojy48jynn6" path="res://assets/art/player-textbox.png" id="1_v3egn"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_5whev"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="3_1fjkw"]
 
 [node name="BeginningCutscene" type="Node2D"]
+script = ExtResource("1_be16r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_v3egn")
 
-[node name="DialogueText" type="RichTextLabel" parent="CanvasLayer"]
+[node name="SpeakerText" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -31,15 +33,31 @@ anchor_bottom = 1.0
 offset_left = -925.0
 offset_top = -368.0
 offset_right = 925.0
+offset_bottom = -289.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/bold_font = ExtResource("3_1fjkw")
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[b]Speaker Name[/b]"
+
+[node name="DialogueText" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -925.0
+offset_top = -287.0
+offset_right = 925.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("2_5whev")
-theme_override_fonts/bold_font = ExtResource("3_1fjkw")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[font_size=60][b]Player Name[/b][/font_size]
-
-[font_size=42]Insert text here! I like to eat beans! Rehehehehe![/font_size]"
+text = "Insert text here! I like to eat beans! Rehehehehe!"
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
