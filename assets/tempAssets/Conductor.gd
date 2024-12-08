@@ -7,23 +7,28 @@ var item_grid
 
 #TODO: add colors and attributes to each clothing
 var clothes = [
-	{"name": "Plain Yellow Shirt", "file": "clothing1.png", "cost": 15},
-	{"name": "Plain Orange Dress", "file": "clothing2.png", "cost": 30},
-	{"name": "Shiny Blue Thingy", "file": "clothing3.png", "cost": 100},
-	{"name": "IDK what this is", "file": "clothing4.png", "cost": 69},
-	{"name": "Silly Stupid PJs", "file": "clothing5.png", "cost": 22},
+	{"name": "Plain Yellow Shirt", "file": "clothing1.png", "cost": 15, "attributes": [Enums.Attributes.SIMPLE], "colors": [Enums.Colors.YELLOW]},
+	{"name": "Plain Orange Dress", "file": "clothing2.png", "cost": 30, "attributes": [Enums.Attributes.CUTE, Enums.Attributes.SIMPLE], "colors": [Enums.Colors.ORANGE]},
+	{"name": "Shiny Blue Thingy", "file": "clothing3.png", "cost": 100, "attributes": [Enums.Attributes.ELEGANT], "colors": [Enums.Colors.BLUE]},
+	{"name": "IDK what this is", "file": "clothing4.png", "cost": 69, "attributes": [Enums.Attributes.SILLY], "colors": [Enums.Colors.RED, Enums.Colors.BLUE]},
+	{"name": "Silly Stupid PJs", "file": "clothing5.png", "cost": 22, "attributes": [Enums.Attributes.SILLY], "colors": [Enums.Colors.BLUE]},
 ]
 var clothes_full
 
 var available_clothes = []
-var selected_attributes = []
-var selected_colors = []
+var selected_clothes = []
+var remaining_attributes = []
+var remaining_colors = []
 
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 var player = Player.new("")
 
+var current_cost: int
+var current_client: Client
+
 # Cutscene Flags
 var first_play_flag = false
+var is_player_turn = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,14 +47,12 @@ func _ready() -> void:
 	# Start game
 	get_node("NameCanvas").visible = false
 	$ItemCanvas.visible = false
+	$HUD.visible = false
 
 
-func create_clothing_item(clothing_name, img_file, cost):
+func create_clothing_item(clothing_name: String, img_file: String, cost: int, attributes: Array, colors: Array):
 	var clothing_instance: Clothing = clothing_prefab.instantiate()
-	clothing_instance.clothing_name = clothing_name
-	clothing_instance.file = img_file
-	clothing_instance.cost = cost
-	# add_child(clothing_instance)
+	clothing_instance.setup(clothing_name, img_file, cost, attributes, colors)
 	available_clothes.append(clothing_instance)
 
 func reset_clothes():
@@ -59,7 +62,7 @@ func randomize_clothing(num_clothes):
 	clothes.shuffle()
 	for i in num_clothes:
 		var random_clothing = clothes.pop_front()
-		create_clothing_item(random_clothing["name"], random_clothing["file"], random_clothing["cost"])
+		create_clothing_item(random_clothing["name"], random_clothing["file"], random_clothing["cost"], random_clothing["attributes"], random_clothing["colors"])
 
 func display_available_clothes():
 	for n in item_grid.get_children():
@@ -72,11 +75,18 @@ func display_available_clothes():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (not first_play_flag):
+	if not first_play_flag:
 		first_play()
 		first_play_flag = true
 	
 	$HUD/WalletText.text = "$" + str(player.wallet)
+	
+	calculate_current_cost()
+	$HUD/WalletText.text += "\nCurrent Cost: $" + str(current_cost)
+	
+	if is_player_turn:
+		play_game()
+		is_player_turn = false
 
 func first_play():
 	await _wait(1.5)
@@ -106,11 +116,58 @@ func setup_game():
 	randomize_clothing(3)
 	display_available_clothes()
 	
-	var client = Client.new("Bagel", 30)
-	client.set_attribute_needs([Enums.Attributes.SILLY, Enums.Attributes.CUTE])
-	client.set_color_needs([Enums.Colors.GREEN])
+	current_client = Client.new("Bagel", 30, [Enums.Attributes.SILLY, Enums.Attributes.CUTE], [Enums.Colors.BLUE])
+	remaining_attributes.clear()
+	remaining_attributes = current_client.attribute_needs.duplicate()
+	remaining_colors.clear()
+	remaining_colors = current_client.color_needs.duplicate()
 	
+	is_player_turn = true
+	current_cost = 0
+	$HUD.visible = true
+
+func play_game():
+	await $HUD/ConfirmButton.pressed
 	
+	if current_cost > player.wallet:
+		_set_text("bruh u dont have enough money L!!!! TRY AGAIN!")
+		play_game()
+		return
+	
+	_set_text("ok u have enough money. cha-ching!")
+	player.wallet -= current_cost
+	$ItemCanvas.visible = false
+	for c in available_clothes:
+		if c.is_selected:
+			selected_clothes.append(c)
+	
+	for att: Enums.Attributes in current_client.attribute_needs:
+		for c: Clothing in selected_clothes:
+			if c.has_attribute(att) and att in remaining_attributes:
+				remaining_attributes.remove_at(remaining_attributes.find(att))
+				#print("found attribute!")
+				break
+	
+	for col: Enums.Colors in current_client.color_needs:
+		for c: Clothing in selected_clothes:
+			if c.has_color(col) and col in remaining_colors:
+				remaining_colors.remove_at(remaining_colors.find(col))
+				#print("found color!")
+				break
+	
+	var is_satisfied = remaining_attributes.is_empty() and remaining_colors.is_empty()
+	await _wait(2.0)
+	if (is_satisfied):
+		_set_text(current_client.name + ": \"omg i love these ty!\"")
+	else:
+		_set_text(current_client.name + ": \"GRRRR u did not satisfy me. perish\"")
+	
+
+func calculate_current_cost():
+	current_cost = 0
+	for c in available_clothes:
+		if c.is_selected:
+			current_cost += c.cost
 
 func _wait(seconds: float):
 	await get_tree().create_timer(seconds).timeout

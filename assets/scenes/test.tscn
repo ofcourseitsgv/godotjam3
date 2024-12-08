@@ -106,6 +106,7 @@ visible = false
 layout_mode = 2
 
 [node name="HUD" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="WalletText" type="RichTextLabel" parent="HUD"]
 offset_right = 539.0
@@ -124,5 +125,20 @@ bbcode_enabled = true
 text = "$100"
 fit_content = true
 shortcut_keys_enabled = false
+
+[node name="ConfirmButton" type="Button" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.5
+offset_top = -133.0
+offset_right = 76.5
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 37
+text = "Confirm"
 
 [node name="Camera2D" type="Camera2D" parent="."]

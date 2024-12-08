@@ -19,6 +19,7 @@ offset_left = -150.0
 offset_right = 150.0
 offset_bottom = 300.0
 grow_horizontal = 2
+toggle_mode = true
 icon = ExtResource("2_skdsn")
 icon_alignment = 1
 expand_icon = true
@@ -38,4 +39,4 @@ bbcode_enabled = true
 text = "[center]Insert Clothing Name Here
 $0[/center]"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
