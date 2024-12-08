@@ -1,4 +1,4 @@
-class_name Clothing extends Node2D
+class_name Clothing extends Control
 
 var clothing_name := "Clothing Name"
 var file := "clothing1.png"

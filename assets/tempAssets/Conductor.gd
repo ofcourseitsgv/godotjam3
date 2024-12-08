@@ -1,13 +1,16 @@
 extends Node
 
+# Node references
 var textbox
+var item_canvas
+var item_grid
 
 var clothes = [
-	{"name": "Plain Yellow Shirt", "file": "clothing1.png"},
-	{"name": "Plain Orange Dress", "file": "clothing2.png"},
-	{"name": "Shiny Blue Thingy", "file": "clothing3.png"},
-	{"name": "IDK what this is", "file": "clothing4.png"},
-	{"name": "Silly Stupid PJs", "file": "clothing5.png"},
+	{"name": "Plain Yellow Shirt", "file": "clothing1.png", "cost": 15},
+	{"name": "Plain Orange Dress", "file": "clothing2.png", "cost": 30},
+	{"name": "Shiny Blue Thingy", "file": "clothing3.png", "cost": 100},
+	{"name": "IDK what this is", "file": "clothing4.png", "cost": 69},
+	{"name": "Silly Stupid PJs", "file": "clothing5.png", "cost": 22},
 ]
 var clothes_full
 
@@ -15,12 +18,13 @@ var available_clothes = []
 
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
 
 	textbox = get_node("BaseCanvas/Text")
+	item_canvas = get_node("ItemCanvas")
+	item_grid = get_node("ItemCanvas/HBoxContainer")
 
 	textbox.text = "[center]Let's get it started![/center]"
 
@@ -28,21 +32,17 @@ func _ready() -> void:
 	reset_clothes()
 
 	# Start game
-
-	var new_clothing = clothing_prefab.instantiate()
-	new_clothing.clothing_name = "Plain Yellow Shirt"
-	new_clothing.file = "clothing1.png"
-	new_clothing.cost = 15
-	add_child(new_clothing)
-	# randomize_clothing(3)
+	randomize_clothing(3)
+	display_available_clothes()
 
 
-func create_clothing_item(clothing_name, img_path):
-	var texture = load("res://assets/tempAssets/" + img_path)
-	var button = Button.new()
-	button.text = clothing_name
-	button.icon = texture
-	add_child(button)
+func create_clothing_item(clothing_name, img_file, cost):
+	var clothing_instance: Clothing = clothing_prefab.instantiate()
+	clothing_instance.clothing_name = clothing_name
+	clothing_instance.file = img_file
+	clothing_instance.cost = cost
+	# add_child(clothing_instance)
+	available_clothes.append(clothing_instance)
 
 func reset_clothes():
 	clothes = clothes_full.duplicate()
@@ -51,9 +51,21 @@ func randomize_clothing(num_clothes):
 	clothes.shuffle()
 	for i in num_clothes:
 		var random_clothing = clothes.pop_front()
-		create_clothing_item(random_clothing["name"], random_clothing["file"])
-	
+		create_clothing_item(random_clothing["name"], random_clothing["file"], random_clothing["cost"])
 
+func display_available_clothes():
+	for n in item_grid.get_children():
+		item_grid.remove_child(n)
+		n.queue_free()
+
+	for c in available_clothes:
+		# var control = Control.new()
+		# control.custom_minimum_size = Vector2(400, 0)
+		# item_grid.add_child(control)
+		# control.add_child(c)
+		item_grid.add_child(c)
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta: float) -> void:
 # 	pass

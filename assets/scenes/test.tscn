@@ -41,11 +41,30 @@ text = "[center]Hello chat! how's it going?[/center]"
 fit_content = true
 shortcut_keys_enabled = false
 
-[node name="ItemCanvas" type="CanvasLayer" parent="BaseCanvas"]
+[node name="ItemCanvas" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="Button" type="Button" parent="BaseCanvas/ItemCanvas"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemCanvas"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -806.0
+offset_top = -500.0
+offset_right = 806.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
 
-[node name="Clothing" parent="." instance=ExtResource("3_v75vj")]
-position = Vector2(-468, 170)
+[node name="Clothing" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+layout_mode = 2
+
+[node name="Clothing2" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+layout_mode = 2
+
+[node name="Clothing3" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+layout_mode = 2
+
+[node name="Clothing4" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+layout_mode = 2
