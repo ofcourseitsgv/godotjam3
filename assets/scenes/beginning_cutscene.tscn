@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl83tqtg4c65f"]
+
+[ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="1_pmglt"]
+
+[node name="BeginningCutscene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.485703, 0.485704, 0.485703, 1)
+scale = Vector2(1.175, 1.175)
+texture = ExtResource("1_pmglt")
