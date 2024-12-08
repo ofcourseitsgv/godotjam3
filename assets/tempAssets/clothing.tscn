@@ -37,3 +37,5 @@ theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[center]Insert Clothing Name Here
 $0[/center]"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

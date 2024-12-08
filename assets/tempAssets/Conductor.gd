@@ -31,6 +31,8 @@ func _ready() -> void:
 	clothes_full = clothes.duplicate()
 	reset_clothes()
 
+	var player = Player.new("Name")
+
 	# Start game
 	randomize_clothing(3)
 	display_available_clothes()
@@ -59,10 +61,6 @@ func display_available_clothes():
 		n.queue_free()
 
 	for c in available_clothes:
-		# var control = Control.new()
-		# control.custom_minimum_size = Vector2(400, 0)
-		# item_grid.add_child(control)
-		# control.add_child(c)
 		item_grid.add_child(c)
 	
 	

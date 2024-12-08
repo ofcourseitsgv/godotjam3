@@ -58,13 +58,17 @@ grow_vertical = 0
 alignment = 1
 
 [node name="Clothing" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+visible = false
 layout_mode = 2
 
 [node name="Clothing2" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+visible = false
 layout_mode = 2
 
 [node name="Clothing3" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+visible = false
 layout_mode = 2
 
 [node name="Clothing4" parent="ItemCanvas/HBoxContainer" instance=ExtResource("3_v75vj")]
+visible = false
 layout_mode = 2
