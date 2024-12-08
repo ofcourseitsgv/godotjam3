@@ -5,6 +5,7 @@ var textbox
 var item_canvas
 var item_grid
 
+#TODO: add colors and attributes to each clothing
 var clothes = [
 	{"name": "Plain Yellow Shirt", "file": "clothing1.png", "cost": 15},
 	{"name": "Plain Orange Dress", "file": "clothing2.png", "cost": 30},
@@ -15,6 +16,8 @@ var clothes = [
 var clothes_full
 
 var available_clothes = []
+var selected_attributes = []
+var selected_colors = []
 
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 var player = Player.new("")
@@ -33,15 +36,12 @@ func _ready() -> void:
 	textbox.text = "[center]Let's get it started![/center]"
 
 	clothes_full = clothes.duplicate()
-	#reset_clothes()
 
 	var player = Player.new("Name")
 
 	# Start game
 	get_node("NameCanvas").visible = false
 	$ItemCanvas.visible = false
-	#randomize_clothing(3)
-	#display_available_clothes()
 
 
 func create_clothing_item(clothing_name, img_file, cost):
@@ -97,11 +97,20 @@ func first_play():
 	await _wait(2.0)
 	_set_text("")
 	
+	setup_game()
+	$ItemCanvas.visible = true
+	_set_text("Random clothes. Each have stuff. Lol!")
+
+func setup_game():
 	reset_clothes()
 	randomize_clothing(3)
 	display_available_clothes()
-	$ItemCanvas.visible = true
-	_set_text("Random clothes. Each have stuff. Lol!")
+	
+	var client = Client.new("Bagel", 30)
+	client.set_attribute_needs([Enums.Attributes.SILLY, Enums.Attributes.CUTE])
+	client.set_color_needs([Enums.Colors.GREEN])
+	
+	
 
 func _wait(seconds: float):
 	await get_tree().create_timer(seconds).timeout

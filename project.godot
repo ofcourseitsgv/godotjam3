@@ -15,6 +15,10 @@ run/main_scene="res://assets/scenes/test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Enums="*res://assets/scripts/enums.gd"
+
 [display]
 
 window/size/viewport_width=1920

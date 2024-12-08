@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgge5vyx1ibdk"]
 
-[ext_resource type="Texture2D" uid="uid://2tgqwirevaog" path="res://assets/tempAssets/member-superlative-certificate_duo-1.png" id="1_s17bp"]
+[ext_resource type="Texture2D" uid="uid://da0l37pyok3vm" path="res://assets/tempAssets/169814-landscape-Dubai-city-night.jpg" id="2_axpor"]
 [ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="3_v75vj"]
 [ext_resource type="Script" path="res://assets/tempAssets/Conductor.gd" id="7_xejf7"]
 
@@ -9,8 +9,8 @@ script = ExtResource("7_xejf7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.647059, 0.647059, 0.647059, 0.631373)
-position = Vector2(960, 540)
-texture = ExtResource("1_s17bp")
+scale = Vector2(0.511272, 0.499532)
+texture = ExtResource("2_axpor")
 
 [node name="BaseCanvas" type="CanvasLayer" parent="."]
 
@@ -124,3 +124,5 @@ bbcode_enabled = true
 text = "$100"
 fit_content = true
 shortcut_keys_enabled = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
