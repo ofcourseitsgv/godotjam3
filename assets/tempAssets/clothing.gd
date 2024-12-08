@@ -15,4 +15,4 @@ func _ready() -> void:
 	var texture: Texture = load("res://assets/tempAssets/" + file)
 
 	_clothing_button.icon = texture
-	_clothing_text.text = "[center]" + clothing_name + "[/center]"
+	_clothing_text.text = "[center]" + clothing_name + "\n$" + str(cost) + "[/center]"
