@@ -5,4 +5,4 @@ static var wallet: int
 
 func _init(p_name):
 	name = p_name
-	wallet = 100
+	wallet = 101

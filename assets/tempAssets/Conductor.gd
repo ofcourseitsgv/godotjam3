@@ -17,6 +17,10 @@ var clothes_full
 var available_clothes = []
 
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
+var player = Player.new("")
+
+# Cutscene Flags
+var first_play_flag = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,13 +33,15 @@ func _ready() -> void:
 	textbox.text = "[center]Let's get it started![/center]"
 
 	clothes_full = clothes.duplicate()
-	reset_clothes()
+	#reset_clothes()
 
 	var player = Player.new("Name")
 
 	# Start game
-	randomize_clothing(3)
-	display_available_clothes()
+	get_node("NameCanvas").visible = false
+	$ItemCanvas.visible = false
+	#randomize_clothing(3)
+	#display_available_clothes()
 
 
 func create_clothing_item(clothing_name, img_file, cost):
@@ -65,5 +71,40 @@ func display_available_clothes():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta: float) -> void:
-# 	pass
+func _process(delta: float) -> void:
+	if (not first_play_flag):
+		first_play()
+		first_play_flag = true
+	
+	$HUD/WalletText.text = "$" + str(player.wallet)
+
+func first_play():
+	await _wait(1.5)
+	_set_text("Wait... What's your name again?")
+	await _wait(2.0)
+	var name_canvas = get_node("NameCanvas")
+	name_canvas.visible = true
+	await $NameCanvas/Button.pressed
+	
+	if ($NameCanvas/TextEdit.text == ""):
+		_set_text("Oh, you're nameless? Well... I'll give you a name! Hey Banksy!")
+		player.name = "Banksy"
+	else:
+		player.name = $NameCanvas/TextEdit.text
+		_set_text("Hi " + player.name + "! Let's tutorialize. *dabs*")
+	name_canvas.visible = false
+	
+	await _wait(2.0)
+	_set_text("")
+	
+	reset_clothes()
+	randomize_clothing(3)
+	display_available_clothes()
+	$ItemCanvas.visible = true
+	_set_text("Random clothes. Each have stuff. Lol!")
+
+func _wait(seconds: float):
+	await get_tree().create_timer(seconds).timeout
+
+func _set_text(text: String):
+	textbox.text = "[center]" + text + "[/center]"

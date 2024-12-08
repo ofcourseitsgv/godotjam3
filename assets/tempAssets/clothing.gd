@@ -16,7 +16,7 @@ func _ready() -> void:
 	var texture: Texture = load("res://assets/tempAssets/" + file)
 
 	clothing_button.icon = texture
-	clothing_text.text = "[center]" + clothing_name + "[/center]"
+	clothing_text.text = "[center]" + clothing_name + "\n$" + str(cost) + "[/center]"
 
 
 func _on_button_pressed() -> void:
