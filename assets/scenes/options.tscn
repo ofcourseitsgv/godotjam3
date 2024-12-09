@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkvxbw4kvdri6"]
+
+[ext_resource type="Script" path="res://assets/scripts/options.gd" id="1_1q0wv"]
+[ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="1_6kwev"]
+[ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_fehgc"]
+
+[node name="Options" type="Node"]
+script = ExtResource("1_1q0wv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleText" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -381.0
+offset_top = 36.0
+offset_right = 381.0
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_fonts/bold_font = ExtResource("1_6kwev")
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center][b]Options[/b][/center]"
+
+[node name="MusicVolText" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 269.0
+offset_top = 158.0
+offset_right = 773.0
+offset_bottom = 238.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_fehgc")
+theme_override_fonts/bold_font = ExtResource("1_6kwev")
+theme_override_font_sizes/normal_font_size = 55
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center]BGM Volume[/center]"
+
+[node name="MusicVol" type="HSlider" parent="CanvasLayer"]
+offset_left = 1199.0
+offset_top = 234.0
+offset_right = 1388.0
+offset_bottom = 275.0
+scale = Vector2(2.96, 2.96)
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SfxVolText" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 269.0
+offset_top = 438.0
+offset_right = 773.0
+offset_bottom = 518.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_fehgc")
+theme_override_fonts/bold_font = ExtResource("1_6kwev")
+theme_override_font_sizes/normal_font_size = 55
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center]SFX Volume[/center]"
+
+[node name="SfxVol" type="HSlider" parent="CanvasLayer"]
+offset_left = 1199.0
+offset_top = 520.0
+offset_right = 1388.0
+offset_bottom = 561.0
+scale = Vector2(2.96, 2.96)
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="TextSpeedDropdown" type="OptionButton" parent="CanvasLayer"]
+offset_left = 174.0
+offset_top = 240.0
+offset_right = 489.0
+offset_bottom = 319.0
+theme_override_fonts/font = ExtResource("2_fehgc")
+theme_override_font_sizes/font_size = 40
+selected = 0
+fit_to_longest_item = false
+item_count = 4
+popup/item_0/text = "Default"
+popup/item_1/text = "Fast"
+popup/item_1/id = 1
+popup/item_2/text = "Faster"
+popup/item_2/id = 2
+popup/item_3/text = "Instant"
+popup/item_3/id = 3
+
+[node name="TextSpeedText" type="RichTextLabel" parent="CanvasLayer/TextSpeedDropdown"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -254.5
+offset_top = -82.0
+offset_right = 249.5
+offset_bottom = -2.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_fehgc")
+theme_override_fonts/bold_font = ExtResource("1_6kwev")
+theme_override_font_sizes/normal_font_size = 55
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center]Text Speed[/center]"

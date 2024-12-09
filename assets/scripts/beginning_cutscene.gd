@@ -22,19 +22,30 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if $CanvasLayer/DialogueText.visible_characters < $CanvasLayer/DialogueText.get_total_character_count():
-		$CanvasLayer/DialogueText.visible_characters += 1
+		match GlobalOptions.text_speed:
+			GlobalOptions.TextSpeeds.FAST:
+				$CanvasLayer/DialogueText.visible_characters = min($CanvasLayer/DialogueText.get_total_character_count(), $CanvasLayer/DialogueText.visible_characters + 2)
+			GlobalOptions.TextSpeeds.FASTER:
+				$CanvasLayer/DialogueText.visible_characters = min($CanvasLayer/DialogueText.get_total_character_count(), $CanvasLayer/DialogueText.visible_characters + 3)
+			GlobalOptions.TextSpeeds.INSTANT:
+				$CanvasLayer/DialogueText.visible_characters = $CanvasLayer/DialogueText.get_total_character_count()
+			_:
+				$CanvasLayer/DialogueText.visible_characters += 1
 	
 	if Input.is_action_just_pressed("dialogue_key") and not dialogue_0_flag:
-		if $CanvasLayer/DialogueText.visible_characters >= $CanvasLayer/DialogueText.get_total_character_count():
-			current_line += 1
-			if current_line < dialogue_0.size():
-				$CanvasLayer/DialogueText.visible_characters = 0
-				$CanvasLayer/DialogueText.text = dialogue_0[current_line]
-			else:
-				print("finished dialogue_0")
-				dialogue_0_flag = true
-				$CanvasLayer.visible = false
-		else:
-			$CanvasLayer/DialogueText.visible_characters = $CanvasLayer/DialogueText.get_total_character_count()
+		progress_dialogue()
 	
+func progress_dialogue():
+	if $CanvasLayer/DialogueText.visible_characters >= $CanvasLayer/DialogueText.get_total_character_count():
+		current_line += 1
+		if current_line < dialogue_0.size():
+			$CanvasLayer/DialogueText.visible_characters = 0
+			$CanvasLayer/DialogueText.text = dialogue_0[current_line]
+		else:
+			print("finished dialogue_0")
+			dialogue_0_flag = true
+			$CanvasLayer.visible = false
+			get_tree().quit()
+	else:
+		$CanvasLayer/DialogueText.visible_characters = $CanvasLayer/DialogueText.get_total_character_count()
 	
