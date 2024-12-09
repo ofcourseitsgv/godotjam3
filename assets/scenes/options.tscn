@@ -8,6 +8,11 @@
 script = ExtResource("1_1q0wv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="TitleText" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 5

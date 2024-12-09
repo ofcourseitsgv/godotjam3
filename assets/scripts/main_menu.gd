@@ -16,18 +16,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time += delta * frequency
 	$Logo.position = logo_start_pos + Vector2(0, sin(time) * amplitude)
-
-# FIXME: figure out moving BG based on mouse position
-#func _input(event: InputEvent) -> void:
-	#if event is InputEventMouseMotion:
-		#print("mouse:", event.position)
-		#$Camera2D.position = -event.position
-		#print("camera:", $Camera2D.position)
-		
-
+	
+	$BGM.volume_db = linear_to_db(GlobalOptions.music_volume)
 
 func _on_options_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://assets/scenes/options.tscn")
+	#get_tree().change_scene_to_file("res://assets/scenes/options.tscn")
+	var options_screen = preload("res://assets/scenes/options.tscn").instantiate()
+	add_child(options_screen)
+	
+	
 
 
 func _on_start_button_pressed() -> void:

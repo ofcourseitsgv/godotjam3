@@ -14,4 +14,6 @@ func _process(delta: float) -> void:
 	GlobalOptions.sfx_volume = $CanvasLayer/SfxVol.value
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+		#get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+		self.queue_free()
+		

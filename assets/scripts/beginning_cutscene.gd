@@ -45,7 +45,7 @@ func progress_dialogue():
 			print("finished dialogue_0")
 			dialogue_0_flag = true
 			$CanvasLayer.visible = false
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
 	else:
 		$CanvasLayer/DialogueText.visible_characters = $CanvasLayer/DialogueText.get_total_character_count()
 	

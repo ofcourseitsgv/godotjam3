@@ -1,4 +1,7 @@
-class_name Shop
+extends Node
 
-static var name: String
-static var upgrades
+static var shop_name: String
+static var upgrades = []
+
+func _init() -> void:
+	shop_name = "Shop"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfx2cud6lkkex"]
+
+[ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
+
+[node name="Play" type="Node2D"]
+script = ExtResource("1_bq4hd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]

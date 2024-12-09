@@ -1,10 +1,10 @@
-class_name Player
+extends Node
 
-static var name: String
+static var player_name: String
 static var wallet: int
 static var reputation: int
 
-func _init(p_name):
-	name = p_name
+func _init():
+	player_name = "Banksy"
 	wallet = 101
 	reputation = 50
