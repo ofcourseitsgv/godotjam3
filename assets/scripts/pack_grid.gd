@@ -5,10 +5,12 @@ class_name PackGrid extends GridContainer
 var pack_text: RichTextLabel
 var clothes_grid: GridContainer
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
+var clothes_dict: Array
+var owned: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	owned = false
 
 func init_child_references():
 	pack_text = get_node("PackText")
@@ -28,3 +30,7 @@ func setup(pack_dict: Dictionary):
 				clothing_dict["cost"], clothing_dict["attributes"], clothing_dict["colors"])
 		
 		clothes_grid.add_child(clothing_instance)
+		clothes_dict.append(clothing_dict)
+
+func get_clothes_dict():
+	return clothes_dict

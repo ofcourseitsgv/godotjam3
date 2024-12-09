@@ -3,6 +3,8 @@
 		{
 			"pack": "temp",
 			"display_name": "Temporary Clothes",
+			"owned_by_default": 1,
+			"cost": 0,
 			"clothes": [
 				{
 					"clothing_name": "Plain Yellow Shirt",
@@ -27,19 +29,45 @@
 				}
 			]	
 		},
+		
 		{
 			"pack": "default",
 			"display_name": "Starting Gear",
+			"owned_by_default": 1,
+			"cost": 0,
 			"clothes": [
 				{
-					"clothing_name": "",
+					"clothing_name": "default1",
 					"file": "",
 					"cost": 0,
 					"attributes": [],
 					"colors": []
 				},
 				{
-					"clothing_name": "",
+					"clothing_name": "default2",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": []
+				}
+			]
+		},
+		
+		{
+			"pack": "basic_boys",
+			"display_name": "Basic Boys",
+			"owned_by_default": 0,
+			"cost": 100,
+			"clothes": [
+				{
+					"clothing_name": "basic 1",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": []
+				},
+				{
+					"clothing_name": "basic 2",
 					"file": "",
 					"cost": 0,
 					"attributes": [],

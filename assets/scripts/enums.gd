@@ -20,6 +20,15 @@ enum Colors {
 	BROWN,
 }
 
+enum Types {
+	TOP,
+	BOTTOM,
+	FULL_BODY,
+	FOOTWEAR,
+	HEADWEAR,
+	ACCESSORY,
+}
+
 func attribute_to_string(att: Attributes):
 	var output := ""
 	match att:

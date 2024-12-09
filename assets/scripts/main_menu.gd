@@ -1,8 +1,8 @@
 extends Node2D
 
 var logo_start_pos
-var amplitude := 25.0
-var frequency := 2.5
+var amplitude := 16.0
+var frequency := 1.75
 var time := 0.0
 
 # Called when the node enters the scene tree for the first time.

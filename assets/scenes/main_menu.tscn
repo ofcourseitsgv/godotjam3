@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
 [ext_resource type="Texture2D" uid="uid://dxou7kodl24mx" path="res://assets/tempAssets/menubg.png" id="2_uuboc"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="4_dqqs2"]
-[ext_resource type="Texture2D" uid="uid://dwrlg1ytvx0xq" path="res://assets/art/logo.png" id="5_dsvlh"]
+[ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="5_sr46l"]
 [ext_resource type="AudioStream" uid="uid://crnx1271jre2b" path="res://assets/audio/Main Menu-wip2.mp3" id="6_lgxbu"]
 
 [node name="MainMenu" type="Node2D"]
@@ -13,6 +13,7 @@ script = ExtResource("1_kjd3y")
 [node name="BG" type="Sprite2D" parent="."]
 modulate = Color(0.485703, 0.485704, 0.485703, 1)
 texture = ExtResource("2_uuboc")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -83,11 +84,13 @@ theme_override_font_sizes/font_size = 50
 text = "Credits"
 
 [node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(-486, -258)
+position = Vector2(57, -6)
 scale = Vector2(0.339024, 0.339024)
-texture = ExtResource("5_dsvlh")
+texture = ExtResource("5_sr46l")
+centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_lgxbu")
