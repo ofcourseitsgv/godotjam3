@@ -37,22 +37,6 @@ func _process(delta: float) -> void:
 	update_hud()
 
 
-func _on_player_name_confirm_pressed() -> void:
-	var new_name = $HubCanvas/NameEditors/PlayerNameEdit.text
-	if (new_name == ""):
-		$HubCanvas/NameEditors/PlayerNameEdit.text = Player.player_name
-		return
-	Player.player_name = new_name
-
-
-func _on_shop_name_confirm_pressed() -> void:
-	var new_name = $HubCanvas/NameEditors/ShopNameEdit.text
-	if (new_name == ""):
-		$HubCanvas/NameEditors/ShopNameEdit.text = Player.player_name
-		return
-	Shop.shop_name = new_name
-
-
 func _on_shop_upgrade_button_pressed() -> void:
 	print("TODO: shop upgrade")
 
@@ -117,7 +101,7 @@ func _display_client_items():
 		var clothing_instance: Clothing = clothing_prefab.instantiate()
 		clothing_instance.init_child_references()
 		clothing_instance.setup(clothing["clothing_name"], clothing["file"], clothing["cost"], 
-				clothing["attributes"], clothing["colors"])
+				clothing["attributes"], clothing["colors"], clothing["type"])
 		
 		client_items.add_child(clothing_instance)
 
@@ -135,4 +119,19 @@ func _on_reroll_button_pressed() -> void:
 	if available_rerolls <= 0:
 		print("No more rerolls!")
 		$RequestCanvas/TabletBg/ClientItemsBg/RerollButton.visible = false
+
+
+func _on_player_name_edit_text_changed() -> void:
+	var new_name = $HubCanvas/NameEditors/PlayerNameEdit.text
+	if (new_name == ""):
+		Player.player_name = "Mira"
 		return
+	Player.player_name = new_name
+
+
+func _on_shop_name_edit_text_changed() -> void:
+	var new_name = $HubCanvas/NameEditors/ShopNameEdit.text
+	if (new_name == ""):
+		Shop.shop_name = "My Shop"
+		return
+	Shop.shop_name = new_name

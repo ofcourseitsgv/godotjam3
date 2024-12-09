@@ -23,7 +23,7 @@ enum Colors {
 enum Types {
 	TOP,
 	BOTTOM,
-	FULL_BODY,
+	ONE_PIECE,
 	FOOTWEAR,
 	HEADWEAR,
 	ACCESSORY,
@@ -66,5 +66,23 @@ func color_to_string(col: Colors):
 			output = "black"
 		Colors.BROWN:
 			output = "brown"
+	
+	return output
+
+func type_to_string(typ: Types):
+	var output := ""
+	match typ:
+		Types.TOP:
+			output = "top"
+		Types.BOTTOM:
+			output = "bottom"
+		Types.ONE_PIECE:
+			output = "one-piece"
+		Types.FOOTWEAR:
+			output = "footwear"
+		Types.HEADWEAR:
+			output = "headwear"
+		Types.ACCESSORY:
+			output = "accessory"
 	
 	return output

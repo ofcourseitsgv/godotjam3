@@ -11,21 +11,24 @@
 					"file": "clothing1.png",
 					"cost": 0,
 					"attributes": [2],
-					"colors": [2]
+					"colors": [2],
+					"type": 0
 				},
 				{
 					"clothing_name": "Nice Orange Dress",
 					"file": "clothing2.png",
 					"cost": 0,
 					"attributes": [0, 2],
-					"colors": [1]
+					"colors": [1],
+					"type": 2
 				},
 				{
 					"clothing_name": "Shiny Blue Tee",
 					"file": "clothing3.png",
 					"cost": 0,
 					"attributes": [2, 3],
-					"colors": [4]
+					"colors": [4],
+					"type": 0
 				}
 			]	
 		},
@@ -41,14 +44,16 @@
 					"file": "",
 					"cost": 0,
 					"attributes": [],
-					"colors": []
+					"colors": [],
+					"type": 0
 				},
 				{
 					"clothing_name": "default2",
 					"file": "",
 					"cost": 0,
 					"attributes": [],
-					"colors": []
+					"colors": [],
+					"type": 0
 				}
 			]
 		},
@@ -64,14 +69,16 @@
 					"file": "",
 					"cost": 0,
 					"attributes": [],
-					"colors": []
+					"colors": [],
+					"type": 1
 				},
 				{
 					"clothing_name": "basic 2",
 					"file": "",
 					"cost": 0,
 					"attributes": [],
-					"colors": []
+					"colors": [],
+					"type": 3
 				}
 			]
 		}

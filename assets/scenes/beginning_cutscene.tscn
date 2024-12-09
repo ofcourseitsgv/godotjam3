@@ -24,6 +24,7 @@ offset_right = 960.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_v3egn")
+metadata/_edit_lock_ = true
 
 [node name="SpeakerText" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 7
@@ -37,10 +38,12 @@ offset_right = 925.0
 offset_bottom = -289.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("3_1fjkw")
 theme_override_fonts/bold_font = ExtResource("3_1fjkw")
+theme_override_font_sizes/normal_font_size = 60
 theme_override_font_sizes/bold_font_size = 60
 bbcode_enabled = true
-text = "[b]Speaker Name[/b]"
+text = "Mira"
 
 [node name="DialogueText" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 7
@@ -61,11 +64,14 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Bg" type="Sprite2D" parent="."]
 modulate = Color(0.485703, 0.485704, 0.485703, 1)
-scale = Vector2(1.175, 1.175)
 texture = ExtResource("1_pmglt")
+centered = false
+metadata/_edit_lock_ = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ylwys")

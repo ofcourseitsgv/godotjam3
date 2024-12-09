@@ -17,7 +17,7 @@ func init_child_references():
 	clothes_grid = get_node("GridContainer")
 
 func setup(pack_dict: Dictionary):
-	pack_text.text = pack_dict["display_name"]
+	pack_text.text = "\t" + pack_dict["display_name"]
 	
 	for n in clothes_grid.get_children():
 		clothes_grid.remove_child(n)
@@ -27,8 +27,8 @@ func setup(pack_dict: Dictionary):
 		var clothing_instance: Clothing = clothing_prefab.instantiate()
 		clothing_instance.init_child_references()
 		clothing_instance.setup(clothing_dict["clothing_name"], clothing_dict["file"], 
-				clothing_dict["cost"], clothing_dict["attributes"], clothing_dict["colors"])
-		
+				clothing_dict["cost"], clothing_dict["attributes"], clothing_dict["colors"], clothing_dict["type"])
+		clothing_instance.clothing_button.disabled = true
 		clothes_grid.add_child(clothing_instance)
 		clothes_dict.append(clothing_dict)
 

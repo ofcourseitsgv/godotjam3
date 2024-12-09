@@ -12,7 +12,7 @@ static var max_rerolls: int
 static var max_client_item_number: int
 
 func _init() -> void:
-	shop_name = "My Own Shop"
+	shop_name = "My Shop"
 	upgrades = []
 	all_packs = []
 	owned_packs = []

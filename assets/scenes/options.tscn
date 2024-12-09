@@ -4,15 +4,21 @@
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="1_6kwev"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_fehgc"]
 
-[node name="Options" type="Node"]
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_1q0wv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-offset_right = 1920.0
-offset_bottom = 1080.0
+[node name="Bg" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0338649, 0.00862478, 0.00134708, 0.752941)
 
 [node name="TitleText" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 5
@@ -114,3 +120,21 @@ theme_override_font_sizes/normal_font_size = 55
 theme_override_font_sizes/bold_font_size = 70
 bbcode_enabled = true
 text = "[center]Text Speed[/center]"
+
+[node name="ReturnButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -223.0
+offset_top = -176.0
+offset_right = 223.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_6kwev")
+theme_override_font_sizes/font_size = 50
+text = "Return"
+
+[connection signal="pressed" from="CanvasLayer/ReturnButton" to="." method="_on_return_button_pressed"]

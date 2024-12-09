@@ -5,6 +5,6 @@ static var wallet: int
 static var reputation: int
 
 func _init():
-	player_name = "Banksy"
+	player_name = "Mira"
 	wallet = 101
 	reputation = 50

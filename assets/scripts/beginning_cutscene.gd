@@ -13,6 +13,7 @@ var current_line: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$CanvasLayer/SpeakerText.text = Player.player_name
 	$CanvasLayer/DialogueText.visible_characters = 0
 	current_line = 0
 	$CanvasLayer/DialogueText.text = dialogue_0[current_line]

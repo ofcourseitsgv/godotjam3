@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +14,8 @@ func _process(delta: float) -> void:
 	GlobalOptions.sfx_volume = $CanvasLayer/SfxVol.value
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		#get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
 		self.queue_free()
-		
+
+
+func _on_return_button_pressed() -> void:
+	self.queue_free()
