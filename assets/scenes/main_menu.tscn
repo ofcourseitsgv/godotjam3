@@ -2,9 +2,9 @@
 
 [ext_resource type="FontFile" uid="uid://dhihjkq7t2vni" path="res://assets/fonts/Coming_Soon/ComingSoon-Regular.ttf" id="1_8lr7f"]
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
-[ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_36q3l"]
-[ext_resource type="Texture2D" uid="uid://ywkixflqroj" path="res://icon.svg" id="2_xms8p"]
+[ext_resource type="Texture2D" uid="uid://dxou7kodl24mx" path="res://assets/tempAssets/menubg.png" id="2_uuboc"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="4_dqqs2"]
+[ext_resource type="Texture2D" uid="uid://dwrlg1ytvx0xq" path="res://assets/art/logo.png" id="5_dsvlh"]
 [ext_resource type="AudioStream" uid="uid://crnx1271jre2b" path="res://assets/audio/Main Menu-wip2.mp3" id="6_lgxbu"]
 
 [node name="MainMenu" type="Node2D"]
@@ -12,11 +12,12 @@ script = ExtResource("1_kjd3y")
 
 [node name="BG" type="Sprite2D" parent="."]
 modulate = Color(0.485703, 0.485704, 0.485703, 1)
-texture = ExtResource("2_36q3l")
+texture = ExtResource("2_uuboc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -39,15 +40,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 128.0
-offset_right = 62.0
-offset_bottom = 199.0
+offset_left = -760.0
+offset_top = 40.0
+offset_right = -270.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_dqqs2")
 theme_override_font_sizes/font_size = 50
-text = "Start"
+text = "Play"
 
 [node name="OptionsButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 8
@@ -55,18 +56,36 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 250.0
-offset_right = 62.0
-offset_bottom = 321.0
+offset_left = -760.0
+offset_top = 190.0
+offset_right = -270.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_dqqs2")
 theme_override_font_sizes/font_size = 50
 text = "Options"
 
+[node name="CreditsButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -760.0
+offset_top = 340.0
+offset_right = -270.0
+offset_bottom = 415.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_dqqs2")
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+
 [node name="Logo" type="Sprite2D" parent="."]
-texture = ExtResource("2_xms8p")
+position = Vector2(-486, -258)
+scale = Vector2(0.339024, 0.339024)
+texture = ExtResource("5_dsvlh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl83tqtg4c65f"]
+[gd_scene load_steps=7 format=3 uid="uid://bl83tqtg4c65f"]
 
 [ext_resource type="Script" path="res://assets/scripts/beginning_cutscene.gd" id="1_be16r"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="1_pmglt"]
 [ext_resource type="Texture2D" uid="uid://lcojy48jynn6" path="res://assets/art/player-textbox.png" id="1_v3egn"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_5whev"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="3_1fjkw"]
+[ext_resource type="AudioStream" uid="uid://b76f1unyk5uvb" path="res://assets/audio/nature-ambience.mp3" id="6_ylwys"]
 
 [node name="BeginningCutscene" type="Node2D"]
 script = ExtResource("1_be16r")
@@ -65,3 +66,7 @@ visible_ratio = 0.0
 modulate = Color(0.485703, 0.485704, 0.485703, 1)
 scale = Vector2(1.175, 1.175)
 texture = ExtResource("1_pmglt")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ylwys")
+parameters/looping = true

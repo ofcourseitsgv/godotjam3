@@ -16,10 +16,12 @@ func _ready() -> void:
 	$CanvasLayer/DialogueText.visible_characters = 0
 	current_line = 0
 	$CanvasLayer/DialogueText.text = dialogue_0[current_line]
+	$Ambience.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	$Ambience.volume_db = linear_to_db(GlobalOptions.music_volume)
 	
 	if $CanvasLayer/DialogueText.visible_characters < $CanvasLayer/DialogueText.get_total_character_count():
 		match GlobalOptions.text_speed:

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://6418m4gbc8aa"]
+
+[ext_resource type="Script" path="res://assets/scripts/pack_grid.gd" id="1_ogkb1"]
+[ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="1_tly4y"]
+[ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="2_cj4kh"]
+
+[node name="PackGrid" type="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+script = ExtResource("1_ogkb1")
+
+[node name="PackText" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_tly4y")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Pack Name[/center]"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 6
+
+[node name="Clothing" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing2" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing3" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing4" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing5" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing6" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2
+
+[node name="Clothing7" parent="GridContainer" instance=ExtResource("2_cj4kh")]
+layout_mode = 2

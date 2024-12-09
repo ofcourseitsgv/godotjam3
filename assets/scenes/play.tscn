@@ -1,23 +1,74 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=9 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_il7yf"]
 [ext_resource type="Texture2D" uid="uid://bc54b2biduxie" path="res://assets/tempAssets/Green-Check-Mark-Transparent.png" id="3_6hifc"]
+[ext_resource type="Texture2D" uid="uid://bup5kocwkr5ev" path="res://assets/tempAssets/requestbg.png" id="3_dx30f"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_jhvn3"]
+[ext_resource type="Texture2D" uid="uid://ywkixflqroj" path="res://icon.svg" id="7_bvmy2"]
+[ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="8_mc235"]
 
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
 
-[node name="BG" type="Sprite2D" parent="."]
+[node name="BgShop" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.58, 0.50112, 0.4408, 0.584314)
+position = Vector2(960, 540)
 texture = ExtResource("2_3lnoc")
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+metadata/_edit_lock_ = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="PlayerName" type="RichTextLabel" parent="HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 395.0
+offset_bottom = 56.0
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 36
+text = "My Name"
+metadata/_edit_lock_ = true
+
+[node name="ShopName" type="RichTextLabel" parent="HUD"]
+offset_left = 8.0
+offset_top = 56.0
+offset_right = 395.0
+offset_bottom = 104.0
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 36
+text = "Shop Name"
+metadata/_edit_lock_ = true
+
+[node name="WalletText" type="RichTextLabel" parent="HUD"]
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 395.0
+offset_bottom = 152.0
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 36
+text = "$xxx"
+metadata/_edit_lock_ = true
+
+[node name="DayText" type="RichTextLabel" parent="HUD"]
+offset_left = 8.0
+offset_top = 152.0
+offset_right = 395.0
+offset_bottom = 200.0
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 36
+text = "Day X"
+metadata/_edit_lock_ = true
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -39,6 +90,7 @@ offset_right = 699.0
 offset_bottom = 589.0
 
 [node name="PlayerNameLabel" type="RichTextLabel" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 102.0
 offset_top = 105.0
 offset_right = 489.0
@@ -48,6 +100,7 @@ theme_override_font_sizes/normal_font_size = 50
 text = "My Name"
 
 [node name="PlayerNameEdit" type="TextEdit" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 187.0
 offset_right = 488.0
@@ -58,6 +111,7 @@ text = "candace"
 placeholder_text = "My Name..."
 
 [node name="PlayerNameConfirm" type="Button" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 520.0
 offset_top = 189.0
 offset_right = 590.0
@@ -66,6 +120,7 @@ icon = ExtResource("3_6hifc")
 expand_icon = true
 
 [node name="ShopNameLabel" type="RichTextLabel" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 102.0
 offset_top = 311.0
 offset_right = 489.0
@@ -75,6 +130,7 @@ theme_override_font_sizes/normal_font_size = 50
 text = "Shop Name"
 
 [node name="ShopNameEdit" type="TextEdit" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 393.0
 offset_right = 488.0
@@ -85,6 +141,7 @@ text = "shoppy toppy"
 placeholder_text = "Shop Name..."
 
 [node name="ShopNameConfirm" type="Button" parent="HubCanvas/NameEditors"]
+layout_mode = 0
 offset_left = 520.0
 offset_top = 395.0
 offset_right = 590.0
@@ -117,7 +174,125 @@ offset_right = 1793.0
 offset_bottom = 647.0
 theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 55
-text = "Shop for Apparel"
+text = "Purchase Apparel"
+
+[node name="DialogueCanvas" type="CanvasLayer" parent="."]
+layer = 4
+visible = false
+
+[node name="PlayerDialogue" type="CanvasLayer" parent="DialogueCanvas"]
+
+[node name="NpcDialogue" type="CanvasLayer" parent="DialogueCanvas"]
+
+[node name="RequestCanvas" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="BG" type="TextureRect" parent="RequestCanvas"]
+modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dx30f")
+metadata/_edit_lock_ = true
+
+[node name="Client" type="TextureRect" parent="RequestCanvas"]
+offset_left = 102.0
+offset_top = 368.0
+offset_right = 470.0
+offset_bottom = 784.0
+texture = ExtResource("7_bvmy2")
+
+[node name="Button" type="Button" parent="RequestCanvas"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -902.0
+offset_top = -128.0
+offset_right = -446.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_jhvn3")
+theme_override_font_sizes/font_size = 47
+text = "Complete Request"
+
+[node name="TabletBg" type="ColorRect" parent="RequestCanvas"]
+offset_left = 576.0
+offset_top = 32.0
+offset_right = 1856.0
+offset_bottom = 1032.0
+color = Color(0.151276, 0.151276, 0.151276, 0.839216)
+
+[node name="MyItemsBg" type="ColorRect" parent="RequestCanvas/TabletBg"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -546.0
+offset_top = 80.0
+offset_right = 546.0
+offset_bottom = 520.0
+grow_horizontal = 2
+color = Color(0.568973, 0.568973, 0.568973, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RequestCanvas/TabletBg/MyItemsBg"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 2
+
+[node name="MasterGrid" type="GridContainer" parent="RequestCanvas/TabletBg/MyItemsBg/ScrollContainer"]
+layout_mode = 2
+
+[node name="ClientItemsBg" type="ColorRect" parent="RequestCanvas/TabletBg"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -546.0
+offset_top = 616.0
+offset_right = 546.0
+offset_bottom = 960.0
+grow_horizontal = 2
+color = Color(0.762404, 0.762404, 0.762404, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RequestCanvas/TabletBg/ClientItemsBg"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -108.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Clothing" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing2" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing3" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing4" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
 
 [connection signal="pressed" from="HubCanvas/NameEditors/PlayerNameConfirm" to="." method="_on_player_name_confirm_pressed"]
 [connection signal="pressed" from="HubCanvas/NameEditors/ShopNameConfirm" to="." method="_on_shop_name_confirm_pressed"]
+[connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_pressed"]
+[connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]

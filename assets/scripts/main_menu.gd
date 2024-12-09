@@ -1,8 +1,8 @@
 extends Node2D
 
 var logo_start_pos
-var amplitude := 50.0
-var frequency := 4.5
+var amplitude := 25.0
+var frequency := 2.5
 var time := 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -23,8 +23,6 @@ func _on_options_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://assets/scenes/options.tscn")
 	var options_screen = preload("res://assets/scenes/options.tscn").instantiate()
 	add_child(options_screen)
-	
-	
 
 
 func _on_start_button_pressed() -> void:

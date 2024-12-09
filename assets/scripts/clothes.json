@@ -1,0 +1,51 @@
+{
+	"all_packs": [
+		{
+			"pack": "temp",
+			"display_name": "Temporary Clothes",
+			"clothes": [
+				{
+					"clothing_name": "Plain Yellow Shirt",
+					"file": "clothing1.png",
+					"cost": 0,
+					"attributes": [2],
+					"colors": [2]
+				},
+				{
+					"clothing_name": "Nice Orange Dress",
+					"file": "clothing2.png",
+					"cost": 0,
+					"attributes": [0, 2],
+					"colors": [1]
+				},
+				{
+					"clothing_name": "Shiny Blue Tee",
+					"file": "clothing3.png",
+					"cost": 0,
+					"attributes": [2, 3],
+					"colors": [4]
+				}
+			]	
+		},
+		{
+			"pack": "default",
+			"display_name": "Starting Gear",
+			"clothes": [
+				{
+					"clothing_name": "",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": []
+				},
+				{
+					"clothing_name": "",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": []
+				}
+			]
+		}
+	]
+}

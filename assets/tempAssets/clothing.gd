@@ -20,13 +20,22 @@ var clothing_text
 	#colors = []
 
 func _ready() -> void:
-	clothing_button = get_node("Button")
-	clothing_text = get_node("RichTextLabel")
+	init_child_references()
 
+	# FIXME: change from tempAssets to official art folder
 	var texture: Texture = load("res://assets/tempAssets/" + file)
+	if (not texture):
+		texture = load("res://assets/tempAssets/clothing1.png")
 
 	clothing_button.icon = texture
-	clothing_text.text = "[center]" + clothing_name + "\n$" + str(cost) + "[/center]"
+	clothing_text.text = "[center]" + clothing_name + "[/center]"
+
+func init_child_references():
+	clothing_button = get_node("Button")
+	clothing_text = get_node("RichTextLabel")
+	
+func _process(delta: float) -> void:
+	pass
 
 func setup(c_name: String, c_file: String, c_cost: int, c_attributes: Array, c_colors: Array) -> void:
 	clothing_name = c_name
@@ -36,6 +45,7 @@ func setup(c_name: String, c_file: String, c_cost: int, c_attributes: Array, c_c
 	colors = []
 	_set_attributes(c_attributes)
 	_set_colors(c_colors)
+	_update_tooltip()
 	is_selected = false
 
 func _set_attributes(c_attributes: Array):
@@ -61,3 +71,11 @@ func has_attribute(att: Enums.Attributes) -> bool:
 
 func has_color(col: Enums.Colors) -> bool:
 	return col in colors
+
+func _update_tooltip():
+	var tooltip := ""
+	for a in attributes:
+		tooltip += Enums.attribute_to_string(a) + " "
+	for c in colors:
+		tooltip += Enums.color_to_string(c) + " "
+	clothing_button.tooltip_text = tooltip
