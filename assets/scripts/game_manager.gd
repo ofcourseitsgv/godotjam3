@@ -16,6 +16,8 @@ var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
 const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon"]
 
+var loading_text_state := 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	my_items = $RequestCanvas/TabletBg/MyItemsBg/ScrollContainer/MasterGrid
@@ -34,6 +36,8 @@ func _ready() -> void:
 	$RequestCanvas.visible = false
 	
 	available_rerolls = 0
+	
+	update_loading_text()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,6 +58,8 @@ func _on_start_button_pressed() -> void:
 	$HUD.visible = true
 	$BgShop.visible = false
 	$RequestCanvas.visible = true
+	$RequestCanvas/TabletBg.visible = true
+	$RequestCanvas/CompleteRequestBg.visible = false
 	
 	start_request()
 
@@ -65,7 +71,7 @@ func start_request():
 	_display_client_items()
 	available_rerolls = Shop.max_rerolls
 	
-	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
+	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
 	update_client_display(current_client)
 
 
@@ -145,17 +151,101 @@ func generate_random_client(base_price = 20, attribute_bag = [], num_attributes 
 
 func update_client_display(client: Client):
 	var tooltip := ""
+	var needs_text := ""
+	
 	tooltip += client.name
 	tooltip += "\nWants: "
+	needs_text += "Attributes: "
 	for a in client.attribute_needs:
 		tooltip += Enums.attribute_to_string(a) + ", "
+		needs_text += Enums.attribute_to_string(a) + ", "
+	needs_text = needs_text.left(-2)
+	needs_text += "\nColors: "
 	for c in client.color_needs:
 		tooltip += Enums.color_to_string(c) + ", "
+		needs_text += Enums.color_to_string(c)+ ", "
+	needs_text = needs_text.left(-2)
 	tooltip = tooltip.left(-2)
 	
 	$RequestCanvas/Client.tooltip_text = tooltip
 	
 	$RequestCanvas/ClientName.text = "[center]" + client.name + "[/center]"
+	$RequestCanvas/ClientNeeds.text = needs_text
+
+func client_check():
+	var remaining_atts = current_client.attribute_needs.duplicate()
+	var remaining_cols = current_client.color_needs.duplicate()
+	
+	var chosen_atts = []
+	var chosen_cols = []
+	for clothing: Clothing in client_items.get_children():
+		if clothing.is_selected:
+			for a in clothing.attributes:
+				chosen_atts.append(a)
+			for c in clothing.colors:
+				chosen_cols.append(c)
+	
+	update_check_display(chosen_atts, chosen_cols)
+	
+	for chosen_att: Enums.Attributes in chosen_atts:
+		#print("chosen_att: " + Enums.attribute_to_string(chosen_att) + str(chosen_att))
+		if chosen_att in remaining_atts:
+			#print("found!")
+			var index = remaining_atts.find(chosen_att)
+			remaining_atts.remove_at(index)
+	
+	for chosen_col: Enums.Colors in chosen_cols:
+		#print("chosen_col: " + Enums.color_to_string(chosen_col) + str(chosen_col))
+		if chosen_col in remaining_cols:
+			#print("found!")
+			var index = remaining_cols.find(chosen_col)
+			remaining_cols.remove_at(index)
+	
+	print("Remaining properties: " + str(remaining_atts) + " " + str(remaining_cols))
+
+func update_check_display(chosen_atts: Array, chosen_cols: Array):
+	$RequestCanvas/TabletBg.visible = false
+	$RequestCanvas/CompleteRequestBg.visible = true
+	
+	$RequestCanvas/CompleteRequestBg/Screen/ClientRequestName.text = _centered_text(current_client.name + "'s Request")
+	var needs_text = ""
+	var properties_text = ""
+	
+	needs_text += "Attributes: "
+	for a in current_client.attribute_needs:
+		needs_text += Enums.attribute_to_string(a) + ", "
+	needs_text = needs_text.left(-2)
+	needs_text += "\nColors: "
+	for c in current_client.color_needs:
+		needs_text += Enums.color_to_string(c)+ ", "
+	needs_text = needs_text.left(-2)
+	$RequestCanvas/CompleteRequestBg/Screen/ClientNeeds.text = needs_text
+	
+	properties_text += "Attributes: "
+	for a in chosen_atts:
+		properties_text += Enums.attribute_to_string(a) + ", "
+	properties_text = properties_text.left(-2)
+	properties_text += "\nColors: "
+	for c in chosen_cols:
+		properties_text += Enums.color_to_string(c)+ ", "
+	properties_text = properties_text.left(-2)
+	$RequestCanvas/CompleteRequestBg/Screen/SelectedPropertiesName.text = _centered_text("Selected Properties")
+	$RequestCanvas/CompleteRequestBg/Screen/SelectedProperties.text = properties_text
+
+func update_loading_text():
+	var loading_text = $RequestCanvas/CompleteRequestBg/Screen/LoadingText
+	await _wait(0.2)
+	loading_text_state = (loading_text_state + 1) % 4
+	match loading_text_state:
+		0:
+			loading_text.text = _centered_text("Processing Order")
+		1:
+			loading_text.text = _centered_text("Processing Order.")
+		2:
+			loading_text.text = _centered_text("Processing Order..")
+		3:
+			loading_text.text = _centered_text("Processing Order...")
+	update_loading_text()
 
 func _on_reroll_button_pressed() -> void:
 	available_rerolls -= 1
@@ -183,4 +273,13 @@ func _on_shop_name_edit_text_changed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
-	pass # Replace with function body.
+	client_check()
+	await _wait(7.5)
+	$RequestCanvas.visible = false
+	$BgShop.visible = true
+
+func _centered_text(s: String):
+	return "[center]" + s + "[/center]"
+
+func _wait(seconds: float):
+	await get_tree().create_timer(seconds).timeout
