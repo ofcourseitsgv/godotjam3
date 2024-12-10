@@ -66,6 +66,7 @@ metadata/_edit_lock_ = true
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -165,7 +166,6 @@ visible = false
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -178,27 +178,21 @@ texture = ExtResource("3_dx30f")
 metadata/_edit_lock_ = true
 
 [node name="Client" type="TextureRect" parent="RequestCanvas"]
-offset_left = 80.0
-offset_top = 272.0
-offset_right = 416.0
-offset_bottom = 784.0
+offset_left = 192.0
+offset_top = 432.0
+offset_right = 320.0
+offset_bottom = 560.0
 texture = ExtResource("7_bvmy2")
 
-[node name="SubmitButton" type="Button" parent="RequestCanvas"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -902.0
-offset_top = -128.0
-offset_right = -446.0
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("4_jhvn3")
-theme_override_font_sizes/font_size = 47
-text = "Complete Request"
+[node name="ClientName" type="RichTextLabel" parent="RequestCanvas"]
+offset_left = 40.0
+offset_top = 872.0
+offset_right = 528.0
+offset_bottom = 935.0
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Client Name[/center]"
 
 [node name="TabletBg" type="ColorRect" parent="RequestCanvas"]
 offset_left = 576.0
@@ -271,26 +265,54 @@ layout_mode = 2
 [node name="Clothing4" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
 layout_mode = 2
 
-[node name="RerollButton" type="Button" parent="RequestCanvas/TabletBg/ClientItemsBg"]
+[node name="Buttons" type="Control" parent="RequestCanvas/TabletBg/ClientItemsBg"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -156.0
-offset_top = -88.0
-offset_right = 156.0
-offset_bottom = -32.0
+offset_left = -16.0
+offset_top = -80.0
+offset_right = 24.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="RerollButton" type="Button" parent="RequestCanvas/TabletBg/ClientItemsBg/Buttons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = -28.0
+offset_right = 396.0
+offset_bottom = 28.0
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 33
 text = "Re-Gather"
+
+[node name="SubmitButton" type="Button" parent="RequestCanvas/TabletBg/ClientItemsBg/Buttons"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -456.0
+offset_top = -28.0
+offset_bottom = 28.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_jhvn3")
+theme_override_font_sizes/font_size = 33
+text = "Complete Request"
 
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
 [connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_pressed"]
 [connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]
-[connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/RerollButton" to="." method="_on_reroll_button_pressed"]
+[connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
+[connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]

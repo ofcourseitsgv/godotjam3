@@ -79,8 +79,10 @@ func _update_tooltip():
 	tooltip += "Type: " + Enums.type_to_string(type)
 	tooltip += "\nAttributes: "
 	for a in attributes:
-		tooltip += Enums.attribute_to_string(a) + " "
+		tooltip += Enums.attribute_to_string(a) + ", "
+	tooltip = tooltip.left(-2)
 	tooltip += "\nColors: "
 	for c in colors:
-		tooltip += Enums.color_to_string(c) + " "
+		tooltip += Enums.color_to_string(c) + ", "
+	tooltip = tooltip.left(-2)
 	clothing_button.tooltip_text = tooltip

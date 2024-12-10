@@ -9,8 +9,12 @@ var client_items_array: Array
 
 var available_rerolls: int
 
+var current_client: Client
+
 var pack_grid_prefab = preload("res://assets/scenes/pack_grid.tscn")
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
+
+const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,6 +64,9 @@ func start_request():
 	generate_client_items()
 	_display_client_items()
 	available_rerolls = Shop.max_rerolls
+	
+	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
+	update_client_display(current_client)
 
 
 func _display_my_items():
@@ -111,6 +118,44 @@ func update_hud() -> void:
 	$HUD/WalletText.text = "$" + str(Player.wallet)
 	$HUD/DayText.text = "Day " + str(current_day)
 
+func generate_client(client_name = "", client_base_price = 0, client_attributes = [], client_colors = []):
+	current_client = Client.new(client_name, client_base_price, client_attributes, client_colors)
+
+func generate_random_client(base_price = 20, attribute_bag = [], num_attributes = 0, color_bag = [], num_colors = 0):
+	var random_name = random_names.pick_random()
+	
+	var att_bag_duplicate = attribute_bag.duplicate()
+	var col_bag_duplicate = color_bag.duplicate()
+	
+	att_bag_duplicate.shuffle()
+	col_bag_duplicate.shuffle()
+	
+	var selected_atts = []
+	for i in num_attributes:
+		selected_atts.append(att_bag_duplicate.pop_front())
+	
+	var selected_cols = []
+	for i in num_colors:
+		selected_cols.append(col_bag_duplicate.pop_front())
+	
+	var selected_price = base_price + (randi_range(0, 5) * 5)
+
+	generate_client(random_name, base_price, selected_atts, selected_cols)
+	
+
+func update_client_display(client: Client):
+	var tooltip := ""
+	tooltip += client.name
+	tooltip += "\nWants: "
+	for a in client.attribute_needs:
+		tooltip += Enums.attribute_to_string(a) + ", "
+	for c in client.color_needs:
+		tooltip += Enums.color_to_string(c) + ", "
+	tooltip = tooltip.left(-2)
+	
+	$RequestCanvas/Client.tooltip_text = tooltip
+	
+	$RequestCanvas/ClientName.text = "[center]" + client.name + "[/center]"
 
 func _on_reroll_button_pressed() -> void:
 	available_rerolls -= 1
@@ -118,7 +163,7 @@ func _on_reroll_button_pressed() -> void:
 	_display_client_items()
 	if available_rerolls <= 0:
 		print("No more rerolls!")
-		$RequestCanvas/TabletBg/ClientItemsBg/RerollButton.visible = false
+		$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.visible = false
 
 
 func _on_player_name_edit_text_changed() -> void:
@@ -135,3 +180,7 @@ func _on_shop_name_edit_text_changed() -> void:
 		Shop.shop_name = "My Shop"
 		return
 	Shop.shop_name = new_name
+
+
+func _on_submit_button_pressed() -> void:
+	pass # Replace with function body.
