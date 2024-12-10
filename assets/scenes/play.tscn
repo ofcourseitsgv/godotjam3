@@ -80,6 +80,7 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="NameEditors" type="Control" parent="HubCanvas"]
 layout_mode = 3
@@ -166,6 +167,7 @@ visible = false
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)

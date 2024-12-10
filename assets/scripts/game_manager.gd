@@ -14,7 +14,7 @@ var current_client: Client
 var pack_grid_prefab = preload("res://assets/scenes/pack_grid.tscn")
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
-const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon"]
+const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
 
 var loading_text_state := 0
 
