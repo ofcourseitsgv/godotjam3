@@ -1,5 +1,7 @@
 extends Node2D
 
+var begin_dialogue = false
+
 var dialogue_0 = [
 	"Ever since I was little, I've always wanted to design outfits for others.",
 	"So, when my dad built this shop for me, I knew it was finally time for me to chase my dreams!",
@@ -18,11 +20,15 @@ func _ready() -> void:
 	current_line = 0
 	$CanvasLayer/DialogueText.text = dialogue_0[current_line]
 	$Ambience.play()
+	transition(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$Ambience.volume_db = linear_to_db(GlobalOptions.music_volume)
+	
+	if not begin_dialogue:
+		return
 	
 	if $CanvasLayer/DialogueText.visible_characters < $CanvasLayer/DialogueText.get_total_character_count():
 		match GlobalOptions.text_speed:
@@ -48,7 +54,27 @@ func progress_dialogue():
 			print("finished dialogue_0")
 			dialogue_0_flag = true
 			$CanvasLayer.visible = false
-			get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
+			#get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
+			transition(true)
 	else:
 		$CanvasLayer/DialogueText.visible_characters = $CanvasLayer/DialogueText.get_total_character_count()
 	
+
+func transition(to_black: bool):
+	$CrossfadeCanvas.visible = true
+	
+	if to_black:
+		var tween = get_tree().create_tween()
+		tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+		tween.play()
+		await get_tree().create_timer(1).timeout
+		get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
+		return
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+	
+	tween.play()
+	await get_tree().create_timer(1).timeout
+	$CrossfadeCanvas.visible = false
+	begin_dialogue = true

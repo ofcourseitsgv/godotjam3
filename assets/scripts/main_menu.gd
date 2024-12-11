@@ -26,4 +26,14 @@ func _on_options_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	#get_tree().change_scene_to_file("res://assets/scenes/beginning_cutscene.tscn")
+	transition()
+
+func transition():
+	$CrossfadeCanvas.visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+	
+	tween.play()
+	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://assets/scenes/beginning_cutscene.tscn")

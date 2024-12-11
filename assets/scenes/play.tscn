@@ -444,6 +444,20 @@ text = "[center]Processing Order...[/center]"
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_qigwv")
 
+[node name="CrossfadeCanvas" type="CanvasLayer" parent="."]
+layer = 50
+visible = false
+
+[node name="Crossfade" type="ColorRect" parent="CrossfadeCanvas"]
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
 [connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]

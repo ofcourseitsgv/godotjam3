@@ -40,6 +40,8 @@ func _ready() -> void:
 	update_loading_text()
 	
 	$Bgm.play()
+	
+	transition(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,10 +59,11 @@ func _on_clothes_upgrade_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	$HubCanvas.visible = false
-	$HUD.visible = true
-	$BgShop.visible = false
-	$RequestCanvas.visible = true
+	transition(2, [$HubCanvas, $BgShop], [$HUD, $RequestCanvas])
+	#$HubCanvas.visible = false
+	#$HUD.visible = true
+	#$BgShop.visible = false
+	#$RequestCanvas.visible = true
 	$RequestCanvas/TabletBg.visible = true
 	$RequestCanvas/CompleteRequestBg.visible = false
 	
@@ -286,3 +289,39 @@ func _centered_text(s: String):
 
 func _wait(seconds: float):
 	await get_tree().create_timer(seconds).timeout
+
+func transition(mode: int, from_canvases = [], to_canvases = []):
+	$CrossfadeCanvas.visible = true
+	
+	var tween = get_tree().create_tween()
+	match mode:
+		0:
+			# beginning / from black
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+			tween.play()
+			await _wait(1)
+			$CrossfadeCanvas.visible = false
+			return
+		1:
+			# end / to black
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+			tween.play()
+			await _wait(1)
+			
+			return
+		2:
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+			tween.play()
+			await _wait(1.2)
+			for c in from_canvases:
+				c.visible = false
+			for c in to_canvases:
+				c.visible = true
+			var to_tween = get_tree().create_tween()
+			to_tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+			to_tween.play()
+			await _wait(1)
+			$CrossfadeCanvas.visible = false
+			return
+		_:
+			return

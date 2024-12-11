@@ -76,3 +76,17 @@ metadata/_edit_lock_ = true
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ylwys")
 parameters/looping = true
+
+[node name="CrossfadeCanvas" type="CanvasLayer" parent="."]
+layer = 50
+visible = false
+
+[node name="Crossfade" type="ColorRect" parent="CrossfadeCanvas"]
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true

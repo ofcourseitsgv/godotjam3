@@ -96,5 +96,19 @@ anchor_mode = 0
 stream = ExtResource("6_jmt05")
 parameters/looping = true
 
+[node name="CrossfadeCanvas" type="CanvasLayer" parent="."]
+layer = 50
+visible = false
+
+[node name="Crossfade" type="ColorRect" parent="CrossfadeCanvas"]
+modulate = Color(1, 1, 1, 0)
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/OptionsButton" to="." method="_on_options_button_pressed"]
