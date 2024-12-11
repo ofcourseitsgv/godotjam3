@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bl83tqtg4c65f"]
 
 [ext_resource type="Script" path="res://assets/scripts/beginning_cutscene.gd" id="1_be16r"]
-[ext_resource type="Texture2D" uid="uid://lcojy48jynn6" path="res://assets/art/player-textbox.png" id="1_v3egn"]
+[ext_resource type="Texture2D" uid="uid://5bmpypogflwu" path="res://assets/art/player-textbox-2.png" id="2_5uba3"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_5whev"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="3_1fjkw"]
-[ext_resource type="Texture2D" uid="uid://bdocjl42unve0" path="res://assets/art/shop-bg.png" id="5_q765p"]
+[ext_resource type="Texture2D" uid="uid://cevgw1kq8gnxn" path="res://assets/art/shop-bg-2.png" id="5_rts45"]
 [ext_resource type="AudioStream" uid="uid://b76f1unyk5uvb" path="res://assets/audio/nature-ambience.mp3" id="6_ylwys"]
 
 [node name="BeginningCutscene" type="Node2D"]
@@ -23,7 +23,7 @@ offset_top = -1080.0
 offset_right = 960.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("1_v3egn")
+texture = ExtResource("2_5uba3")
 metadata/_edit_lock_ = true
 
 [node name="SpeakerText" type="RichTextLabel" parent="CanvasLayer"]
@@ -33,15 +33,15 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -925.0
-offset_top = -312.0
+offset_top = -376.0
 offset_right = 925.0
-offset_bottom = -233.0
+offset_bottom = -297.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("3_1fjkw")
 theme_override_fonts/bold_font = ExtResource("3_1fjkw")
-theme_override_font_sizes/normal_font_size = 60
-theme_override_font_sizes/bold_font_size = 60
+theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/bold_font_size = 65
 bbcode_enabled = true
 text = "Mira"
 
@@ -52,12 +52,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -925.0
-offset_top = -232.0
+offset_top = -296.0
 offset_right = 925.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("2_5whev")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
 text = "Insert text here! I like to eat beans! Rehehehehe!"
 visible_characters = 0
@@ -68,7 +69,7 @@ anchor_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="Bg" type="Sprite2D" parent="."]
-texture = ExtResource("5_q765p")
+texture = ExtResource("5_rts45")
 centered = false
 metadata/_edit_lock_ = true
 

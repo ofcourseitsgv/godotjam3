@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dxou7kodl24mx" path="res://assets/tempAssets/menubg.png" id="2_uuboc"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_hs33e"]
 [ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="5_sr46l"]
-[ext_resource type="AudioStream" uid="uid://crnx1271jre2b" path="res://assets/audio/Main Menu-wip2.mp3" id="6_lgxbu"]
+[ext_resource type="AudioStream" uid="uid://dx4gg7ejh8gec" path="res://assets/audio/Main Menu.mp3" id="6_jmt05"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_kjd3y")
@@ -93,7 +93,7 @@ centered = false
 anchor_mode = 0
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_lgxbu")
+stream = ExtResource("6_jmt05")
 parameters/looping = true
 
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]

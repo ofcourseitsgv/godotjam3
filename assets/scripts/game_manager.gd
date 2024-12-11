@@ -38,11 +38,14 @@ func _ready() -> void:
 	available_rerolls = 0
 	
 	update_loading_text()
+	
+	$Bgm.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_hud()
+	$Bgm.volume_db = linear_to_db(GlobalOptions.music_volume)
 
 
 func _on_shop_upgrade_button_pressed() -> void:

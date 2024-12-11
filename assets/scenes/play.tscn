@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=9 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_jhvn3"]
 [ext_resource type="Texture2D" uid="uid://ywkixflqroj" path="res://icon.svg" id="7_bvmy2"]
 [ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="8_mc235"]
+[ext_resource type="AudioStream" uid="uid://bka0lmyoukkbc" path="res://assets/audio/Play-final2.mp3" id="8_qigwv"]
 
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
@@ -439,6 +440,9 @@ theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]Processing Order...[/center]"
+
+[node name="Bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_qigwv")
 
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
