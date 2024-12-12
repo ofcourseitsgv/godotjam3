@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=13 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
@@ -6,8 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bup5kocwkr5ev" path="res://assets/tempAssets/requestbg.png" id="3_dx30f"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_jhvn3"]
 [ext_resource type="Texture2D" uid="uid://ywkixflqroj" path="res://icon.svg" id="7_bvmy2"]
+[ext_resource type="Texture2D" uid="uid://bx6sqwgt8ullc" path="res://assets/art/request-bg.png" id="7_skquw"]
+[ext_resource type="Texture2D" uid="uid://balkl6as8pktv" path="res://assets/art/my-items-bg.png" id="8_1355l"]
 [ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="8_mc235"]
 [ext_resource type="AudioStream" uid="uid://bka0lmyoukkbc" path="res://assets/audio/Play-final2.mp3" id="8_qigwv"]
+[ext_resource type="Texture2D" uid="uid://b2slnxss7sa4t" path="res://assets/art/client-items-bg.png" id="10_41gul"]
+[ext_resource type="Texture2D" uid="uid://ktudgqcceu0j" path="res://assets/art/IMG_0670.png" id="11_ppjai"]
 
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
@@ -24,6 +28,7 @@ metadata/_edit_lock_ = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="PlayerName" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
@@ -160,11 +165,120 @@ text = "Purchase Apparel"
 
 [node name="DialogueCanvas" type="CanvasLayer" parent="."]
 layer = 4
+
+[node name="PlayerDialogue" type="Control" parent="DialogueCanvas"]
 visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PlayerDialogue" type="CanvasLayer" parent="DialogueCanvas"]
+[node name="Player" type="TextureRect" parent="DialogueCanvas/PlayerDialogue"]
+offset_right = 448.0
+offset_bottom = 1080.0
+texture = ExtResource("7_bvmy2")
+expand_mode = 1
 
-[node name="NpcDialogue" type="CanvasLayer" parent="DialogueCanvas"]
+[node name="TextureRect" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
+offset_left = 512.0
+offset_top = 704.0
+offset_right = 1240.0
+offset_bottom = 784.0
+color = Color(0.870588, 0.678431, 0.647059, 1)
+
+[node name="SpeakerText" type="RichTextLabel" parent="DialogueCanvas/PlayerDialogue/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_fonts/bold_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/bold_font_size = 65
+bbcode_enabled = true
+text = "[color=4c2b21]Mira[/color]"
+
+[node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
+offset_left = 512.0
+offset_top = 808.0
+offset_right = 1856.0
+offset_bottom = 1024.0
+color = Color(0.870588, 0.678431, 0.647059, 1)
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueCanvas/PlayerDialogue/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "Insert text here! I like to eat beans! Rehehehehe!"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="NpcDialogue" type="Control" parent="DialogueCanvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
+offset_left = 1472.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_bvmy2")
+expand_mode = 1
+
+[node name="TextureRect" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+offset_left = 64.0
+offset_top = 704.0
+offset_right = 792.0
+offset_bottom = 784.0
+color = Color(0.870588, 0.678431, 0.647059, 1)
+
+[node name="SpeakerText" type="RichTextLabel" parent="DialogueCanvas/NpcDialogue/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_fonts/bold_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/bold_font_size = 65
+bbcode_enabled = true
+text = "[color=4c2b21]Mira[/color]"
+
+[node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+offset_left = 64.0
+offset_top = 808.0
+offset_right = 1408.0
+offset_bottom = 1024.0
+color = Color(0.870588, 0.678431, 0.647059, 1)
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueCanvas/NpcDialogue/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "Insert text here! I like to eat beans! Rehehehehe!"
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
@@ -208,34 +322,39 @@ bbcode_enabled = true
 text = "Attributes: simple, clean, deez, nuts
 Colors: orange"
 
-[node name="TabletBg" type="ColorRect" parent="RequestCanvas"]
-visible = false
-offset_left = 576.0
-offset_top = 32.0
-offset_right = 1856.0
-offset_bottom = 1032.0
-color = Color(0.151276, 0.151276, 0.151276, 0.839216)
-metadata/_edit_lock_ = true
-
-[node name="MyItemsBg" type="ColorRect" parent="RequestCanvas/TabletBg"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -546.0
-offset_top = 80.0
-offset_right = 546.0
-offset_bottom = 520.0
+[node name="TabletBg" type="TextureRect" parent="RequestCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-color = Color(0.568973, 0.568973, 0.568973, 1)
-metadata/_edit_lock_ = true
+grow_vertical = 2
+texture = ExtResource("7_skquw")
+
+[node name="MyItemsBg" type="TextureRect" parent="RequestCanvas/TabletBg"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -168.0
+offset_bottom = -520.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1355l")
+expand_mode = 1
+stretch_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RequestCanvas/TabletBg/MyItemsBg"]
+z_index = 5
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 696.0
+offset_top = 132.0
+offset_right = -30.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical_scroll_mode = 2
@@ -243,18 +362,18 @@ vertical_scroll_mode = 2
 [node name="MasterGrid" type="GridContainer" parent="RequestCanvas/TabletBg/MyItemsBg/ScrollContainer"]
 layout_mode = 2
 
-[node name="ClientItemsBg" type="ColorRect" parent="RequestCanvas/TabletBg"]
+[node name="ClientItemsBg" type="TextureRect" parent="RequestCanvas/TabletBg"]
+z_index = 1
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -546.0
-offset_top = 616.0
-offset_right = 546.0
-offset_bottom = 960.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1032.0
 grow_horizontal = 2
-color = Color(0.762404, 0.762404, 0.762404, 1)
-metadata/_edit_lock_ = true
+grow_vertical = 2
+texture = ExtResource("10_41gul")
+expand_mode = 1
+stretch_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RequestCanvas/TabletBg/ClientItemsBg"]
 layout_mode = 1
@@ -262,14 +381,15 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -140.0
-offset_bottom = 172.0
+offset_left = 696.0
+offset_top = 656.0
+offset_right = -198.0
+offset_bottom = 936.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer"]
 layout_mode = 2
-metadata/_edit_group_ = true
 
 [node name="Clothing" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer/HBoxContainer" instance=ExtResource("8_mc235")]
 layout_mode = 2
@@ -291,9 +411,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -16.0
-offset_top = -80.0
+offset_top = 952.0
 offset_right = 24.0
-offset_bottom = -40.0
+offset_bottom = 992.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -302,10 +422,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 84.0
-offset_top = -28.0
-offset_right = 396.0
-offset_bottom = 28.0
+offset_left = 408.0
+offset_top = -122.0
+offset_right = 720.0
+offset_bottom = -66.0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 33
@@ -318,9 +438,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -456.0
-offset_top = -28.0
-offset_bottom = 28.0
+offset_left = -220.0
+offset_top = -122.0
+offset_right = 344.0
+offset_bottom = -66.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_jhvn3")
@@ -441,8 +562,15 @@ theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]Processing Order...[/center]"
 
+[node name="WindowOutlines" type="Sprite2D" parent="RequestCanvas"]
+z_index = 15
+texture = ExtResource("11_ppjai")
+centered = false
+metadata/_edit_lock_ = true
+
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_qigwv")
+parameters/looping = true
 
 [node name="CrossfadeCanvas" type="CanvasLayer" parent="."]
 layer = 50

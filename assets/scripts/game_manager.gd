@@ -11,6 +11,18 @@ var available_rerolls: int
 
 var current_client: Client
 
+var master_dialogue: Dictionary
+var current_dialogue: Array
+var current_dialogue_index: int
+var in_dialogue: bool
+var player_speaker_text: RichTextLabel
+var player_dialogue_text: RichTextLabel
+var npc_speaker_text: RichTextLabel
+var npc_dialogue_text: RichTextLabel
+
+var prerequest_flag = false
+var postrequest_flag = false
+
 var pack_grid_prefab = preload("res://assets/scenes/pack_grid.tscn")
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
@@ -35,6 +47,21 @@ func _ready() -> void:
 	
 	$RequestCanvas.visible = false
 	
+	$RequestCanvas/WindowOutlines.visible = true
+	
+	var file = "res://assets/scripts/dialogue.json"
+	var json_as_text = FileAccess.get_file_as_string(file)
+	master_dialogue = JSON.parse_string(json_as_text)
+	in_dialogue = false
+	current_dialogue_index = 0
+	$DialogueCanvas.visible = false
+	$DialogueCanvas/PlayerDialogue.visible = false
+	$DialogueCanvas/NpcDialogue.visible = false
+	player_speaker_text = $DialogueCanvas/PlayerDialogue/TextureRect/SpeakerText
+	player_dialogue_text = $DialogueCanvas/PlayerDialogue/TextureRect2/DialogueText
+	npc_speaker_text = $DialogueCanvas/NpcDialogue/TextureRect/SpeakerText
+	npc_dialogue_text = $DialogueCanvas/NpcDialogue/TextureRect2/DialogueText
+	
 	available_rerolls = 0
 	
 	update_loading_text()
@@ -48,26 +75,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	update_hud()
 	$Bgm.volume_db = linear_to_db(GlobalOptions.music_volume)
+	
+	if in_dialogue:
+		
+		# typewriter effect
+		_typewriter_effect()
+		
+		if Input.is_action_just_pressed("dialogue_key"):
+			_progress_dialogue()
 
 
 func _on_shop_upgrade_button_pressed() -> void:
 	print("TODO: shop upgrade")
 
-
 func _on_clothes_upgrade_button_pressed() -> void:
 	print("TODO: clothes upgrade")
 
-
 func _on_start_button_pressed() -> void:
-	transition(2, [$HubCanvas, $BgShop], [$HUD, $RequestCanvas])
-	#$HubCanvas.visible = false
-	#$HUD.visible = true
-	#$BgShop.visible = false
-	#$RequestCanvas.visible = true
-	$RequestCanvas/TabletBg.visible = true
-	$RequestCanvas/CompleteRequestBg.visible = false
+	await transition(2, [$HubCanvas, $BgShop], [$HUD, $DialogueCanvas])
+	#$RequestCanvas/TabletBg.visible = true
+	#$RequestCanvas/CompleteRequestBg.visible = false
 	
-	start_request()
+	$DialogueCanvas/PlayerDialogue.visible = true
+	start_dialogue("begin_dialogue")
+	prerequest_flag = true
+	
+	#start_request()
 
 func start_request():
 	_display_my_items()
@@ -79,7 +112,6 @@ func start_request():
 	
 	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
 	update_client_display(current_client)
-
 
 func _display_my_items():
 	# clear items
@@ -207,11 +239,16 @@ func client_check():
 			var index = remaining_cols.find(chosen_col)
 			remaining_cols.remove_at(index)
 	
+	if remaining_atts.is_empty() and remaining_cols.is_empty():
+		current_client.satisfied()
+	else:
+		current_client.dissatisfied()
 	print("Remaining properties: " + str(remaining_atts) + " " + str(remaining_cols))
 
 func update_check_display(chosen_atts: Array, chosen_cols: Array):
 	$RequestCanvas/TabletBg.visible = false
 	$RequestCanvas/CompleteRequestBg.visible = true
+	$RequestCanvas/WindowOutlines.visible = false
 	
 	$RequestCanvas/CompleteRequestBg/Screen/ClientRequestName.text = _centered_text(current_client.name + "'s Request")
 	var needs_text = ""
@@ -280,9 +317,14 @@ func _on_shop_name_edit_text_changed() -> void:
 
 func _on_submit_button_pressed() -> void:
 	client_check()
-	await _wait(7.5)
-	$RequestCanvas.visible = false
-	$BgShop.visible = true
+	await _wait(3.5)
+	await transition(2, [$RequestCanvas], [$BgShop, $DialogueCanvas])
+	if current_client.is_satisfied:
+		start_dialogue("request_success_dialogue")
+	else:
+		start_dialogue("request_fail_dialogue")
+	
+	postrequest_flag = true
 
 func _centered_text(s: String):
 	return "[center]" + s + "[/center]"
@@ -325,3 +367,93 @@ func transition(mode: int, from_canvases = [], to_canvases = []):
 			return
 		_:
 			return
+
+func _progress_dialogue():
+	var dialogue_box
+	if _current_speaker() == "player":
+		dialogue_box = player_dialogue_text
+	else:
+		dialogue_box = npc_dialogue_text
+		
+	if dialogue_box.visible_characters >= dialogue_box.get_total_character_count():
+		# go to next line, or end dialogue
+		current_dialogue_index += 1
+		if current_dialogue_index < current_dialogue.size():
+			if _current_speaker() == "player":
+				$DialogueCanvas/NpcDialogue.visible = false
+				$DialogueCanvas/PlayerDialogue.visible = true
+				player_dialogue_text.visible_characters = 0
+				player_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
+				player_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+			elif _current_speaker() == "client":
+				$DialogueCanvas/PlayerDialogue.visible = false
+				$DialogueCanvas/NpcDialogue.visible = true
+				npc_dialogue_text.visible_characters = 0
+				npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
+				npc_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+		else:
+			print("finish dialogue")
+			in_dialogue = false
+			_resolve_dialogue()
+	else:
+		# insta-fill
+		dialogue_box.visible_characters = dialogue_box.get_total_character_count()
+
+func start_dialogue(dialogue_name: String):
+	current_dialogue = master_dialogue[dialogue_name]
+	current_dialogue_index = 0
+	in_dialogue = true
+	if _current_speaker() == "player":
+		$DialogueCanvas/NpcDialogue.visible = false
+		$DialogueCanvas/PlayerDialogue.visible = true
+		player_dialogue_text.visible_characters = 0
+		player_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
+		player_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+	elif _current_speaker() == "client":
+		$DialogueCanvas/PlayerDialogue.visible = false
+		$DialogueCanvas/NpcDialogue.visible = true
+		npc_dialogue_text.visible_characters = 0
+		npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
+		npc_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+
+func _typewriter_effect():
+	var visible_characters
+	var total_characters
+	var dialogue_box
+	if _current_speaker() == "player":
+		visible_characters = player_dialogue_text.visible_characters
+		total_characters = player_dialogue_text.get_total_character_count()
+		dialogue_box = player_dialogue_text
+	else:
+		visible_characters = npc_dialogue_text.visible_characters
+		total_characters = npc_dialogue_text.get_total_character_count()
+		dialogue_box = npc_dialogue_text
+	
+	if visible_characters < total_characters:
+		match GlobalOptions.text_speed:
+			GlobalOptions.TextSpeeds.FAST:
+				dialogue_box.visible_characters = min(total_characters, visible_characters + 2)
+			GlobalOptions.TextSpeeds.FASTER:
+				dialogue_box.visible_characters = min(total_characters, visible_characters + 3)
+			GlobalOptions.TextSpeeds.INSTANT:
+				dialogue_box.visible_characters = total_characters
+			_:
+				dialogue_box.visible_characters += 1
+
+func _format_dialogue_text(s: String):
+	return "[color=4c2b21]" + s + "[/color]"
+
+func _current_speaker():
+	return current_dialogue[current_dialogue_index]["speaker"]
+
+func _resolve_dialogue():
+	if in_dialogue:
+		return
+	
+	if prerequest_flag:
+		prerequest_flag = false
+		await transition(2, [$DialogueCanvas, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$RequestCanvas])
+		start_request()
+	elif postrequest_flag:
+		postrequest_flag = false
+		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg], [$HubCanvas])

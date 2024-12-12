@@ -8,13 +8,32 @@
 custom_minimum_size = Vector2(0, 50)
 script = ExtResource("1_ogkb1")
 
+[node name="HSeparator" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
 [node name="PackText" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.588235)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
 theme_override_fonts/normal_font = ExtResource("1_tly4y")
-theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center]Pack Name[/center]"
+text = "	[color=3f1f16]Pack Name[/color]"
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2

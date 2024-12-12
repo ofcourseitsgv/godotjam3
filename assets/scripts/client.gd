@@ -6,11 +6,15 @@ var base_price: int
 var attribute_needs = []
 var color_needs = []
 
+var is_satisfied: bool
+
 func _init(c_name: String, c_base_price: int, attributes: Array, colors: Array):
 	name = c_name
 	base_price = c_base_price
 	_set_attribute_needs(attributes)
 	_set_color_needs(colors)
+	
+	is_satisfied = false
 
 func _set_attribute_needs(attributes: Array):
 	attribute_needs.clear()
@@ -21,3 +25,9 @@ func _set_color_needs(colors: Array):
 	color_needs.clear()
 	for c in colors:
 		color_needs.append(c)
+
+func satisfied():
+	is_satisfied = true
+
+func dissatisfied():
+	is_satisfied = false

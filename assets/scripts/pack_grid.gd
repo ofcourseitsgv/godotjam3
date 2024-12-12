@@ -17,7 +17,7 @@ func init_child_references():
 	clothes_grid = get_node("GridContainer")
 
 func setup(pack_dict: Dictionary):
-	pack_text.text = "\t" + pack_dict["display_name"]
+	pack_text.text = "\t[color=3f1f16]" + pack_dict["display_name"] + "[/color]"
 	
 	for n in clothes_grid.get_children():
 		clothes_grid.remove_child(n)

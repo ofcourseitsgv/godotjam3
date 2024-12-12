@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="3_so3im"]
 
 [node name="Clothing" type="Control"]
+z_index = 7
 custom_minimum_size = Vector2(175, 240)
 layout_mode = 3
 anchors_preset = 0
@@ -36,10 +37,13 @@ offset_top = 139.0
 offset_right = 64.5
 offset_bottom = 232.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
 theme_override_fonts/normal_font = ExtResource("3_so3im")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[center]Insert Clothing Name Here
-$0[/center]"
+text = "[center][color=3f1f16]Insert Clothing Name Here
+$0[/color][/center]"
 
 [connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

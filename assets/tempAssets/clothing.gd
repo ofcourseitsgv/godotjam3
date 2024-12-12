@@ -29,7 +29,7 @@ func _ready() -> void:
 		texture = load("res://assets/tempAssets/clothing1.png")
 
 	clothing_button.icon = texture
-	clothing_text.text = "[center]" + clothing_name + "[/center]"
+	clothing_text.text = "[center][color=3f1f16]" + clothing_name + "[/color][/center]"
 
 func init_child_references():
 	clothing_button = get_node("Button")

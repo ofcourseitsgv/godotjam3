@@ -1,0 +1,38 @@
+{
+	"begin_dialogue": [
+		{
+			"speaker": "player",
+			"text": "Welp... now that I have my new appearance, it's time to open up my new shop!"
+		},
+		{
+			"speaker": "client",
+			"text": "Hi! I saw your post on FlipFlop, and I thought your shop looked suuuuper cute! Would you be able to design an outfit for me?"
+		},
+		{
+			"speaker": "player",
+			"text": "But of course! Let me know what kind of style and colors you want!"
+		}
+	],
+
+	"request_success_dialogue": [
+		{
+			"speaker": "client",
+			"text": "omg this is awesome ily tysm heres ur money"
+		},
+		{
+			"speaker": "player",
+			"text": "hehehehe MONEY!!!! *dances*"
+		}
+	],
+
+	"request_fail_dialogue": [
+		{
+			"speaker": "player",
+			"text": "So... what do you think?"
+		},
+		{
+			"speaker":"client",
+			"text": "erm... what the scallop"
+		}
+	]
+}
