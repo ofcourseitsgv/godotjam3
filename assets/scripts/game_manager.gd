@@ -93,15 +93,12 @@ func _on_clothes_upgrade_button_pressed() -> void:
 	print("TODO: clothes upgrade")
 
 func _on_start_button_pressed() -> void:
+	current_day += 1
 	await transition(2, [$HubCanvas, $BgShop, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg])
-	#$RequestCanvas/TabletBg.visible = true
-	#$RequestCanvas/CompleteRequestBg.visible = false
 	
 	$DialogueCanvas/PlayerDialogue.visible = true
 	start_dialogue("begin_dialogue")
 	prerequest_flag = true
-	
-	#start_request()
 
 func start_request():
 	_display_my_items()
@@ -110,6 +107,7 @@ func start_request():
 	generate_client_items()
 	_display_client_items()
 	available_rerolls = Shop.max_rerolls
+	$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.visible = true
 	
 	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
 	update_client_display(current_client)
@@ -227,43 +225,38 @@ func client_check():
 	update_check_display(chosen_atts, chosen_cols)
 	
 	for chosen_att: Enums.Attributes in chosen_atts:
-		#print("chosen_att: " + Enums.attribute_to_string(chosen_att) + str(chosen_att))
 		if chosen_att in remaining_atts:
-			#print("found!")
 			var index = remaining_atts.find(chosen_att)
 			remaining_atts.remove_at(index)
 	
 	for chosen_col: Enums.Colors in chosen_cols:
-		#print("chosen_col: " + Enums.color_to_string(chosen_col) + str(chosen_col))
 		if chosen_col in remaining_cols:
-			#print("found!")
 			var index = remaining_cols.find(chosen_col)
 			remaining_cols.remove_at(index)
 	
-	if remaining_atts.is_empty() and remaining_cols.is_empty():
+	var num_mistakes = _get_number_mistakes(remaining_atts, remaining_cols)
+	if num_mistakes <= 0:
 		current_client.satisfied()
+	elif num_mistakes == 1:
+		current_client.okay()
 	else:
 		current_client.dissatisfied()
 	print("Remaining properties: " + str(remaining_atts) + " " + str(remaining_cols))
+
+func _get_number_mistakes(atts: Array, cols: Array):
+	var num_mistakes = 0
+	for a in atts:
+		num_mistakes += 1
+	for c in cols:
+		num_mistakes += 1
+	return num_mistakes
 
 func update_check_display(chosen_atts: Array, chosen_cols: Array):
 	$RequestCanvas/TabletBg.visible = false
 	$RequestCanvas/CompleteRequestBg.visible = true
 	$RequestCanvas/WindowOutlines.visible = false
 	
-	$RequestCanvas/CompleteRequestBg/Screen/ClientRequestName.text = _centered_text(current_client.name + "'s Request")
-	var needs_text = ""
 	var properties_text = ""
-	
-	needs_text += "Attributes: "
-	for a in current_client.attribute_needs:
-		needs_text += Enums.attribute_to_string(a) + ", "
-	needs_text = needs_text.left(-2)
-	needs_text += "\nColors: "
-	for c in current_client.color_needs:
-		needs_text += Enums.color_to_string(c)+ ", "
-	needs_text = needs_text.left(-2)
-	$RequestCanvas/CompleteRequestBg/Screen/ClientNeeds.text = needs_text
 	
 	properties_text += "Attributes: "
 	for a in chosen_atts:
@@ -273,22 +266,25 @@ func update_check_display(chosen_atts: Array, chosen_cols: Array):
 	for c in chosen_cols:
 		properties_text += Enums.color_to_string(c)+ ", "
 	properties_text = properties_text.left(-2)
-	$RequestCanvas/CompleteRequestBg/Screen/SelectedPropertiesName.text = _centered_text("Selected Properties")
-	$RequestCanvas/CompleteRequestBg/Screen/SelectedProperties.text = properties_text
+	#$RequestCanvas/CompleteRequestBg/Screen/SelectedPropertiesName.text = _format_dialogue_text(_centered_text("Selected Properties"))
+	$RequestCanvas/CompleteRequestBg/Screen/SelectedProperties.text = _format_dialogue_text(properties_text)
 
 func update_loading_text():
 	var loading_text = $RequestCanvas/CompleteRequestBg/Screen/LoadingText
 	await _wait(0.2)
 	loading_text_state = (loading_text_state + 1) % 4
+	var temp: String
 	match loading_text_state:
 		0:
-			loading_text.text = _centered_text("Processing Order")
+			temp = "Processing Order"
 		1:
-			loading_text.text = _centered_text("Processing Order.")
+			temp = "Processing Order."
 		2:
-			loading_text.text = _centered_text("Processing Order..")
+			temp = "Processing Order.."
 		3:
-			loading_text.text = _centered_text("Processing Order...")
+			temp = "Processing Order..."
+	
+	loading_text.text = _centered_text(_format_dialogue_text(temp))
 	update_loading_text()
 
 func _on_reroll_button_pressed() -> void:
@@ -320,10 +316,13 @@ func _on_submit_button_pressed() -> void:
 	client_check()
 	await _wait(3.5)
 	await transition(2, [$RequestCanvas], [$BgShop, $DialogueCanvas])
-	if current_client.is_satisfied:
-		start_dialogue("request_success_dialogue")
-	else:
-		start_dialogue("request_fail_dialogue")
+	match current_client.satisfied_val:
+		Client.SatisfactionValue.SATISFIED:
+			start_dialogue("request_success_dialogue")
+		Client.SatisfactionValue.OKAY:
+			start_dialogue("request_okay_dialogue")
+		_:
+			start_dialogue("request_fail_dialogue")
 	
 	postrequest_flag = true
 
@@ -457,4 +456,12 @@ func _resolve_dialogue():
 		start_request()
 	elif postrequest_flag:
 		postrequest_flag = false
+		match current_client.satisfied_val:
+			Client.SatisfactionValue.SATISFIED:
+				Player.wallet += current_client.base_price + (randi_range(2, 6) * 5)
+			Client.SatisfactionValue.OKAY:
+				Player.wallet += current_client.base_price - (randi_range(0, 3) * 5)
+			_:
+				Player.wallet -= current_client.base_price
 		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg], [$HubCanvas])
+		

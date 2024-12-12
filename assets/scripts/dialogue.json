@@ -34,5 +34,20 @@
 			"speaker":"client",
 			"text": "erm... what the scallop"
 		}
+	],
+
+	"request_okay_dialogue": [
+		{
+			"speaker": "player",
+			"text": "Do you like it?"
+		},
+		{
+			"speaker": "client",
+			"text": "Yeah! I think it's alright! Not perfect, but... I lieky :3"
+		},
+		{
+			"speaker": "player",
+			"text": "awawawaowjoajmowafmeofjmemgmsdfkljnsjkrgnr"
+		}
 	]
 }

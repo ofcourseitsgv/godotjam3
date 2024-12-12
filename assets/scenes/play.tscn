@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=14 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="8_mc235"]
 [ext_resource type="AudioStream" uid="uid://bka0lmyoukkbc" path="res://assets/audio/Play-final2.mp3" id="8_qigwv"]
 [ext_resource type="Texture2D" uid="uid://b2slnxss7sa4t" path="res://assets/art/client-items-bg.png" id="10_41gul"]
+[ext_resource type="Texture2D" uid="uid://ctvt7uel58pmj" path="res://assets/art/request-windows.png" id="11_0haxk"]
 [ext_resource type="Texture2D" uid="uid://ktudgqcceu0j" path="res://assets/art/IMG_0670.png" id="11_ppjai"]
 
 [node name="Play" type="Node2D"]
@@ -283,6 +284,7 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -323,7 +325,6 @@ text = "Attributes: simple, clean, deez, nuts
 Colors: orange"
 
 [node name="TabletBg" type="TextureRect" parent="RequestCanvas"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -449,15 +450,16 @@ theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 33
 text = "Complete Request"
 
-[node name="CompleteRequestBg" type="ColorRect" parent="RequestCanvas"]
-offset_left = 576.0
-offset_top = 32.0
-offset_right = 1856.0
-offset_bottom = 1032.0
-color = Color(0.151276, 0.151276, 0.151276, 0.839216)
-metadata/_edit_lock_ = true
+[node name="CompleteRequestBg" type="TextureRect" parent="RequestCanvas"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_skquw")
 
-[node name="Screen" type="ColorRect" parent="RequestCanvas/CompleteRequestBg"]
+[node name="Screen" type="TextureRect" parent="RequestCanvas/CompleteRequestBg"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -470,42 +472,7 @@ offset_right = 546.0
 offset_bottom = 460.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.568973, 0.568973, 0.568973, 1)
-metadata/_edit_lock_ = true
-
-[node name="ClientRequestName" type="RichTextLabel" parent="RequestCanvas/CompleteRequestBg/Screen"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -371.0
-offset_top = 48.0
-offset_right = 377.0
-offset_bottom = 111.0
-grow_horizontal = 2
-theme_override_fonts/normal_font = ExtResource("4_jhvn3")
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Client's Request[/center]"
-
-[node name="ClientNeeds" type="RichTextLabel" parent="RequestCanvas/CompleteRequestBg/Screen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -452.0
-offset_top = -340.0
-offset_right = 452.0
-offset_bottom = -156.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-text = "Attributes: simple, clean, deez, nuts
-Colors: orange"
+texture = ExtResource("11_0haxk")
 
 [node name="SelectedPropertiesName" type="RichTextLabel" parent="RequestCanvas/CompleteRequestBg/Screen"]
 layout_mode = 1
@@ -514,16 +481,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -374.0
-offset_top = -124.0
-offset_right = 374.0
-offset_bottom = -61.0
+offset_left = -261.0
+offset_top = -388.0
+offset_right = 760.0
+offset_bottom = -325.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[center]Selected Properties[/center]"
+text = "[center][color=4c2b21]Selected Properties[/color][/center]"
 
 [node name="SelectedProperties" type="RichTextLabel" parent="RequestCanvas/CompleteRequestBg/Screen"]
 layout_mode = 1
@@ -532,17 +499,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -452.0
-offset_top = -52.0
-offset_right = 452.0
-offset_bottom = 132.0
+offset_left = -240.0
+offset_top = -276.0
+offset_right = 728.0
+offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "Attributes: simple, clean, deez, nuts
-Colors: orange"
+text = "[color=4c2b21]Attributes: simple, clean, deez, nuts
+Colors: orange[/color]"
 
 [node name="LoadingText" type="RichTextLabel" parent="RequestCanvas/CompleteRequestBg/Screen"]
 layout_mode = 1
@@ -551,16 +518,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -374.0
-offset_top = -192.0
-offset_right = 374.0
-offset_bottom = -52.0
+offset_left = -261.0
+offset_top = -304.0
+offset_right = 762.0
+offset_bottom = -164.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[center]Processing Order...[/center]"
+text = "[center][color=4c2b21]Processing Order...[/color][/center]"
 
 [node name="WindowOutlines" type="Sprite2D" parent="RequestCanvas"]
 visible = false
