@@ -46,6 +46,7 @@ func _ready() -> void:
 	$BgShop.visible = true
 	
 	$RequestCanvas.visible = false
+	$RequestCanvas/CompleteRequestBg.visible = false
 	
 	$RequestCanvas/WindowOutlines.visible = true
 	
@@ -92,7 +93,7 @@ func _on_clothes_upgrade_button_pressed() -> void:
 	print("TODO: clothes upgrade")
 
 func _on_start_button_pressed() -> void:
-	await transition(2, [$HubCanvas, $BgShop], [$HUD, $DialogueCanvas])
+	await transition(2, [$HubCanvas, $BgShop, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg])
 	#$RequestCanvas/TabletBg.visible = true
 	#$RequestCanvas/CompleteRequestBg.visible = false
 	
