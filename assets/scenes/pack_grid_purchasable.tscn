@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://d08wk6r5haw02"]
+
+[ext_resource type="Script" path="res://assets/scripts/pack_grid_purchasable.gd" id="1_vl3oe"]
+[ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="2_7hm15"]
+[ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="3_yqpdp"]
+
+[node name="PackGridPurchasable" type="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+script = ExtResource("1_vl3oe")
+
+[node name="HSeparator" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="PackText" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.588235)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/normal_font = ExtResource("2_7hm15")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "	[color=3f1f16]Pack Name[/color]"
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+columns = 4
+
+[node name="Clothing" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing2" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing3" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing4" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing5" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing6" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2
+
+[node name="Clothing7" parent="GridContainer" instance=ExtResource("3_yqpdp")]
+layout_mode = 2

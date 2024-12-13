@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=19 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://ctvt7uel58pmj" path="res://assets/art/request-windows.png" id="11_0haxk"]
 [ext_resource type="Texture2D" uid="uid://ktudgqcceu0j" path="res://assets/art/IMG_0670.png" id="11_ppjai"]
 [ext_resource type="PackedScene" uid="uid://6418m4gbc8aa" path="res://assets/scenes/pack_grid.tscn" id="12_4u0sy"]
+[ext_resource type="PackedScene" uid="uid://d08wk6r5haw02" path="res://assets/scenes/pack_grid_purchasable.tscn" id="18_vo7xu"]
 
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
@@ -558,6 +559,7 @@ text = "Complete Request"
 
 [node name="OwnedItemsLabel" type="RichTextLabel" parent="RequestCanvas/TabletBg"]
 z_index = 8
+layout_mode = 0
 offset_left = 672.0
 offset_top = 80.0
 offset_right = 992.0
@@ -570,6 +572,7 @@ text = "[center]Owned Items[/center]"
 
 [node name="AvailableItemsLabel" type="RichTextLabel" parent="RequestCanvas/TabletBg"]
 z_index = 8
+layout_mode = 0
 offset_left = 672.0
 offset_top = 617.0
 offset_right = 992.0
@@ -685,6 +688,39 @@ metadata/_edit_lock_ = true
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
 
 [node name="ApparelStoreCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PhoneBg" type="TextureRect" parent="ApparelStoreCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="ApparelStoreCanvas/PhoneBg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 64.0
+offset_right = -384.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ApparelStoreCanvas/PhoneBg"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 1536.0
+offset_bottom = 1080.0
+
+[node name="MasterGrid" type="GridContainer" parent="ApparelStoreCanvas/PhoneBg/ScrollContainer"]
+layout_mode = 2
+
+[node name="PackGridPurchasable" parent="ApparelStoreCanvas/PhoneBg/ScrollContainer/MasterGrid" instance=ExtResource("18_vo7xu")]
+layout_mode = 2
 
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]

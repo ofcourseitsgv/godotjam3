@@ -95,6 +95,21 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("dialogue_key"):
 			_progress_dialogue()
 	
+	# disable other clothes of same type if one is selected
+	if client_items_array and client_items.get_child_count() != 0:
+		for c: Clothing in client_items.get_children():
+			for other_clothing: Clothing in client_items.get_children():
+				if other_clothing == c:
+					continue
+					
+				if other_clothing.type == c.type and c.type != Enums.Types.ACCESSORY:
+					if c.just_deselected:
+						c.just_deselected = false
+						other_clothing.clothing_button.disabled = false
+						print("re-enabling clothes of type " + str(c.type))
+					elif c.is_selected:
+						other_clothing.set_disabled()
+	
 	if Player.wallet <= 0 or Player.reputation <= 0:
 		print("end game")
 

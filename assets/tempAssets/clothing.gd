@@ -9,6 +9,7 @@ var attributes: Array
 var colors: Array
 var type: Enums.Types
 var is_selected: bool
+var just_deselected := false
 
 var clothing_button
 var clothing_text
@@ -52,6 +53,12 @@ func _set_colors(c_colors: Array):
 	for c in c_colors:
 		colors.append(c)
 
+func set_disabled():
+	clothing_button.button_pressed = false
+	is_selected = false
+	just_deselected = false
+	clothing_button.disabled = true
+
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		#print("Selected ", clothing_name, ", attributes: ", attributes, ", colors: ", colors)
@@ -59,6 +66,7 @@ func _on_button_toggled(toggled_on: bool) -> void:
 	else:
 		print("Deselected ", clothing_name)
 		is_selected = false
+		just_deselected = true
 
 func has_attribute(att: Enums.Attributes) -> bool:
 	return att in attributes
