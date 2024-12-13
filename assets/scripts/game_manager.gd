@@ -177,7 +177,7 @@ func _display_client_items():
 
 func update_hud() -> void:
 	$HUD/PlayerName.text = Player.player_name
-	$HUD/ShopName.text = Shop.shop_name
+	$HUD/ShopName.text = Shop.shop_name + " -- " + str(Player.reputation) + " rep."
 	$HUD/WalletText.text = "$" + str(Player.wallet)
 	$HUD/DayText.text = "Day " + str(current_day)
 
@@ -257,14 +257,10 @@ func client_check():
 	var num_mistakes = _get_number_mistakes(remaining_atts, remaining_cols)
 	if num_mistakes <= 0:
 		current_client.satisfied()
-		Player.reputation += randi_range(5,10)
 	elif num_mistakes == 1:
 		current_client.okay()
-		Player.reputation += randi_range(0, 4)
 	else:
 		current_client.dissatisfied()
-		for _i in num_mistakes:
-			Player.reputation -= randi_range(5, 10)
 	print("Remaining properties: " + str(remaining_atts) + " " + str(remaining_cols))
 
 func _get_number_mistakes(atts: Array, cols: Array):
@@ -491,10 +487,15 @@ func _resolve_dialogue():
 		match current_client.satisfied_val:
 			Client.SatisfactionValue.SATISFIED:
 				Player.wallet += current_client.base_price + (randi_range(2, 6) * 5)
+				Player.reputation += randi_range(5,10)
 			Client.SatisfactionValue.OKAY:
 				Player.wallet += current_client.base_price
+				Player.reputation += randi_range(0, 4)
 			_:
-				Player.wallet -= current_client.base_price
+				#Player.wallet += current_client.base_price
+				var err = client_attribute_number + client_color_number
+				for _i in err:
+					Player.reputation -= randi_range(0, 4)
 		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$HubCanvas], 0.5)
 
 func _update_progression():
