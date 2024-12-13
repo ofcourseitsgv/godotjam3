@@ -24,12 +24,12 @@ func _init(c_name: String, c_base_price: int, attributes: Array, colors: Array):
 
 func _set_attribute_needs(attributes: Array):
 	attribute_needs.clear()
-	for a in attributes:
+	for a: Enums.Attributes in attributes:
 		attribute_needs.append(a)
 
 func _set_color_needs(colors: Array):
 	color_needs.clear()
-	for c in colors:
+	for c: Enums.Colors in colors:
 		color_needs.append(c)
 
 func satisfied():

@@ -29,6 +29,20 @@ enum Types {
 	ACCESSORY,
 }
 
+func get_attributes():
+	var arr = []
+	for i in Attributes.size():
+		arr.append(i)
+		i += 1
+	return arr
+
+func get_colors():
+	var arr = []
+	for i in Colors.size():
+		arr.append(i)
+		i += 1
+	return arr
+
 func attribute_to_string(att: Attributes):
 	var output := ""
 	match att:

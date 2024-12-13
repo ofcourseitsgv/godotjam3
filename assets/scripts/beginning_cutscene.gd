@@ -12,6 +12,8 @@ var dialogue_0_flag = false
 
 var current_line: int
 
+var is_transitioning: bool
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,12 +22,15 @@ func _ready() -> void:
 	current_line = 0
 	$CanvasLayer/DialogueText.text = dialogue_0[current_line]
 	$Ambience.play()
+	$Ambience.volume_db = linear_to_db(0.01)
+	is_transitioning = true
 	transition(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Ambience.volume_db = linear_to_db(GlobalOptions.music_volume)
+	if not is_transitioning:
+		$Ambience.volume_db = linear_to_db(GlobalOptions.music_volume)
 	
 	if not begin_dialogue:
 		return
@@ -62,19 +67,25 @@ func progress_dialogue():
 
 func transition(to_black: bool):
 	$CrossfadeCanvas.visible = true
+	is_transitioning = true
+	var tween = get_tree().create_tween()
+	var music_tween = get_tree().create_tween()
 	
 	if to_black:
-		var tween = get_tree().create_tween()
 		tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+		music_tween.tween_property($Ambience, "volume_db", linear_to_db(0.01), 1)
 		tween.play()
+		music_tween.play()
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
 		return
 	
-	var tween = get_tree().create_tween()
 	tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+	music_tween.tween_property($Ambience, "volume_db", linear_to_db(GlobalOptions.music_volume), 1)
 	
 	tween.play()
+	music_tween.play()
 	await get_tree().create_timer(1).timeout
+	is_transitioning = false
 	$CrossfadeCanvas.visible = false
 	begin_dialogue = true

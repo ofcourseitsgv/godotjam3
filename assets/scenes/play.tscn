@@ -39,40 +39,56 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 395.0
 offset_bottom = 56.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/normal_font_size = 42
 text = "My Name"
-metadata/_edit_lock_ = true
+fit_content = true
+scroll_active = false
 
 [node name="ShopName" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
-offset_top = 56.0
+offset_top = 64.0
 offset_right = 395.0
-offset_bottom = 104.0
+offset_bottom = 118.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/normal_font_size = 42
 text = "Shop Name"
-metadata/_edit_lock_ = true
+fit_content = true
+scroll_active = false
 
 [node name="WalletText" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
-offset_top = 104.0
+offset_top = 112.0
 offset_right = 395.0
-offset_bottom = 152.0
+offset_bottom = 166.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/normal_font_size = 42
 text = "$xxx"
-metadata/_edit_lock_ = true
+fit_content = true
+scroll_active = false
 
 [node name="DayText" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
-offset_top = 152.0
+offset_top = 160.0
 offset_right = 395.0
-offset_bottom = 200.0
+offset_bottom = 214.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/normal_font_size = 42
 text = "Day X"
-metadata/_edit_lock_ = true
+fit_content = true
+scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
@@ -150,6 +166,7 @@ offset_left = 672.0
 offset_top = 723.0
 offset_right = 1785.0
 offset_bottom = 960.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
@@ -174,6 +191,7 @@ offset_left = 1023.0
 offset_top = 247.0
 offset_right = 1798.0
 offset_bottom = 409.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
@@ -198,6 +216,7 @@ offset_left = 1018.0
 offset_top = 485.0
 offset_right = 1793.0
 offset_bottom = 647.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
@@ -219,6 +238,7 @@ text = "[center]Purchase Apparel[/center]"
 
 [node name="DialogueCanvas" type="CanvasLayer" parent="."]
 layer = 4
+visible = false
 
 [node name="PlayerDialogue" type="Control" parent="DialogueCanvas"]
 visible = false
@@ -354,7 +374,6 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -363,6 +382,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_dx30f")
 metadata/_edit_lock_ = true
 
@@ -371,6 +391,7 @@ offset_left = 192.0
 offset_top = 432.0
 offset_right = 320.0
 offset_bottom = 560.0
+mouse_filter = 2
 texture = ExtResource("7_bvmy2")
 
 [node name="ClientName" type="RichTextLabel" parent="RequestCanvas"]
@@ -378,6 +399,7 @@ offset_left = 40.0
 offset_top = 792.0
 offset_right = 528.0
 offset_bottom = 855.0
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
@@ -387,12 +409,12 @@ text = "[center]Client Name[/center]"
 offset_left = 40.0
 offset_top = 856.0
 offset_right = 528.0
-offset_bottom = 1080.0
+offset_bottom = 1024.0
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "Attributes: simple, clean, deez, nuts
-Colors: orange"
+Colors: orange, blue, red, yellow, green"
 
 [node name="TabletBg" type="TextureRect" parent="RequestCanvas"]
 anchors_preset = 15
@@ -400,6 +422,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("7_skquw")
 
 [node name="MyItemsBg" type="TextureRect" parent="RequestCanvas/TabletBg"]
@@ -412,6 +435,7 @@ offset_right = -168.0
 offset_bottom = -520.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("8_1355l")
 expand_mode = 1
 stretch_mode = 2
@@ -429,6 +453,7 @@ offset_right = -30.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 vertical_scroll_mode = 2
 
 [node name="MasterGrid" type="GridContainer" parent="RequestCanvas/TabletBg/MyItemsBg/ScrollContainer"]
@@ -443,6 +468,7 @@ anchor_bottom = 1.0
 offset_bottom = -1032.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("10_41gul")
 expand_mode = 1
 stretch_mode = 2
@@ -459,6 +485,7 @@ offset_right = -198.0
 offset_bottom = 936.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="RequestCanvas/TabletBg/ClientItemsBg/ScrollContainer"]
 layout_mode = 2
@@ -499,6 +526,7 @@ offset_top = -122.0
 offset_right = 720.0
 offset_bottom = -66.0
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 33
 text = "Re-Gather"
@@ -516,6 +544,7 @@ offset_right = 344.0
 offset_bottom = -66.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("4_jhvn3")
 theme_override_font_sizes/font_size = 33
 text = "Complete Request"

@@ -28,6 +28,13 @@ var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
 const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
 
+var client_base_pay = 15
+var client_attribute_bag = [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.ELEGANT, Enums.Attributes.SIMPLE]
+var client_attribute_number = 2
+var client_color_bag = [Enums.Colors.ORANGE, Enums.Colors.YELLOW, Enums.Colors.YELLOW, Enums.Colors.ORANGE, Enums.Colors.BLUE]
+var client_color_number = 1
+
+
 var loading_text_state := 0
 
 # Called when the node enters the scene tree for the first time.
@@ -84,6 +91,9 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("dialogue_key"):
 			_progress_dialogue()
+	
+	if Player.wallet <= 0:
+		print("end game")
 
 
 func _on_shop_upgrade_button_pressed() -> void:
@@ -96,7 +106,12 @@ func _on_start_button_pressed() -> void:
 	current_day += 1
 	await transition(2, [$HubCanvas, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg], 0.5)
 	
-	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW, Enums.Colors.YELLOW, Enums.Colors.ORANGE, Enums.Colors.BLUE], 1)
+	# progression
+	for i in 100:
+		current_day += 1
+		_update_progression()
+	
+	generate_random_client(client_base_pay, client_attribute_bag, client_attribute_number, client_color_bag, client_color_number)
 	start_dialogue("begin_dialogue")
 	prerequest_flag = true
 
@@ -109,7 +124,6 @@ func start_request():
 	available_rerolls = Shop.max_rerolls
 	$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.visible = true
 	
-	#generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
 	update_client_display(current_client)
 
 func _display_my_items():
@@ -187,24 +201,24 @@ func generate_random_client(base_price = 20, attribute_bag = [], num_attributes 
 	
 
 func update_client_display(client: Client):
-	var tooltip := ""
+	#var tooltip := ""
 	var needs_text := ""
 	
-	tooltip += client.name
-	tooltip += "\nWants: "
+	#tooltip += client.name
+	#tooltip += "\nWants: "
 	needs_text += "Attributes: "
-	for a in client.attribute_needs:
-		tooltip += Enums.attribute_to_string(a) + ", "
-		needs_text += Enums.attribute_to_string(a) + ", "
+	for _a: Enums.Attributes in client.attribute_needs:
+		#tooltip += Enums.attribute_to_string(_a) + ", "
+		needs_text += Enums.attribute_to_string(_a) + ", "
 	needs_text = needs_text.left(-2)
 	needs_text += "\nColors: "
-	for c in client.color_needs:
-		tooltip += Enums.color_to_string(c) + ", "
-		needs_text += Enums.color_to_string(c)+ ", "
+	for _c: Enums.Colors in client.color_needs:
+		#tooltip += Enums.color_to_string(_c) + ", "
+		needs_text += Enums.color_to_string(_c)+ ", "
 	needs_text = needs_text.left(-2)
-	tooltip = tooltip.left(-2)
+	#tooltip = tooltip.left(-2)
 	
-	$RequestCanvas/Client.tooltip_text = tooltip
+	#$RequestCanvas/Client.tooltip_text = tooltip
 	
 	$RequestCanvas/ClientName.text = "[center]" + client.name + "[/center]"
 	$RequestCanvas/ClientNeeds.text = needs_text
@@ -314,7 +328,7 @@ func _on_shop_name_edit_text_changed() -> void:
 
 func _on_submit_button_pressed() -> void:
 	client_check()
-	await _wait(3.5)
+	await _wait(3.0)
 	await transition(2, [$RequestCanvas], [$BgShop, $DialogueCanvas])
 	match current_client.satisfied_val:
 		Client.SatisfactionValue.SATISFIED:
@@ -392,7 +406,7 @@ func _progress_dialogue():
 				npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
 				npc_speaker_text.text = current_client.name
 		else:
-			print("finish dialogue")
+			#print("finish dialogue")
 			in_dialogue = false
 			_resolve_dialogue()
 	else:
@@ -452,16 +466,41 @@ func _resolve_dialogue():
 	
 	if prerequest_flag:
 		prerequest_flag = false
-		await transition(2, [$DialogueCanvas, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue, $BgShop], [$RequestCanvas], 0.5)
 		start_request()
+		await transition(2, [$DialogueCanvas, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue, $BgShop], [$RequestCanvas], 0.5)
+		#start_request()
 	elif postrequest_flag:
 		postrequest_flag = false
 		match current_client.satisfied_val:
 			Client.SatisfactionValue.SATISFIED:
 				Player.wallet += current_client.base_price + (randi_range(2, 6) * 5)
 			Client.SatisfactionValue.OKAY:
-				Player.wallet += current_client.base_price - (randi_range(0, 3) * 5)
+				Player.wallet += current_client.base_price
 			_:
 				Player.wallet -= current_client.base_price
 		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$HubCanvas], 0.5)
-		
+
+func _update_progression():
+	if current_day % 2 == 0 and current_day % 4 != 0:
+		client_base_pay += 5
+		var all_atts = Enums.get_attributes()
+		var new_att = all_atts.pick_random()
+		client_attribute_bag.append(new_att)
+		print("new attribute: " + str(new_att))
+	
+	if current_day % 4 == 0:
+		client_base_pay += 5
+		var all_cols = Enums.get_colors()
+		var new_col = all_cols.pick_random()
+		client_color_bag.append(new_col)
+		print("new color: " + str(new_col))
+	
+	if current_day % 7 == 0:
+		client_base_pay += 10
+		var c = randi_range(0, 5)
+		if c >= 0 and c <= 1:
+			client_color_number += 1
+			print("+1 color")
+		else:
+			client_attribute_number += 1
+			print("+1 attribute")
