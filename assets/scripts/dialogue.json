@@ -2,7 +2,7 @@
 	"begin_dialogue": [
 		{
 			"speaker": "player",
-			"text": "Welp... now that I have my new appearance, it's time to open up my new shop!"
+			"text": "Welp... now that I have my new appearance, it's time to open up my new shop! I also just posted on social medias, so I hope someone comes in soon."
 		},
 		{
 			"speaker": "client",
@@ -13,8 +13,46 @@
 			"text": "But of course! Let me know what kind of style and colors you want!"
 		}
 	],
-
-	"request_success_dialogue": [
+	
+	"generic_start_0": [
+		{
+			"speaker": "player",
+			"text": "Another day, another dollar... and hopefully another client."
+		},
+		{
+			"speaker": "client",
+			"text": "Um... Hello?"
+		},
+		{
+			"speaker": "player",
+			"text": "Hi, yes! Welcome in! How may I help you?"
+		},
+		{
+			"speaker": "client",
+			"text": "I, uh... was hoping if you could decide on what I could wear to this event..."
+		}
+	],
+	
+	"generic_start_1": [
+		{
+			"speaker": "client",
+			"text": "Hope I'm not bothering anyone."
+		},
+		{
+			"speaker": "player",
+			"text": "Oh, not at all! I just opened up the shop, so you're right on time. What didya need help with?"
+		},
+		{
+			"speaker": "client",
+			"text": "Hey! One of my friends mentioned this place for some cute designs! I wanna check out what you got."
+		},
+		{
+			"speaker": "player",
+			"text": "Hehehe, your friend is right! Let me see what I can make for you."
+		}
+	],
+	
+	"success_0": [
 		{
 			"speaker": "client",
 			"text": "omg this is awesome ily tysm heres ur money"
@@ -25,7 +63,7 @@
 		}
 	],
 
-	"request_fail_dialogue": [
+	"fail_0": [
 		{
 			"speaker": "player",
 			"text": "So... what do you think?"
@@ -36,7 +74,7 @@
 		}
 	],
 
-	"request_okay_dialogue": [
+	"okay_0": [
 		{
 			"speaker": "player",
 			"text": "Do you like it?"

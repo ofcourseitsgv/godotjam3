@@ -19,6 +19,10 @@ var player_speaker_text: RichTextLabel
 var player_dialogue_text: RichTextLabel
 var npc_speaker_text: RichTextLabel
 var npc_dialogue_text: RichTextLabel
+const NUM_START_DIALOGUES = 2
+const NUM_SUCCESS_DIALOGUES = 1
+const NUM_OKAY_DIALOGUES = 1
+const NUM_FAIL_DIALOGUES = 1
 
 var prerequest_flag = false
 var postrequest_flag = false
@@ -107,12 +111,15 @@ func _on_start_button_pressed() -> void:
 	await transition(2, [$HubCanvas, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg], 0.5)
 	
 	# progression
-	for i in 100:
-		current_day += 1
-		_update_progression()
+	_update_progression()
 	
 	generate_random_client(client_base_pay, client_attribute_bag, client_attribute_number, client_color_bag, client_color_number)
-	start_dialogue("begin_dialogue")
+	if current_day == 1:
+		start_dialogue("begin_dialogue")
+	else:
+		var random_start = randi_range(0, NUM_START_DIALOGUES - 1)
+		var start = "generic_start_" + str(random_start)
+		start_dialogue(start)
 	prerequest_flag = true
 
 func start_request():
@@ -330,13 +337,20 @@ func _on_submit_button_pressed() -> void:
 	client_check()
 	await _wait(3.0)
 	await transition(2, [$RequestCanvas], [$BgShop, $DialogueCanvas])
+	var ind: int
+	var d: String
 	match current_client.satisfied_val:
 		Client.SatisfactionValue.SATISFIED:
-			start_dialogue("request_success_dialogue")
+			ind = randi_range(0, NUM_SUCCESS_DIALOGUES - 1)
+			d = "success_" + str(ind)
 		Client.SatisfactionValue.OKAY:
-			start_dialogue("request_okay_dialogue")
+			ind = randi_range(0, NUM_OKAY_DIALOGUES - 1)
+			d = "okay_" + str(ind)
 		_:
-			start_dialogue("request_fail_dialogue")
+			ind = randi_range(0, NUM_FAIL_DIALOGUES - 1)
+			d = "fail_" + str(ind)
+	
+	start_dialogue(d)
 	
 	postrequest_flag = true
 
