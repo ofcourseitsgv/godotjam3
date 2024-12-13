@@ -46,7 +46,6 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 text = "My Name"
-fit_content = true
 scroll_active = false
 
 [node name="ShopName" type="RichTextLabel" parent="HUD"]
@@ -60,7 +59,6 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 text = "Shop Name"
-fit_content = true
 scroll_active = false
 
 [node name="WalletText" type="RichTextLabel" parent="HUD"]
@@ -74,7 +72,6 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 text = "$xxx -- xx rep."
-fit_content = true
 scroll_active = false
 
 [node name="DayText" type="RichTextLabel" parent="HUD"]
@@ -88,12 +85,10 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 text = "Day X"
-fit_content = true
 scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -112,10 +107,9 @@ metadata/_edit_lock_ = true
 [node name="NameEditors" type="Control" parent="HubCanvas"]
 layout_mode = 3
 anchors_preset = 0
-offset_top = 80.0
+offset_top = 152.0
 offset_right = 699.0
-offset_bottom = 669.0
-metadata/_edit_lock_ = true
+offset_bottom = 741.0
 
 [node name="PlayerNameLabel" type="RichTextLabel" parent="HubCanvas/NameEditors"]
 layout_mode = 0
@@ -380,6 +374,7 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -686,9 +681,43 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ReturnButton" type="TextureButton" parent="ShopUpgradeCanvas"]
+offset_left = 1427.0
+offset_top = 938.0
+offset_right = 1896.0
+offset_bottom = 1038.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ReturnButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 63
+bbcode_enabled = true
+text = "[center]Return[/center]"
 
 [node name="ApparelStoreCanvas" type="CanvasLayer" parent="."]
+layer = 4
 visible = false
+
+[node name="Panel" type="Panel" parent="ApparelStoreCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PhoneBg" type="TextureRect" parent="ApparelStoreCanvas"]
 anchors_preset = 15
@@ -699,6 +728,7 @@ grow_vertical = 2
 expand_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="ApparelStoreCanvas/PhoneBg"]
+modulate = Color(0.607079, 0.520718, 0.424678, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -722,6 +752,31 @@ layout_mode = 2
 [node name="PackGridPurchasable" parent="ApparelStoreCanvas/PhoneBg/ScrollContainer/MasterGrid" instance=ExtResource("18_vo7xu")]
 layout_mode = 2
 
+[node name="ReturnButton" type="TextureButton" parent="ApparelStoreCanvas"]
+offset_left = 1427.0
+offset_top = 938.0
+offset_right = 1896.0
+offset_bottom = 1038.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ApparelStoreCanvas/ReturnButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 63
+bbcode_enabled = true
+text = "[center]Return[/center]"
+
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
 [connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]
@@ -729,3 +784,5 @@ layout_mode = 2
 [connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ApparelStoreCanvas/ReturnButton" to="." method="_on_return_button_pressed"]

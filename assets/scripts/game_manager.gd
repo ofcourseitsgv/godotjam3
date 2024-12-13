@@ -28,17 +28,20 @@ var prerequest_flag = false
 var postrequest_flag = false
 
 var pack_grid_prefab = preload("res://assets/scenes/pack_grid.tscn")
+var pack_grid_purchasable_prefab = preload("res://assets/scenes/pack_grid_purchasable.tscn")
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
 const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
 
 var client_base_pay = 15
-var client_attribute_bag = [Enums.Attributes.SILLY, Enums.Attributes.CUTE, Enums.Attributes.COMFORTABLE, Enums.Attributes.SIMPLE]
+var client_attribute_bag = [Enums.Attributes.SILLY, Enums.Attributes.CUTE, Enums.Attributes.FORMAL, Enums.Attributes.SIMPLE]
 var client_attribute_number = 2
 var client_color_bag = [Enums.Colors.BLACK, Enums.Colors.ORANGE, Enums.Colors.BLUE]
 var client_color_number = 1
 
 var loading_text_state := 0
+
+var store_items: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,7 +54,7 @@ func _ready() -> void:
 	$HubCanvas/NameEditors/PlayerNameEdit.text = Player.player_name
 	$HubCanvas/NameEditors/ShopNameEdit.text = Shop.shop_name
 	
-	$HUD.visible = false
+	$HUD.visible = true
 	
 	$BgShop.visible = true
 	
@@ -59,6 +62,10 @@ func _ready() -> void:
 	$RequestCanvas/CompleteRequestBg.visible = false
 	
 	$RequestCanvas/WindowOutlines.visible = true
+	
+	$ApparelStoreCanvas.visible = false
+	$ShopUpgradeCanvas.visible = false
+	store_items = $ApparelStoreCanvas/PhoneBg/ScrollContainer/MasterGrid
 	
 	var file = "res://assets/scripts/dialogue.json"
 	var json_as_text = FileAccess.get_file_as_string(file)
@@ -98,17 +105,34 @@ func _process(delta: float) -> void:
 	# disable other clothes of same type if one is selected
 	if client_items_array and client_items.get_child_count() != 0:
 		for c: Clothing in client_items.get_children():
+			var deselect_flag := false
 			for other_clothing: Clothing in client_items.get_children():
 				if other_clothing == c:
 					continue
-					
-				if other_clothing.type == c.type and c.type != Enums.Types.ACCESSORY:
+				
+				if c.type == Enums.Types.ONE_PIECE and (other_clothing.type == Enums.Types.TOP
+						or other_clothing.type == Enums.Types.BOTTOM or other_clothing.type == Enums.Types.ONE_PIECE):
 					if c.just_deselected:
-						c.just_deselected = false
-						other_clothing.clothing_button.disabled = false
-						print("re-enabling clothes of type " + str(c.type))
+						deselect_flag = true
+						other_clothing.set_enabled()
+						print("re-enabled " + other_clothing.clothing_name)
 					elif c.is_selected:
 						other_clothing.set_disabled()
+				
+				if other_clothing.type == c.type and c.type != Enums.Types.ACCESSORY:
+					if c.just_deselected:
+						deselect_flag = true
+						other_clothing.set_enabled()
+						#print("re-enabling clothes of type " + str(c.type))
+					elif c.is_selected:
+						other_clothing.set_disabled()
+			c.just_deselected = false
+	
+	# upgrade store layout
+	for g: PackGridPurchasable in store_items.get_children():
+		if g.just_purchased:
+			g.just_purchased = false
+			_display_apparel_store()
 	
 	if Player.wallet <= 0 or Player.reputation <= 0:
 		print("end game")
@@ -116,9 +140,12 @@ func _process(delta: float) -> void:
 
 func _on_shop_upgrade_button_pressed() -> void:
 	print("TODO: shop upgrade")
+	await transition(2, [$HubCanvas], [$ShopUpgradeCanvas, $HUD], 0.25)
 
 func _on_clothes_upgrade_button_pressed() -> void:
-	print("TODO: clothes upgrade")
+	#print("TODO: clothes upgrade")
+	_display_apparel_store()
+	await transition(2, [$HubCanvas], [$ApparelStoreCanvas, $HUD], 0.25)
 
 func _on_start_button_pressed() -> void:
 	current_day += 1
@@ -127,7 +154,9 @@ func _on_start_button_pressed() -> void:
 	# progression
 	_update_progression()
 	
-	generate_random_client(client_base_pay, client_attribute_bag, client_attribute_number, client_color_bag, client_color_number)
+	var att_num = randi_range(1, client_attribute_number)
+	var col_num = randi_range(1, client_color_number)
+	generate_random_client(client_base_pay, client_attribute_bag, att_num, client_color_bag, col_num)
 	if current_day == 1:
 		start_dialogue("begin_dialogue")
 	else:
@@ -192,8 +221,8 @@ func _display_client_items():
 
 func update_hud() -> void:
 	$HUD/PlayerName.text = Player.player_name
-	$HUD/ShopName.text = Shop.shop_name + " -- " + str(Player.reputation) + " rep."
-	$HUD/WalletText.text = "$" + str(Player.wallet)
+	$HUD/ShopName.text = Shop.shop_name
+	$HUD/WalletText.text = "$" + str(Player.wallet) + " -- " + str(Player.reputation) + " rep."
 	$HUD/DayText.text = "Day " + str(current_day)
 
 func generate_client(client_name = "", client_base_price = 0, client_attributes = [], client_colors = []):
@@ -404,7 +433,7 @@ func transition(mode: int, from_canvases = [], to_canvases = [], fadetime = 1.0)
 			var to_tween = get_tree().create_tween()
 			to_tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), fadetime)
 			to_tween.play()
-			await _wait(1)
+			await _wait(fadetime + 0.2)
 			$CrossfadeCanvas.visible = false
 			return
 		_:
@@ -537,3 +566,25 @@ func _update_progression():
 		else:
 			client_attribute_number += 1
 			print("+1 attribute")
+
+func _display_apparel_store():
+	# clear items
+	for n in store_items.get_children():
+		store_items.remove_child(n)
+		n.queue_free()
+	
+	# add items
+	for dict in Shop.all_packs:
+		if dict in Shop.owned_packs:
+			print(dict["pack"] + " already owned")
+			continue
+		
+		var new_pack_grid: PackGridPurchasable = pack_grid_purchasable_prefab.instantiate()
+		new_pack_grid.init_child_references()
+		new_pack_grid.setup(dict)
+		store_items.add_child(new_pack_grid)
+		
+
+
+func _on_return_button_pressed() -> void:
+	transition(2, [$ApparelStoreCanvas, $ShopUpgradeCanvas], [$HubCanvas], 0.25)

@@ -59,6 +59,9 @@ func set_disabled():
 	just_deselected = false
 	clothing_button.disabled = true
 
+func set_enabled():
+	clothing_button.disabled = false
+
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		#print("Selected ", clothing_name, ", attributes: ", attributes, ", colors: ", colors)

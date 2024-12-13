@@ -40,5 +40,10 @@ func _init_parse():
 
 func purchase_pack(pack_name: String):
 	for dict in all_packs:
-		if dict["pack"] == pack_name:
-			owned_clothes.append(dict)
+		if dict["pack"] == pack_name and dict["pack"] not in owned_clothes:
+			if Player.wallet >= dict["cost"]:
+				Player.wallet -= dict["cost"]
+				owned_packs.append(dict)
+				
+				for clothing in dict["clothes"]:
+					owned_clothes.append(clothing)
