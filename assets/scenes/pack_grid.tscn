@@ -37,7 +37,7 @@ layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
-columns = 6
+columns = 5
 
 [node name="Clothing" parent="GridContainer" instance=ExtResource("2_cj4kh")]
 layout_mode = 2

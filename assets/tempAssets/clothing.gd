@@ -13,20 +13,12 @@ var is_selected: bool
 var clothing_button
 var clothing_text
 
-#func _init(c_name: String, c_file: String, c_cost: int) -> void:
-	#clothing_name = c_name
-	#file = c_file
-	#cost = c_cost
-	#attributes = []
-	#colors = []
-
 func _ready() -> void:
 	init_child_references()
 
-	# FIXME: change from tempAssets to official art folder
-	var texture: Texture = load("res://assets/tempAssets/" + file)
+	var texture: Texture = load("res://assets/art/" + file)
 	if (not texture):
-		texture = load("res://assets/tempAssets/clothing1.png")
+		texture = load("")
 
 	clothing_button.icon = texture
 	clothing_text.text = "[center][color=3f1f16]" + clothing_name + "[/color][/center]"

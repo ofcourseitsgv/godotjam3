@@ -33,9 +33,9 @@ var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
 
 var client_base_pay = 15
-var client_attribute_bag = [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.ELEGANT, Enums.Attributes.SIMPLE]
+var client_attribute_bag = [Enums.Attributes.SILLY, Enums.Attributes.CUTE, Enums.Attributes.COMFORTABLE, Enums.Attributes.SIMPLE]
 var client_attribute_number = 2
-var client_color_bag = [Enums.Colors.ORANGE, Enums.Colors.YELLOW, Enums.Colors.YELLOW, Enums.Colors.ORANGE, Enums.Colors.BLUE]
+var client_color_bag = [Enums.Colors.BLACK, Enums.Colors.ORANGE, Enums.Colors.BLUE]
 var client_color_number = 1
 
 var loading_text_state := 0
@@ -77,7 +77,7 @@ func _ready() -> void:
 	
 	update_loading_text()
 	
-	$Bgm.play()
+	#$Bgm.play()
 	
 	transition(0)
 

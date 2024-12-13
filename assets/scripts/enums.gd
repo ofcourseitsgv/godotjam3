@@ -1,11 +1,15 @@
 extends Node
 
 enum Attributes {
-	CUTE,
-	SEXY,
 	SIMPLE,
-	ELEGANT,
 	SILLY,
+	CUTE,
+	FORMAL,
+	COMFORTABLE,
+	SUMMER,
+	COSPLAY,
+	OUTDOORSY,
+	UNIFORM,
 }
 
 enum Colors {
@@ -18,6 +22,7 @@ enum Colors {
 	WHITE,
 	BLACK,
 	BROWN,
+	PINK,
 }
 
 enum Types {
@@ -46,16 +51,24 @@ func get_colors():
 func attribute_to_string(att: Attributes):
 	var output := ""
 	match att:
-		Attributes.CUTE:
-			output = "cute"
-		Attributes.SEXY:
-			output = "sexy"
 		Attributes.SIMPLE:
 			output = "simple"
-		Attributes.ELEGANT:
-			output = "elegant"
 		Attributes.SILLY:
 			output = "silly"
+		Attributes.CUTE:
+			output = "cute"
+		Attributes.FORMAL:
+			output = "formal"
+		Attributes.COMFORTABLE:
+			output = "comfortable"
+		Attributes.SUMMER:
+			output = "summer"
+		Attributes.COSPLAY:
+			output = "cosplay"
+		Attributes.OUTDOORSY:
+			output = "outdoorsy"
+		Attributes.UNIFORM:
+			output = "uniform"
 	
 	return output
 
@@ -80,6 +93,8 @@ func color_to_string(col: Colors):
 			output = "black"
 		Colors.BROWN:
 			output = "brown"
+		Colors.PINK:
+			output = "pink"
 	
 	return output
 
