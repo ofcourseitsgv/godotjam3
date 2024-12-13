@@ -20,9 +20,9 @@ var player_dialogue_text: RichTextLabel
 var npc_speaker_text: RichTextLabel
 var npc_dialogue_text: RichTextLabel
 const NUM_START_DIALOGUES = 2
-const NUM_SUCCESS_DIALOGUES = 1
-const NUM_OKAY_DIALOGUES = 1
-const NUM_FAIL_DIALOGUES = 1
+const NUM_SUCCESS_DIALOGUES = 2
+const NUM_OKAY_DIALOGUES = 2
+const NUM_FAIL_DIALOGUES = 2
 
 var prerequest_flag = false
 var postrequest_flag = false
@@ -37,7 +37,6 @@ var client_attribute_bag = [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enum
 var client_attribute_number = 2
 var client_color_bag = [Enums.Colors.ORANGE, Enums.Colors.YELLOW, Enums.Colors.YELLOW, Enums.Colors.ORANGE, Enums.Colors.BLUE]
 var client_color_number = 1
-
 
 var loading_text_state := 0
 
@@ -96,7 +95,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("dialogue_key"):
 			_progress_dialogue()
 	
-	if Player.wallet <= 0:
+	if Player.wallet <= 0 or Player.reputation <= 0:
 		print("end game")
 
 
@@ -258,10 +257,14 @@ func client_check():
 	var num_mistakes = _get_number_mistakes(remaining_atts, remaining_cols)
 	if num_mistakes <= 0:
 		current_client.satisfied()
+		Player.reputation += randi_range(5,10)
 	elif num_mistakes == 1:
 		current_client.okay()
+		Player.reputation += randi_range(0, 4)
 	else:
 		current_client.dissatisfied()
+		for _i in num_mistakes:
+			Player.reputation -= randi_range(5, 10)
 	print("Remaining properties: " + str(remaining_atts) + " " + str(remaining_cols))
 
 func _get_number_mistakes(atts: Array, cols: Array):

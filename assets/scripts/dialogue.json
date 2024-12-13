@@ -62,6 +62,21 @@
 			"text": "hehehehe MONEY!!!! *dances*"
 		}
 	],
+	
+	"success_1": [
+		{
+			"speaker": "player",
+			"text": "What do you think? Do you like it?"
+		},
+		{
+			"speaker": "client",
+			"text": "I... absolutely..."
+		},
+		{
+			"speaker": "client",
+			"text": "LOVE IT! THIS IS PERFECT!!! You really know your stuff!! I gotta tell all my friends about this place. Here's some extra tip!"
+		}
+	],
 
 	"fail_0": [
 		{
@@ -71,6 +86,25 @@
 		{
 			"speaker":"client",
 			"text": "erm... what the scallop"
+		}
+	],
+	
+	"fail_1": [
+		{
+			"speaker": "client",
+			"text": "Ough..."
+		},
+		{
+			"speaker": "player",
+			"text": "What's wrong? Do you not like it?"
+		},
+		{
+			"speaker": "client",
+			"text": "It's not that I don't like it... I'm just not sure if this will be entirely appropriate..."
+		},
+		{
+			"speaker": "client",
+			"text": "I really appreciate the fit, though!"
 		}
 	],
 
@@ -86,6 +120,21 @@
 		{
 			"speaker": "player",
 			"text": "awawawaowjoajmowafmeofjmemgmsdfkljnsjkrgnr"
+		}
+	],
+	
+	"okay_1": [
+		{
+			"speaker": "client",
+			"text": "Wow! This is neat!"
+		},
+		{
+			"speaker": "player",
+			"text": "Aww, I'm glad you like it!"
+		},
+		{
+			"speaker": "client",
+			"text": "Of course I like it, this will definitely work!"
 		}
 	]
 }
