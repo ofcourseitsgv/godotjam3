@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cab2tsib78lo4"]
+[gd_scene load_steps=10 format=3 uid="uid://cab2tsib78lo4"]
 
 [ext_resource type="FontFile" uid="uid://dhihjkq7t2vni" path="res://assets/fonts/Coming_Soon/ComingSoon-Regular.ttf" id="1_8lr7f"]
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
 [ext_resource type="Texture2D" uid="uid://dxou7kodl24mx" path="res://assets/tempAssets/menubg.png" id="2_uuboc"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_hs33e"]
+[ext_resource type="Texture2D" uid="uid://carygbi38fjhf" path="res://assets/art/Normal_button_.png" id="4_may6n"]
+[ext_resource type="Texture2D" uid="uid://d1p6flgku3c8c" path="res://assets/art/Dark_button.png" id="5_3utn0"]
 [ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="5_sr46l"]
 [ext_resource type="AudioStream" uid="uid://dx4gg7ejh8gec" path="res://assets/audio/Main Menu.mp3" id="6_jmt05"]
+[ext_resource type="Texture2D" uid="uid://ce1jijw03ladr" path="res://assets/art/Light_button.png" id="6_qhc88"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_kjd3y")
@@ -35,39 +38,69 @@ theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]Change of Pace[/center]"
 
-[node name="StartButton" type="Button" parent="CanvasLayer"]
+[node name="StartButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -760.0
-offset_top = 40.0
+offset_top = 36.0
 offset_right = -270.0
-offset_bottom = 115.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_hs33e")
-theme_override_font_sizes/font_size = 50
-text = "Play"
+texture_normal = ExtResource("4_may6n")
+texture_pressed = ExtResource("5_3utn0")
+texture_hover = ExtResource("6_qhc88")
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/StartButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_right = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_hs33e")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Play[/center]"
+
+[node name="OptionsButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -760.0
-offset_top = 190.0
+offset_top = 180.0
 offset_right = -270.0
-offset_bottom = 265.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_hs33e")
-theme_override_font_sizes/font_size = 50
-text = "Options"
+texture_normal = ExtResource("4_may6n")
+texture_pressed = ExtResource("5_3utn0")
+texture_hover = ExtResource("6_qhc88")
 
-[node name="CreditsButton" type="Button" parent="CanvasLayer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/OptionsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_right = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_hs33e")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Options[/center]"
+
+[node name="CreditsButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -79,9 +112,24 @@ offset_right = -270.0
 offset_bottom = 415.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_hs33e")
-theme_override_font_sizes/font_size = 50
-text = "Credits"
+texture_normal = ExtResource("4_may6n")
+texture_pressed = ExtResource("5_3utn0")
+texture_hover = ExtResource("6_qhc88")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/CreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_right = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_hs33e")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Credits[/center]"
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(57, -6)

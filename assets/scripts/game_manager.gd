@@ -94,9 +94,9 @@ func _on_clothes_upgrade_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	current_day += 1
-	await transition(2, [$HubCanvas, $BgShop, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg])
+	await transition(2, [$HubCanvas, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg], 0.5)
 	
-	$DialogueCanvas/PlayerDialogue.visible = true
+	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW, Enums.Colors.YELLOW, Enums.Colors.ORANGE, Enums.Colors.BLUE], 1)
 	start_dialogue("begin_dialogue")
 	prerequest_flag = true
 
@@ -109,7 +109,7 @@ func start_request():
 	available_rerolls = Shop.max_rerolls
 	$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.visible = true
 	
-	generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
+	#generate_random_client(20, [Enums.Attributes.SIMPLE, Enums.Attributes.CUTE, Enums.Attributes.SILLY, Enums.Attributes.SIMPLE], 2, [Enums.Colors.ORANGE, Enums.Colors.YELLOW], 1)
 	update_client_display(current_client)
 
 func _display_my_items():
@@ -332,35 +332,35 @@ func _centered_text(s: String):
 func _wait(seconds: float):
 	await get_tree().create_timer(seconds).timeout
 
-func transition(mode: int, from_canvases = [], to_canvases = []):
+func transition(mode: int, from_canvases = [], to_canvases = [], fadetime = 1.0):
 	$CrossfadeCanvas.visible = true
 	
 	var tween = get_tree().create_tween()
 	match mode:
 		0:
 			# beginning / from black
-			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), fadetime)
 			tween.play()
-			await _wait(1)
+			await _wait(fadetime)
 			$CrossfadeCanvas.visible = false
 			return
 		1:
 			# end / to black
-			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), fadetime)
 			tween.play()
-			await _wait(1)
+			await _wait(fadetime)
 			
 			return
 		2:
-			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), 1)
+			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), fadetime)
 			tween.play()
-			await _wait(1.2)
+			await _wait(fadetime + 0.2)
 			for c in from_canvases:
 				c.visible = false
 			for c in to_canvases:
 				c.visible = true
 			var to_tween = get_tree().create_tween()
-			to_tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
+			to_tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), fadetime)
 			to_tween.play()
 			await _wait(1)
 			$CrossfadeCanvas.visible = false
@@ -384,13 +384,13 @@ func _progress_dialogue():
 				$DialogueCanvas/PlayerDialogue.visible = true
 				player_dialogue_text.visible_characters = 0
 				player_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-				player_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+				player_speaker_text.text = Player.player_name
 			elif _current_speaker() == "client":
 				$DialogueCanvas/PlayerDialogue.visible = false
 				$DialogueCanvas/NpcDialogue.visible = true
 				npc_dialogue_text.visible_characters = 0
 				npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-				npc_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+				npc_speaker_text.text = current_client.name
 		else:
 			print("finish dialogue")
 			in_dialogue = false
@@ -408,13 +408,13 @@ func start_dialogue(dialogue_name: String):
 		$DialogueCanvas/PlayerDialogue.visible = true
 		player_dialogue_text.visible_characters = 0
 		player_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-		player_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+		player_speaker_text.text = Player.player_name
 	elif _current_speaker() == "client":
 		$DialogueCanvas/PlayerDialogue.visible = false
 		$DialogueCanvas/NpcDialogue.visible = true
 		npc_dialogue_text.visible_characters = 0
 		npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-		npc_speaker_text.text = current_dialogue[current_dialogue_index]["speaker"]
+		npc_speaker_text.text = current_client.name
 
 func _typewriter_effect():
 	var visible_characters
@@ -452,7 +452,7 @@ func _resolve_dialogue():
 	
 	if prerequest_flag:
 		prerequest_flag = false
-		await transition(2, [$DialogueCanvas, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$RequestCanvas])
+		await transition(2, [$DialogueCanvas, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue, $BgShop], [$RequestCanvas], 0.5)
 		start_request()
 	elif postrequest_flag:
 		postrequest_flag = false
@@ -463,5 +463,5 @@ func _resolve_dialogue():
 				Player.wallet += current_client.base_price - (randi_range(0, 3) * 5)
 			_:
 				Player.wallet -= current_client.base_price
-		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg], [$HubCanvas])
+		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$HubCanvas], 0.5)
 		

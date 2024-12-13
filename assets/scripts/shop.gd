@@ -37,3 +37,8 @@ func _init_parse():
 				all_clothes.append(clothing)
 				if pack["owned_by_default"] == 1:
 					owned_clothes.append(clothing)
+
+func purchase_pack(pack_name: String):
+	for dict in all_packs:
+		if dict["pack"] == pack_name:
+			owned_clothes.append(dict)

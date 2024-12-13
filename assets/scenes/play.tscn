@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=17 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_il7yf"]
 [ext_resource type="Texture2D" uid="uid://bup5kocwkr5ev" path="res://assets/tempAssets/requestbg.png" id="3_dx30f"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_jhvn3"]
+[ext_resource type="Texture2D" uid="uid://carygbi38fjhf" path="res://assets/art/Normal_button_.png" id="5_kcxah"]
+[ext_resource type="Texture2D" uid="uid://d1p6flgku3c8c" path="res://assets/art/Dark_button.png" id="6_ao1w7"]
+[ext_resource type="Texture2D" uid="uid://ce1jijw03ladr" path="res://assets/art/Light_button.png" id="7_3w4tq"]
 [ext_resource type="Texture2D" uid="uid://ywkixflqroj" path="res://icon.svg" id="7_bvmy2"]
 [ext_resource type="Texture2D" uid="uid://bx6sqwgt8ullc" path="res://assets/art/request-bg.png" id="7_skquw"]
 [ext_resource type="Texture2D" uid="uid://balkl6as8pktv" path="res://assets/art/my-items-bg.png" id="8_1355l"]
@@ -92,81 +95,130 @@ metadata/_edit_lock_ = true
 [node name="NameEditors" type="Control" parent="HubCanvas"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 80.0
 offset_right = 699.0
-offset_bottom = 589.0
+offset_bottom = 669.0
 
 [node name="PlayerNameLabel" type="RichTextLabel" parent="HubCanvas/NameEditors"]
 layout_mode = 0
 offset_left = 102.0
 offset_top = 105.0
-offset_right = 489.0
-offset_bottom = 171.0
+offset_right = 502.0
+offset_bottom = 185.0
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/normal_font_size = 65
 text = "My Name"
+fit_content = true
+scroll_active = false
 
 [node name="PlayerNameEdit" type="TextEdit" parent="HubCanvas/NameEditors"]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 187.0
-offset_right = 488.0
-offset_bottom = 257.0
+offset_top = 205.0
+offset_right = 608.0
+offset_bottom = 288.0
 theme_override_fonts/font = ExtResource("2_il7yf")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 55
 text = "candace"
 placeholder_text = "My Name..."
 
 [node name="ShopNameLabel" type="RichTextLabel" parent="HubCanvas/NameEditors"]
 layout_mode = 0
 offset_left = 102.0
-offset_top = 311.0
-offset_right = 489.0
-offset_bottom = 377.0
+offset_top = 360.0
+offset_right = 502.0
+offset_bottom = 442.0
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
-theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/normal_font_size = 65
 text = "Shop Name"
+fit_content = true
+scroll_active = false
 
 [node name="ShopNameEdit" type="TextEdit" parent="HubCanvas/NameEditors"]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 393.0
-offset_right = 488.0
-offset_bottom = 463.0
+offset_top = 460.0
+offset_right = 608.0
+offset_bottom = 545.0
 theme_override_fonts/font = ExtResource("2_il7yf")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 55
 text = "shoppy toppy"
 placeholder_text = "Shop Name..."
 
-[node name="StartButton" type="Button" parent="HubCanvas"]
-offset_left = 493.0
+[node name="StartButton" type="TextureButton" parent="HubCanvas"]
+offset_left = 672.0
 offset_top = 723.0
 offset_right = 1785.0
-offset_bottom = 885.0
-theme_override_fonts/font = ExtResource("4_jhvn3")
-theme_override_font_sizes/font_size = 55
-text = "Start Business"
+offset_bottom = 960.0
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+stretch_mode = 6
 
-[node name="ShopUpgradeButton" type="Button" parent="HubCanvas"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/StartButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 95
+bbcode_enabled = true
+text = "[center]Start Work Day[/center]"
+
+[node name="ShopUpgradeButton" type="TextureButton" parent="HubCanvas"]
 offset_left = 1023.0
 offset_top = 247.0
 offset_right = 1798.0
 offset_bottom = 409.0
-theme_override_fonts/font = ExtResource("4_jhvn3")
-theme_override_font_sizes/font_size = 55
-text = "Upgrade Shop"
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+stretch_mode = 0
 
-[node name="ClothesUpgradeButton" type="Button" parent="HubCanvas"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/ShopUpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]Upgrade Shop[/center]"
+
+[node name="ClothesUpgradeButton" type="TextureButton" parent="HubCanvas"]
 offset_left = 1018.0
 offset_top = 485.0
 offset_right = 1793.0
 offset_bottom = 647.0
-theme_override_fonts/font = ExtResource("4_jhvn3")
-theme_override_font_sizes/font_size = 55
-text = "Purchase Apparel"
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/ClothesUpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]Purchase Apparel[/center]"
 
 [node name="DialogueCanvas" type="CanvasLayer" parent="."]
 layer = 4
-visible = false
 
 [node name="PlayerDialogue" type="Control" parent="DialogueCanvas"]
 visible = false
@@ -178,12 +230,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="TextureRect" parent="DialogueCanvas/PlayerDialogue"]
+layout_mode = 0
 offset_right = 448.0
 offset_bottom = 1080.0
 texture = ExtResource("7_bvmy2")
 expand_mode = 1
 
 [node name="TextureRect" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = 704.0
 offset_right = 1240.0
@@ -197,6 +251,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
 theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_fonts/bold_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 65
@@ -205,6 +262,7 @@ bbcode_enabled = true
 text = "[color=4c2b21]Mira[/color]"
 
 [node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = 808.0
 offset_right = 1856.0
@@ -218,6 +276,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
@@ -234,6 +295,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
+layout_mode = 0
 offset_left = 1472.0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -241,6 +303,7 @@ texture = ExtResource("7_bvmy2")
 expand_mode = 1
 
 [node name="TextureRect" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 704.0
 offset_right = 792.0
@@ -254,6 +317,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
 theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_fonts/bold_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 65
@@ -262,6 +328,7 @@ bbcode_enabled = true
 text = "[color=4c2b21]Mira[/color]"
 
 [node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 808.0
 offset_right = 1408.0
@@ -275,6 +342,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
 theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
@@ -553,6 +623,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
+
+[node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
+
+[node name="ApparelStoreCanvas" type="CanvasLayer" parent="."]
 
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
