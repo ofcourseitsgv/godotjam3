@@ -670,9 +670,9 @@ bbcode_enabled = true
 text = "[center]Available Items[/center]"
 
 [node name="RequestTrendyButton" type="TextureButton" parent="RequestCanvas/TabletBg"]
-offset_left = 122.0
+offset_left = 40.0
 offset_top = 697.0
-offset_right = 469.0
+offset_right = 387.0
 offset_bottom = 771.0
 toggle_mode = true
 texture_normal = ExtResource("5_kcxah")
@@ -680,30 +680,6 @@ texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="TrendyPopup" type="PopupPanel" parent="RequestCanvas/TabletBg/RequestTrendyButton"]
-auto_translate_mode = 1
-position = Vector2i(405, 440)
-size = Vector2i(820, 270)
-theme_override_styles/panel = SubResource("StyleBoxFlat_s5sfv")
-
-[node name="TrendyContainer" type="HBoxContainer" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup"]
-visible = false
-offset_top = 20.0
-offset_right = 820.0
-offset_bottom = 270.0
-
-[node name="Clothing" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
-layout_mode = 2
-
-[node name="Clothing2" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
-layout_mode = 2
-
-[node name="Clothing3" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
-layout_mode = 2
-
-[node name="Clothing4" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
-layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="RequestCanvas/TabletBg/RequestTrendyButton"]
 layout_mode = 1

@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dhihjkq7t2vni" path="res://assets/fonts/Coming_Soon/ComingSoon-Regular.ttf" id="1_8lr7f"]
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
-[ext_resource type="Texture2D" uid="uid://dxou7kodl24mx" path="res://assets/tempAssets/menubg.png" id="2_uuboc"]
+[ext_resource type="Texture2D" uid="uid://xdpnup4vsd1u" path="res://assets/art/main-menu.png" id="2_7ph8j"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_hs33e"]
 [ext_resource type="Texture2D" uid="uid://carygbi38fjhf" path="res://assets/art/Normal_button_.png" id="4_may6n"]
 [ext_resource type="Texture2D" uid="uid://d1p6flgku3c8c" path="res://assets/art/Dark_button.png" id="5_3utn0"]
@@ -16,9 +16,9 @@
 script = ExtResource("1_kjd3y")
 
 [node name="BG" type="Sprite2D" parent="."]
-modulate = Color(0.485703, 0.485704, 0.485703, 1)
-texture = ExtResource("2_uuboc")
+texture = ExtResource("2_7ph8j")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

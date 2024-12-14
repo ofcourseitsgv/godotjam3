@@ -16,6 +16,7 @@ var is_popular := false
 
 var new_trendy_chance := 15
 var has_trends_updated := false
+var has_selected_trendy := false
 
 var master_dialogue: Dictionary
 var current_dialogue: Array
@@ -196,9 +197,10 @@ func _on_start_button_pressed() -> void:
 	# progression
 	_update_progression()
 	
+	has_selected_trendy = false
 	var popular_roll = randi_range(1, 100)
 	if popular_roll <= Shop.popular_client_chance:
-		#print("POPULAR CLIENT!")
+		print("POPULAR CLIENT!")
 		is_popular = true
 	var att_num = randi_range(1, client_attribute_number)
 	var col_num = randi_range(1, client_color_number)
@@ -313,6 +315,8 @@ func update_client_display(client: Client):
 	for _a: Enums.Attributes in client.attribute_needs:
 		#tooltip += Enums.attribute_to_string(_a) + ", "
 		needs_text += Enums.attribute_to_string(_a) + ", "
+	if is_popular:
+		needs_text += "trendy--"
 	needs_text = needs_text.left(-2)
 	needs_text += "\nColors: "
 	for _c: Enums.Colors in client.color_needs:
@@ -342,6 +346,12 @@ func client_check():
 			for c in clothing.colors:
 				chosen_cols.append(c)
 	
+	for trend: Dictionary in Shop.trendy_clothes:
+		for c: Clothing in chosen_clothes:
+			if trend["clothing_name"] == c.clothing_name:
+				has_selected_trendy = true
+				print("trendy clothes!")
+	
 	update_check_display(chosen_atts, chosen_cols)
 	
 	for chosen_att: Enums.Attributes in chosen_atts:
@@ -354,20 +364,13 @@ func client_check():
 			var index = remaining_cols.find(chosen_col)
 			remaining_cols.remove_at(index)
 	
-	var selected_trendy = false
-	for trend: Dictionary in Shop.trendy_clothes:
-		for c: Clothing in chosen_clothes:
-			if trend["clothing_name"] == c.clothing_name:
-				selected_trendy = true
-				print("trendy clothes!")
-	
 	var error_mark = 1
-	if selected_trendy:
+	if has_selected_trendy:
 		error_mark += 1
 	
 	var num_mistakes = _get_number_mistakes(remaining_atts, remaining_cols)
 	
-	if is_popular and not selected_trendy:
+	if is_popular and not has_selected_trendy:
 		num_mistakes = 999
 	
 	if num_mistakes < error_mark:
@@ -396,6 +399,8 @@ func update_check_display(chosen_atts: Array, chosen_cols: Array):
 	properties_text += "Attributes: "
 	for a in chosen_atts:
 		properties_text += Enums.attribute_to_string(a) + ", "
+	if has_selected_trendy:
+		properties_text += "trendy--"
 	if chosen_atts.is_empty():
 		properties_text += "none--"
 	properties_text = properties_text.left(-2)
@@ -635,6 +640,8 @@ func _resolve_dialogue():
 		if trendy_roll <= new_trendy_chance:
 			update_trends()
 			has_trends_updated = true
+		else:
+			has_trends_updated = false
 		_display_rewards_text(money_gained, rep_gained)
 		Player.wallet += money_gained
 		Player.reputation += rep_gained

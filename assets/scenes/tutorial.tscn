@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvwl018wkyxmq"]
+[gd_scene load_steps=19 format=3 uid="uid://cvwl018wkyxmq"]
 
 [ext_resource type="Script" path="res://assets/scripts/tutorial.gd" id="1_f3ejd"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="2_u54us"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="3_4m5ko"]
-[ext_resource type="Texture2D" uid="uid://bc54b2biduxie" path="res://assets/tempAssets/Green-Check-Mark-Transparent.png" id="3_sj71n"]
 [ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="4_blgq5"]
 [ext_resource type="Texture2D" uid="uid://h7ny4ds5pqq4" path="res://assets/art/screenshots/client-ask.png" id="5_hmb00"]
 [ext_resource type="Texture2D" uid="uid://c08d10vgefcsv" path="res://assets/art/screenshots/client-needs.png" id="6_k6en2"]
@@ -13,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://e6ar6apgualj" path="res://assets/art/screenshots/hub.png" id="10_t3utf"]
 [ext_resource type="Texture2D" uid="uid://cbpic1p7b6hhc" path="res://assets/art/screenshots/shop-upgrades.png" id="11_ufnga"]
 [ext_resource type="Texture2D" uid="uid://cfudcd1yb6vio" path="res://assets/art/screenshots/apparel-store.png" id="12_ckt11"]
+[ext_resource type="Texture2D" uid="uid://kvwyl0der8xe" path="res://assets/art/screenshots/trendy-button.png" id="13_wvu8k"]
+[ext_resource type="Texture2D" uid="uid://cdlsgmambochm" path="res://assets/art/screenshots/trendy-clothes.png" id="14_vpf10"]
+[ext_resource type="Texture2D" uid="uid://cmc3qy2gfjts3" path="res://assets/art/screenshots/popular-client-needs.png" id="15_5hqsb"]
+[ext_resource type="Texture2D" uid="uid://nvdxdbhhs6nt" path="res://assets/art/screenshots/popular-rewards.png" id="16_m2dks"]
+[ext_resource type="Texture2D" uid="uid://cccmg7f1nhnlt" path="res://assets/art/arrow.png" id="17_38rj4"]
+[ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="18_cvgcu"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -31,22 +36,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06, 0.06, 0.06, 0.819608)
-metadata/_edit_lock_ = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -256.0
-offset_top = 32.0
-offset_right = 256.0
-offset_bottom = 150.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_u54us")
-theme_override_font_sizes/normal_font_size = 76
-bbcode_enabled = true
-text = "[center]Tutorial[/center]"
 metadata/_edit_lock_ = true
 
 [node name="Page0" type="CanvasLayer" parent="CanvasLayer"]
@@ -85,6 +74,22 @@ grow_vertical = 2
 texture = ExtResource("4_blgq5")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page0"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Tutorial[/center]"
+metadata/_edit_lock_ = true
 
 [node name="Page1" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
@@ -125,6 +130,22 @@ texture = ExtResource("6_k6en2")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page1"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Clients[/center]"
+metadata/_edit_lock_ = true
+
 [node name="Page2" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
 visible = false
@@ -154,6 +175,22 @@ offset_bottom = 768.0
 texture = ExtResource("7_0s6xy")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Owned Items[/center]"
+metadata/_edit_lock_ = true
 
 [node name="Page3" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
@@ -185,6 +222,22 @@ offset_bottom = 549.0
 texture = ExtResource("8_eedve")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page3"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Available Items[/center]"
+metadata/_edit_lock_ = true
 
 [node name="Page4" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
@@ -226,6 +279,22 @@ texture = ExtResource("6_k6en2")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page4"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Selecting Items for a Client[/center]"
+metadata/_edit_lock_ = true
+
 [node name="Page5" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
 visible = false
@@ -258,6 +327,22 @@ text = "After each day, you gain money (and potentially reputation). You can use
 fit_content = true
 scroll_active = false
 
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page5"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Rewards & Hub[/center]"
+metadata/_edit_lock_ = true
+
 [node name="Page6" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
 visible = false
@@ -287,6 +372,22 @@ offset_bottom = 832.0
 texture = ExtResource("11_ufnga")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page6"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Shop Upgrades[/center]"
+metadata/_edit_lock_ = true
 
 [node name="Page7" type="CanvasLayer" parent="CanvasLayer"]
 layer = 101
@@ -319,6 +420,151 @@ texture = ExtResource("12_ckt11")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page7"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Buying Apparel Packs[/center]"
+metadata/_edit_lock_ = true
+
+[node name="Page8" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page8"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 656.0
+offset_right = 864.0
+offset_bottom = 928.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "\"Trendy clothes\" are clothes that are currently popular with the crowds. Selecting trendy clothes will make your clients less likely to be dissatisfied with your outfit choice.
+"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page8"]
+offset_left = 112.0
+offset_top = 336.0
+offset_right = 656.0
+offset_bottom = 488.0
+texture = ExtResource("13_wvu8k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Page8"]
+offset_left = 728.0
+offset_top = 208.0
+offset_right = 1881.0
+offset_bottom = 616.0
+texture = ExtResource("14_vpf10")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page8"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Trendy Clothes[/center]"
+metadata/_edit_lock_ = true
+
+[node name="Page9" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page9"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 192.0
+offset_right = 864.0
+offset_bottom = 464.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Sometimes, popular clients appear at your store (indicated with a gold name)! They always want something trendy. If you don't give them a trendy clothing article, they will not like the outfit.
+"
+fit_content = true
+scroll_active = false
+
+[node name="Text2" type="RichTextLabel" parent="CanvasLayer/Page9"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 48.0
+offset_top = 624.0
+offset_right = 897.0
+offset_bottom = 831.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Satisfying a popular client will give big rewards, though. High risk, high reward!"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page9"]
+offset_left = 128.0
+offset_top = 432.0
+offset_right = 935.0
+offset_bottom = 776.0
+texture = ExtResource("15_5hqsb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Page9"]
+offset_left = 1072.0
+offset_top = 440.0
+offset_right = 1777.0
+offset_bottom = 600.0
+texture = ExtResource("16_m2dks")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Page9"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -812.0
+offset_top = 40.0
+offset_right = 812.0
+offset_bottom = 158.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Popular Clients[/center]"
+metadata/_edit_lock_ = true
+
 [node name="NavButtons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 7
@@ -338,11 +584,11 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -40.0
-offset_right = 84.0
-offset_bottom = 40.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
 grow_vertical = 2
-texture_normal = ExtResource("3_sj71n")
+texture_normal = ExtResource("17_38rj4")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -353,14 +599,19 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -40.0
-offset_bottom = 40.0
+offset_left = -200.0
+offset_top = -50.0
+offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("3_sj71n")
+texture_normal = ExtResource("17_38rj4")
 ignore_texture_size = true
 stretch_mode = 4
+flip_h = true
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_cvgcu")
+max_polyphony = 2
 
 [connection signal="pressed" from="CanvasLayer/NavButtons/Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="CanvasLayer/NavButtons/Right" to="." method="_on_right_pressed"]

@@ -38,7 +38,7 @@ func _init() -> void:
 	max_rerolls = 1
 	max_client_item_number = 3
 	reputation_mult = 1.0
-	popular_client_chance = 100
+	popular_client_chance = 1
 	_init_parse()
 
 func _reset():
