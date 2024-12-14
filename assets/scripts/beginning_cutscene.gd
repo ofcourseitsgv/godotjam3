@@ -56,7 +56,7 @@ func progress_dialogue():
 			$CanvasLayer/DialogueText.visible_characters = 0
 			$CanvasLayer/DialogueText.text = dialogue_0[current_line]
 		else:
-			print("finished dialogue_0")
+			#print("finished dialogue_0")
 			dialogue_0_flag = true
 			$CanvasLayer.visible = false
 			#get_tree().change_scene_to_file("res://assets/scenes/play.tscn")

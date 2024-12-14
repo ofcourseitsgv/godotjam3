@@ -104,6 +104,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	update_hud()
 	$Bgm.volume_db = linear_to_db(GlobalOptions.music_volume)
+	$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
+	$ClickSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
+	$ChachingSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 	
 	if in_dialogue:
 		
@@ -126,7 +129,7 @@ func _process(delta: float) -> void:
 					if c.just_deselected:
 						deselect_flag = true
 						other_clothing.set_enabled()
-						print("re-enabled " + other_clothing.clothing_name)
+						#print("re-enabled " + other_clothing.clothing_name)
 					elif c.is_selected:
 						other_clothing.set_disabled()
 				
@@ -162,16 +165,17 @@ func _input(event):
 		dialogue_clicked.emit()
 
 func _on_shop_upgrade_button_pressed() -> void:
-	#print("TODO: shop upgrade")
+	click_sfx()
 	_display_shop_upgrades()
 	await transition(2, [$HubCanvas], [$ShopUpgradeCanvas, $HUD], 0.25)
 
 func _on_clothes_upgrade_button_pressed() -> void:
-	#print("TODO: clothes upgrade")
+	click_sfx()
 	_display_apparel_store()
 	await transition(2, [$HubCanvas], [$ApparelStoreCanvas, $HUD], 0.25)
 
 func _on_start_button_pressed() -> void:
+	click_sfx()
 	await transition(2, [$HubCanvas, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg], 0.5)
 	
 	# progression
@@ -179,7 +183,7 @@ func _on_start_button_pressed() -> void:
 	
 	var popular_roll = randi_range(1, 100)
 	if popular_roll <= Shop.popular_client_chance:
-		print("POPULAR CLIENT!")
+		#print("POPULAR CLIENT!")
 		is_popular = true
 	var att_num = randi_range(1, client_attribute_number)
 	var col_num = randi_range(1, client_color_number)
@@ -226,6 +230,8 @@ func reset_item_bag():
 func generate_client_items():
 	client_items_array.clear()
 	for i in Shop.max_client_item_number:
+		if my_items_bag.is_empty():
+			reset_item_bag()
 		var rand_clothing = my_items_bag.pop_front()
 		if rand_clothing:
 			client_items_array.append(rand_clothing)
@@ -388,11 +394,12 @@ func update_loading_text():
 	update_loading_text()
 
 func _on_reroll_button_pressed() -> void:
+	click_sfx()
 	available_rerolls -= 1
 	generate_client_items()
 	_display_client_items()
 	if available_rerolls <= 0:
-		print("No more rerolls!")
+		#print("No more rerolls!")
 		$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.visible = false
 
 
@@ -413,6 +420,7 @@ func _on_shop_name_edit_text_changed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
+	click_sfx()
 	client_check()
 	await _wait(3.0)
 	await transition(2, [$RequestCanvas], [$BgShop, $DialogueCanvas])
@@ -592,6 +600,7 @@ func _resolve_dialogue():
 		Player.wallet += money_gained
 		Player.reputation += rep_gained
 		current_day += 1
+		chaching_sfx()
 
 func _display_rewards_text(money: int, rep: int):
 	var rewards = "[center]"
@@ -655,7 +664,7 @@ func _display_apparel_store():
 	# add items
 	for dict in Shop.all_packs:
 		if dict in Shop.owned_packs:
-			print(dict["pack"] + " already owned")
+			#print(dict["pack"] + " already owned")
 			continue
 		
 		var new_pack_grid: PackGridPurchasable = pack_grid_purchasable_prefab.instantiate()
@@ -678,21 +687,83 @@ func _display_shop_upgrades():
 	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Desc4.text = Shop.get_upgrade_description("social_media")
 
 func _on_return_button_pressed() -> void:
+	click_sfx()
 	transition(2, [$ApparelStoreCanvas, $ShopUpgradeCanvas], [$HubCanvas], 0.25)
 
 
 func _on_purchase_1_pressed() -> void:
-	Shop.purchase_upgrade("crates")
+	if Shop.purchase_upgrade("crates"):
+		chaching_sfx()
 	_display_shop_upgrades()
+	click_sfx()
 
 func _on_purchase_2_pressed() -> void:
-	Shop.purchase_upgrade("wardrobe")
+	if Shop.purchase_upgrade("wardrobe"):
+		chaching_sfx()
 	_display_shop_upgrades()
+	click_sfx()
 
 func _on_purchase_3_pressed() -> void:
-	Shop.purchase_upgrade("decor")
+	if Shop.purchase_upgrade("decor"):
+		chaching_sfx()
 	_display_shop_upgrades()
+	click_sfx()
 
 func _on_purchase_4_pressed() -> void:
-	Shop.purchase_upgrade("social_media")
+	if Shop.purchase_upgrade("social_media"):
+		chaching_sfx()
 	_display_shop_upgrades()
+	click_sfx()
+
+func hover_sfx():
+	$HoverSfx.play()
+
+func click_sfx():
+	$ClickSfx.play()
+
+func chaching_sfx():
+	$ChachingSfx.play()
+
+
+func _on_start_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_shop_upgrade_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_clothes_upgrade_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_reroll_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_submit_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_return_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_purchase_1_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_purchase_2_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_purchase_3_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_purchase_4_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_return_button_2_mouse_entered() -> void:
+	hover_sfx()

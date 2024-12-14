@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cab2tsib78lo4"]
+[gd_scene load_steps=12 format=3 uid="uid://cab2tsib78lo4"]
 
 [ext_resource type="FontFile" uid="uid://dhihjkq7t2vni" path="res://assets/fonts/Coming_Soon/ComingSoon-Regular.ttf" id="1_8lr7f"]
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="5_sr46l"]
 [ext_resource type="AudioStream" uid="uid://dx4gg7ejh8gec" path="res://assets/audio/Main Menu.mp3" id="6_jmt05"]
 [ext_resource type="Texture2D" uid="uid://ce1jijw03ladr" path="res://assets/art/Light_button.png" id="6_qhc88"]
+[ext_resource type="AudioStream" uid="uid://dpa8ip7g8s4sy" path="res://assets/audio/button-hover.ogg" id="10_jjurs"]
+[ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="11_ya385"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_kjd3y")
@@ -161,5 +163,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_jjurs")
+max_polyphony = 5
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ya385")
+
+[connection signal="mouse_entered" from="CanvasLayer/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/OptionsButton" to="." method="_on_options_button_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]

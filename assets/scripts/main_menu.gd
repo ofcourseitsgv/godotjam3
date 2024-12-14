@@ -21,18 +21,28 @@ func _process(delta: float) -> void:
 	
 	if not is_transitioning:
 		$BGM.volume_db = linear_to_db(GlobalOptions.music_volume)
+		$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
+		$ClickSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 
 func _on_options_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://assets/scenes/options.tscn")
 	var options_screen = preload("res://assets/scenes/options.tscn").instantiate()
 	add_child(options_screen)
+	_click_sfx()
 
 
 func _on_start_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://assets/scenes/beginning_cutscene.tscn")
+	_click_sfx()
 	Player._reset()
 	Shop._reset()
 	transition()
+
+func _hover_sfx():
+	$HoverSfx.play()
+
+func _click_sfx():
+	$ClickSfx.play()
 
 func transition():
 	$CrossfadeCanvas.visible = true
@@ -46,3 +56,15 @@ func transition():
 	music_tween.play()
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://assets/scenes/beginning_cutscene.tscn")
+
+
+func _on_credits_button_mouse_entered() -> void:
+	_hover_sfx()
+
+
+func _on_options_button_mouse_entered() -> void:
+	_hover_sfx()
+
+
+func _on_start_button_mouse_entered() -> void:
+	_hover_sfx()

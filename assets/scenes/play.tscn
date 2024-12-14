@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=22 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://cevgw1kq8gnxn" path="res://assets/art/shop-bg-2.png" id="2_fwga3"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://ktudgqcceu0j" path="res://assets/art/IMG_0670.png" id="11_ppjai"]
 [ext_resource type="PackedScene" uid="uid://6418m4gbc8aa" path="res://assets/scenes/pack_grid.tscn" id="12_4u0sy"]
 [ext_resource type="PackedScene" uid="uid://d08wk6r5haw02" path="res://assets/scenes/pack_grid_purchasable.tscn" id="18_vo7xu"]
+[ext_resource type="AudioStream" uid="uid://dpa8ip7g8s4sy" path="res://assets/audio/button-hover.ogg" id="19_71w03"]
+[ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="20_n1wdk"]
+[ext_resource type="AudioStream" uid="uid://crpc2nisjwfkc" path="res://assets/audio/chaching.mp3" id="21_olv4x"]
 
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
@@ -113,6 +116,7 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -709,7 +713,6 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Panel" type="Panel" parent="ShopUpgradeCanvas"]
 anchors_preset = 15
@@ -1131,16 +1134,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_71w03")
+max_polyphony = 5
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_n1wdk")
+
+[node name="ChachingSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_olv4x")
+
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
+[connection signal="mouse_entered" from="HubCanvas/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_pressed"]
+[connection signal="mouse_entered" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]
+[connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
+[connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="mouse_entered" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="mouse_entered" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Purchase1" to="." method="_on_purchase_1_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Purchase1" to="." method="_on_purchase_1_pressed"]
+[connection signal="mouse_entered" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2/Purchase2" to="." method="_on_purchase_2_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2/Purchase2" to="." method="_on_purchase_2_pressed"]
+[connection signal="mouse_entered" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3/Purchase3" to="." method="_on_purchase_3_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3/Purchase3" to="." method="_on_purchase_3_pressed"]
+[connection signal="mouse_entered" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Purchase4" to="." method="_on_purchase_4_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Purchase4" to="." method="_on_purchase_4_pressed"]
+[connection signal="mouse_entered" from="ApparelStoreCanvas/ReturnButton" to="." method="_on_return_button_2_mouse_entered"]
 [connection signal="pressed" from="ApparelStoreCanvas/ReturnButton" to="." method="_on_return_button_pressed"]

@@ -14,16 +14,20 @@ static var max_client_item_number: int
 static var reputation_mult: float
 static var popular_client_chance: int
 
+signal button_clicked
+
 func _init() -> void:
 	shop_name = "My Shop"
 	upgrades = {
-		"crates": {"owned": 0, "cost": 105, "cost_mult": 1.75},
-		"wardrobe": {"owned": 0, "cost": 85, "cost_mult": 2.5},
+		"crates": {"owned": 0, "cost": 105, "cost_mult": 1.65},
+		"wardrobe": {"owned": 0, "cost": 85, "cost_mult": 2.25},
 		"decor": {"owned": 0, "cost": 130, "cost_mult": 1.3},
-		"social_media": {"owned": 0, "cost": 250, "cost_mult": 1.1}
+		"social_media": {"owned": 0, "cost": 250, "cost_mult": 1.15}
 	}
 	all_packs = []
 	owned_packs = []
+	all_clothes = []
+	owned_clothes = []
 	
 	max_rerolls = 1
 	max_client_item_number = 3
@@ -40,7 +44,7 @@ func _init_parse():
 	var master_dict = JSON.parse_string(json_as_text)
 	if (master_dict):
 		for pack in master_dict["all_packs"]:
-			print("Parsing " + pack["pack"] + " pack: \"" + pack["display_name"] + "\"")
+			#print("Parsing " + pack["pack"] + " pack: \"" + pack["display_name"] + "\"")
 			all_packs.append(pack)
 			if pack["owned_by_default"] == 1:
 				owned_packs.append(pack)
@@ -69,17 +73,17 @@ func _update_shop_upgrades():
 func purchase_upgrade(upg: String):
 	if upg not in upgrades:
 		print("Error: invalid upgrade")
-		return
+		return false
 	
 	if Player.wallet < upgrades[upg]["cost"]:
 		print("Not enough money")
-		return
+		return false
 	
 	Player.wallet -= upgrades[upg]["cost"]
 	upgrades[upg]["owned"] += 1
 	upgrades[upg]["cost"] = int(upgrades[upg]["cost"] * upgrades[upg]["cost_mult"])
-	
 	_update_shop_upgrades()
+	return true
 
 func get_upgrade_title(upg: String):
 	if upg not in upgrades:

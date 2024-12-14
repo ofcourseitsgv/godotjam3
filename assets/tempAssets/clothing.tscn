@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcnot8aw53gfb"]
+[gd_scene load_steps=9 format=3 uid="uid://dcnot8aw53gfb"]
 
 [ext_resource type="Script" path="res://assets/tempAssets/clothing.gd" id="1_c3bkd"]
 [ext_resource type="Texture2D" uid="uid://70ypirtyon6o" path="res://assets/art/clothing1.png" id="2_skdsn"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="3_so3im"]
+[ext_resource type="AudioStream" uid="uid://dpa8ip7g8s4sy" path="res://assets/audio/button-hover.ogg" id="4_u55wv"]
+[ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="5_6entd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c15dm"]
 bg_color = Color(0, 0, 0, 0.678431)
@@ -58,4 +60,12 @@ bbcode_enabled = true
 text = "[center][color=3f1f16]Insert Clothing Name Here
 $0[/color][/center]"
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u55wv")
+max_polyphony = 5
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6entd")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

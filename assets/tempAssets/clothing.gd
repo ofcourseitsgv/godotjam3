@@ -63,6 +63,7 @@ func set_enabled():
 	clothing_button.disabled = false
 
 func _on_button_toggled(toggled_on: bool) -> void:
+	$ClickSfx.play()
 	if toggled_on:
 		#print("Selected ", clothing_name, ", attributes: ", attributes, ", colors: ", colors)
 		is_selected = true
@@ -89,3 +90,7 @@ func _update_tooltip():
 		tooltip += Enums.color_to_string(c) + ", "
 	tooltip = tooltip.left(-2)
 	clothing_button.tooltip_text = tooltip
+
+
+func _on_button_mouse_entered() -> void:
+	$HoverSfx.play()

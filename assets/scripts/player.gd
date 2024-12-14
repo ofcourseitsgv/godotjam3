@@ -6,7 +6,7 @@ static var reputation: int
 
 func _init():
 	player_name = "Mira G."
-	wallet = 40
+	wallet = 40777
 	reputation = 10
 
 func _reset():

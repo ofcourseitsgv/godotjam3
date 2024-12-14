@@ -13,9 +13,17 @@ func _process(delta: float) -> void:
 	GlobalOptions.music_volume = $CanvasLayer/MusicVol.value
 	GlobalOptions.sfx_volume = $CanvasLayer/SfxVol.value
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		self.queue_free()
+	$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 
 
 func _on_return_button_pressed() -> void:
 	self.queue_free()
+
+
+func _on_return_button_mouse_entered() -> void:
+	$HoverSfx.play()
+
+
+func _on_sfx_vol_value_changed(value: float) -> void:
+	if not $HoverSfx.playing:
+		$HoverSfx.play()
