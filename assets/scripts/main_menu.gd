@@ -9,6 +9,9 @@ var is_transitioning = false
 
 var showing_tutorial := false
 
+const beginning_cutscene = preload("res://assets/scenes/beginning_cutscene.tscn")
+const tutorial = preload("res://assets/scenes/tutorial.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	logo_start_pos = $Logo.position
@@ -31,8 +34,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("toggle_tutorial"):
 		if not showing_tutorial:
-			var tutorial = preload("res://assets/scenes/tutorial.tscn").instantiate()
-			add_child(tutorial)
+			var t = tutorial.instantiate()
+			add_child(t)
 			showing_tutorial = true
 		else:
 			showing_tutorial = false
@@ -68,7 +71,7 @@ func transition():
 	tween.play()
 	music_tween.play()
 	await get_tree().create_timer(1).timeout
-	get_tree().change_scene_to_file("res://assets/scenes/beginning_cutscene.tscn")
+	get_tree().change_scene_to_packed(beginning_cutscene)
 
 
 func _on_credits_button_mouse_entered() -> void:

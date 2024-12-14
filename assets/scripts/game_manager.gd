@@ -57,6 +57,8 @@ var fail_flag := false
 
 var showing_tutorial := false
 
+var is_editing_text := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	my_items = $RequestCanvas/TabletBg/MyItemsBg/ScrollContainer/MasterGrid
@@ -165,7 +167,7 @@ func _process(delta: float) -> void:
 		fail_flag = false
 		_fail_game()
 	
-	if Input.is_action_just_pressed("toggle_tutorial"):
+	if Input.is_action_just_pressed("toggle_tutorial") and not is_editing_text:
 		if not showing_tutorial:
 			var tutorial = preload("res://assets/scenes/tutorial.tscn").instantiate()
 			add_child(tutorial)
@@ -872,4 +874,24 @@ func _on_trendy_button_mouse_entered() -> void:
 
 
 func _on_request_trendy_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_player_name_edit_focus_entered() -> void:
+	is_editing_text = true
+	click_sfx()
+
+
+func _on_player_name_edit_focus_exited() -> void:
+	is_editing_text = false
+	hover_sfx()
+
+
+func _on_shop_name_edit_focus_entered() -> void:
+	is_editing_text = true
+	click_sfx()
+
+
+func _on_shop_name_edit_focus_exited() -> void:
+	is_editing_text = false
 	hover_sfx()

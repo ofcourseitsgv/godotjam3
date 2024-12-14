@@ -1229,7 +1229,11 @@ stream = ExtResource("20_n1wdk")
 [node name="ChachingSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_olv4x")
 
+[connection signal="focus_entered" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_focus_entered"]
+[connection signal="focus_exited" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_focus_exited"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
+[connection signal="focus_entered" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_focus_entered"]
+[connection signal="focus_exited" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_focus_exited"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]
 [connection signal="mouse_entered" from="HubCanvas/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/StartButton" to="." method="_on_start_button_pressed"]

@@ -14,6 +14,8 @@ var current_line: int
 
 var is_transitioning: bool
 
+const play_scene = preload("res://assets/scenes/play.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -77,7 +79,7 @@ func transition(to_black: bool):
 		tween.play()
 		music_tween.play()
 		await get_tree().create_timer(1).timeout
-		get_tree().change_scene_to_file("res://assets/scenes/play.tscn")
+		get_tree().change_scene_to_packed(play_scene)
 		return
 	
 	tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,0), 1)
