@@ -617,7 +617,11 @@ func _display_rewards_text(money: int, rep: int):
 	if money > 0:
 		rewards += "+$" + str(money) + ",  "
 	rewards += "+" if rep >= 0 else ""
-	rewards += str(rep) + " rep[/center]"
+	rewards += str(rep) + " rep"
+	if current_day % 5 == 0:
+		rewards += "\nNew apparel pack available!"
+	
+	rewards += "[/center]"
 	$HUD/RewardsText.text = rewards
 	$HUD/RewardsText.modulate = Color(1,1,1,1)
 	$HUD/RewardsText.visible = true
@@ -646,6 +650,22 @@ func _update_progression():
 		client_color_bag.append(new_col)
 		print("new color: " + str(new_col))
 	
+	# every 5 days, add new pack
+	if current_day % 5 == 0:
+		var packs = Shop.all_packs.duplicate()
+		packs.shuffle()
+		var picked_pack
+		for _i in packs.size():
+			if (packs[_i] not in Shop.buyable_packs) and (packs[_i] not in Shop.owned_packs):
+				picked_pack = packs[_i]
+				break
+		if not picked_pack:
+			print("No new packs available")
+		elif Shop.make_pack_buyable(picked_pack):
+			print("new pack: " + picked_pack["pack"])
+		else:
+			print("Error: invalid pack")
+	
 	# every 6 days, increase max colors/attributes
 	if current_day % 6 == 0:
 		client_base_pay += 10
@@ -672,11 +692,7 @@ func _display_apparel_store():
 		n.queue_free()
 	
 	# add items
-	for dict in Shop.all_packs:
-		if dict in Shop.owned_packs:
-			#print(dict["pack"] + " already owned")
-			continue
-		
+	for dict in Shop.buyable_packs:
 		var new_pack_grid: PackGridPurchasable = pack_grid_purchasable_prefab.instantiate()
 		new_pack_grid.init_child_references()
 		new_pack_grid.setup(dict)

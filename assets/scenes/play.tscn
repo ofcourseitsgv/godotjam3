@@ -91,7 +91,6 @@ text = "Day X"
 scroll_active = false
 
 [node name="RewardsText" type="RichTextLabel" parent="HUD"]
-visible = false
 z_index = 20
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,10 +111,12 @@ theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]+$60, +10 rep[/center]"
+fit_content = true
 scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8

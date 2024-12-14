@@ -3,6 +3,7 @@ extends Node
 static var shop_name: String
 static var upgrades: Dictionary
 static var all_packs: Array
+static var buyable_packs: Array
 static var owned_packs: Array
 
 static var all_clothes: Array
@@ -25,6 +26,7 @@ func _init() -> void:
 		"social_media": {"owned": 0, "cost": 250, "cost_mult": 1.15}
 	}
 	all_packs = []
+	buyable_packs = []
 	owned_packs = []
 	all_clothes = []
 	owned_clothes = []
@@ -55,14 +57,22 @@ func _init_parse():
 					owned_clothes.append(clothing)
 
 func purchase_pack(pack_name: String):
-	for dict in all_packs:
+	for dict in buyable_packs:
 		if dict["pack"] == pack_name and dict["pack"] not in owned_clothes:
 			if Player.wallet >= dict["cost"]:
 				Player.wallet -= dict["cost"]
 				owned_packs.append(dict)
+				var ind = buyable_packs.find(dict)
+				buyable_packs.remove_at(ind)
 				
 				for clothing in dict["clothes"]:
 					owned_clothes.append(clothing)
+
+func make_pack_buyable(pack: Dictionary):
+	if pack not in buyable_packs and pack not in owned_packs:
+		buyable_packs.append(pack)
+		return true
+	return false
 
 func _update_shop_upgrades():
 	max_rerolls = 1 + upgrades["crates"]["owned"]
