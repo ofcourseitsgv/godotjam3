@@ -1,5 +1,7 @@
 extends Node2D
 
+signal dialogue_clicked
+
 var current_day := 1
 var my_items: Node
 var client_items: Node
@@ -91,7 +93,9 @@ func _ready() -> void:
 	
 	update_loading_text()
 	
-	#$Bgm.play()
+	$FailCanvas.visible = false
+	
+	$Bgm.play()
 	
 	transition(0)
 
@@ -149,11 +153,13 @@ func _process(delta: float) -> void:
 		_fail_game()
 
 func _fail_game():
-	$HUD/RewardsText.text = "Your business failed..."
-	$HUD/RewardsText
-	await transition(1, [], [], 3)
-	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
-	
+	$FailCanvas.visible = true
+	var x = await transition(1, [], [], 2)
+	x.change_scene_to_file("res://assets/scenes/main_menu.tscn")
+
+func _input(event):
+	if event.is_action_pressed("dialogue_key"):
+		dialogue_clicked.emit()
 
 func _on_shop_upgrade_button_pressed() -> void:
 	#print("TODO: shop upgrade")
@@ -449,9 +455,9 @@ func transition(mode: int, from_canvases = [], to_canvases = [], fadetime = 1.0)
 			# end / to black
 			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), fadetime)
 			tween.play()
-			await _wait(fadetime + 1)
+			await _wait(fadetime + 3)
 			
-			return
+			return get_tree()
 		2:
 			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), fadetime)
 			tween.play()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
-[ext_resource type="Texture2D" uid="uid://dldsvkggd6fwg" path="res://assets/tempAssets/tempbg.png" id="2_3lnoc"]
+[ext_resource type="Texture2D" uid="uid://cevgw1kq8gnxn" path="res://assets/art/shop-bg-2.png" id="2_fwga3"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="2_il7yf"]
 [ext_resource type="Texture2D" uid="uid://bup5kocwkr5ev" path="res://assets/tempAssets/requestbg.png" id="3_dx30f"]
 [ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="4_jhvn3"]
@@ -23,9 +23,9 @@
 script = ExtResource("1_bq4hd")
 
 [node name="BgShop" type="Sprite2D" parent="."]
-modulate = Color(0.58, 0.50112, 0.4408, 0.584314)
+modulate = Color(0.61, 0.58804, 0.5856, 1)
 position = Vector2(960, 540)
-texture = ExtResource("2_3lnoc")
+texture = ExtResource("2_fwga3")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -113,7 +113,6 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -1097,6 +1096,40 @@ theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 63
 bbcode_enabled = true
 text = "[center]Return[/center]"
+
+[node name="FailCanvas" type="CanvasLayer" parent="."]
+layer = 69
+visible = false
+
+[node name="FailText" type="RichTextLabel" parent="FailCanvas"]
+z_index = 20
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.5
+offset_top = -49.5
+offset_right = 403.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]Your business has failed...[/center]"
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="FailCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="text_changed" from="HubCanvas/NameEditors/PlayerNameEdit" to="." method="_on_player_name_edit_text_changed"]
 [connection signal="text_changed" from="HubCanvas/NameEditors/ShopNameEdit" to="." method="_on_shop_name_edit_text_changed"]

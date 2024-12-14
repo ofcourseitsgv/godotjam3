@@ -31,6 +31,9 @@ func _init() -> void:
 	popular_client_chance = 1
 	_init_parse()
 
+func _reset():
+	_init()
+
 func _init_parse():
 	var file = "res://assets/scripts/clothes.json"
 	var json_as_text = FileAccess.get_file_as_string(file)
