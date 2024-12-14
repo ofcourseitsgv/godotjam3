@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=23 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://cevgw1kq8gnxn" path="res://assets/art/shop-bg-2.png" id="2_fwga3"]
@@ -22,6 +22,14 @@
 [ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="20_n1wdk"]
 [ext_resource type="AudioStream" uid="uid://crpc2nisjwfkc" path="res://assets/audio/chaching.mp3" id="21_olv4x"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5sfv"]
+content_margin_top = 20.0
+bg_color = Color(0.4891, 0.73, 0.645685, 0.905882)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Play" type="Node2D"]
 script = ExtResource("1_bq4hd")
 
@@ -37,6 +45,7 @@ metadata/_edit_lock_ = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="PlayerName" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
@@ -116,7 +125,6 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -267,6 +275,55 @@ theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]Purchase Apparel[/center]"
 
+[node name="TrendyButton" type="TextureButton" parent="HubCanvas"]
+offset_left = 100.0
+offset_top = 938.0
+offset_right = 447.0
+offset_bottom = 1012.0
+toggle_mode = true
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TrendyPopup" type="PopupPanel" parent="HubCanvas/TrendyButton"]
+transparent_bg = true
+position = Vector2i(315, 620)
+size = Vector2i(820, 270)
+theme_override_styles/panel = SubResource("StyleBoxFlat_s5sfv")
+
+[node name="TrendyContainer" type="HBoxContainer" parent="HubCanvas/TrendyButton/TrendyPopup"]
+offset_top = 20.0
+offset_right = 820.0
+offset_bottom = 270.0
+
+[node name="Clothing" parent="HubCanvas/TrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing2" parent="HubCanvas/TrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing3" parent="HubCanvas/TrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing4" parent="HubCanvas/TrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/TrendyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]View Trending Clothes[/center]"
+
 [node name="DialogueCanvas" type="CanvasLayer" parent="."]
 layer = 4
 visible = false
@@ -286,6 +343,7 @@ offset_right = 448.0
 offset_bottom = 1080.0
 texture = ExtResource("7_bvmy2")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="TextureRect" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
 layout_mode = 0
@@ -345,13 +403,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Player" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
+[node name="Npc" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
 layout_mode = 0
 offset_left = 1472.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("7_bvmy2")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="TextureRect" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
 layout_mode = 0
@@ -1153,6 +1212,7 @@ stream = ExtResource("21_olv4x")
 [connection signal="pressed" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_pressed"]
 [connection signal="mouse_entered" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]
+[connection signal="toggled" from="HubCanvas/TrendyButton" to="." method="_on_trendy_button_toggled"]
 [connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_mouse_entered"]

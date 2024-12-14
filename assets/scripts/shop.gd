@@ -9,6 +9,8 @@ static var owned_packs: Array
 static var all_clothes: Array
 static var owned_clothes: Array
 
+static var trendy_clothes: Array
+
 static var max_rerolls: int
 static var max_client_item_number: int
 
@@ -30,6 +32,8 @@ func _init() -> void:
 	owned_packs = []
 	all_clothes = []
 	owned_clothes = []
+	
+	trendy_clothes = []
 	
 	max_rerolls = 1
 	max_client_item_number = 3
@@ -131,3 +135,19 @@ func get_upgrade_description(upg: String):
 			str += " (" + str(popular_client_chance) + "% chance)"
 	
 	return str
+
+func generate_trendy():
+	trendy_clothes.clear()
+	
+	var randomized_clothes = all_clothes.duplicate()
+	randomized_clothes.shuffle()
+	
+	for _i in 4:
+		var c = randomized_clothes.pop_front()
+		trendy_clothes.append(c)
+	
+	print("new trends!")
+	return trendy_clothes
+
+func get_trendy():
+	return trendy_clothes

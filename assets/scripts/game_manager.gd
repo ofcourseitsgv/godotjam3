@@ -14,6 +14,9 @@ var available_rerolls: int
 var current_client: Client
 var is_popular := false
 
+var new_trendy_chance := 15
+var has_trends_updated := false
+
 var master_dialogue: Dictionary
 var current_dialogue: Array
 var current_dialogue_index: int
@@ -36,8 +39,8 @@ var pack_grid_prefab = preload("res://assets/scenes/pack_grid.tscn")
 var pack_grid_purchasable_prefab = preload("res://assets/scenes/pack_grid_purchasable.tscn")
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
-const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
-const popular_client_names = ["Benguet", "Angel"]
+const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel", "Jeremy", "Oswald", "Maria"]
+const popular_client_names = ["Benguet", "Angel", "Him", "Hymn"]
 
 var client_base_pay = 15
 var client_attribute_bag = [Enums.Attributes.SILLY, Enums.Attributes.CUTE, Enums.Attributes.FORMAL, Enums.Attributes.SIMPLE]
@@ -98,6 +101,8 @@ func _ready() -> void:
 	$FailCanvas.visible = false
 	
 	$Bgm.play()
+	
+	update_trends()
 	
 	transition(0)
 
@@ -606,9 +611,15 @@ func _resolve_dialogue():
 				if is_popular:
 					rep_gained -= int(randi_range(10, 10 + err * 3) * Shop.reputation_mult)
 		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$HubCanvas], 0.5)
+		var trendy_roll = randi_range(1, 100)
+		if trendy_roll <= new_trendy_chance:
+			update_trends()
+			has_trends_updated = true
 		_display_rewards_text(money_gained, rep_gained)
 		Player.wallet += money_gained
 		Player.reputation += rep_gained
+		
+		
 		current_day += 1
 		chaching_sfx()
 
@@ -620,7 +631,8 @@ func _display_rewards_text(money: int, rep: int):
 	rewards += str(rep) + " rep"
 	if current_day % 5 == 0:
 		rewards += "\nNew apparel pack available!"
-	
+	if has_trends_updated:
+		rewards += "\n\nThe current trends have changed!"
 	rewards += "[/center]"
 	$HUD/RewardsText.text = rewards
 	$HUD/RewardsText.modulate = Color(1,1,1,1)
@@ -698,6 +710,21 @@ func _display_apparel_store():
 		new_pack_grid.setup(dict)
 		store_items.add_child(new_pack_grid)
 		
+
+func update_trends():
+	var trends = Shop.generate_trendy()
+	var trendy_box = $HubCanvas/TrendyButton/TrendyPopup/TrendyContainer
+	for n in trendy_box.get_children():
+		trendy_box.remove_child(n)
+		n.queue_free()
+	
+	for clothing in trends:
+		var clothing_instance: Clothing = clothing_prefab.instantiate()
+		clothing_instance.init_child_references()
+		clothing_instance.setup(clothing["clothing_name"], clothing["file"], clothing["cost"], 
+				clothing["attributes"], clothing["colors"], clothing["type"])
+		
+		trendy_box.add_child(clothing_instance)
 
 func _display_shop_upgrades():
 	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1.text = Shop.get_upgrade_title("crates")
@@ -793,3 +820,10 @@ func _on_purchase_4_mouse_entered() -> void:
 
 func _on_return_button_2_mouse_entered() -> void:
 	hover_sfx()
+
+
+func _on_trendy_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		$HubCanvas/TrendyButton/TrendyPopup.popup()
+	else:
+		$HubCanvas/TrendyButton/TrendyPopup.hide()
