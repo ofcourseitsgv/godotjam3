@@ -332,8 +332,11 @@ func client_check():
 	
 	var chosen_atts = []
 	var chosen_cols = []
+	
+	var chosen_clothes = []
 	for clothing: Clothing in client_items.get_children():
 		if clothing.is_selected:
+			chosen_clothes.append(clothing)
 			for a in clothing.attributes:
 				chosen_atts.append(a)
 			for c in clothing.colors:
@@ -351,10 +354,25 @@ func client_check():
 			var index = remaining_cols.find(chosen_col)
 			remaining_cols.remove_at(index)
 	
+	var selected_trendy = false
+	for trend: Dictionary in Shop.trendy_clothes:
+		for c: Clothing in chosen_clothes:
+			if trend["clothing_name"] == c.clothing_name:
+				selected_trendy = true
+				print("trendy clothes!")
+	
+	var error_mark = 1
+	if selected_trendy:
+		error_mark += 1
+	
 	var num_mistakes = _get_number_mistakes(remaining_atts, remaining_cols)
-	if num_mistakes <= 0:
+	
+	if is_popular and not selected_trendy:
+		num_mistakes = 999
+	
+	if num_mistakes < error_mark:
 		current_client.satisfied()
-	elif num_mistakes == 1:
+	elif num_mistakes <= error_mark:
 		current_client.okay()
 	else:
 		current_client.dissatisfied()
@@ -598,11 +616,13 @@ func _resolve_dialogue():
 				rep_gained += int(randi_range(5,10) * Shop.reputation_mult)
 				if is_popular:
 					rep_gained += int(randi_range(50,100) * Shop.reputation_mult)
+					money_gained += randi_range(25, 50)
 			Client.SatisfactionValue.OKAY:
 				money_gained += current_client.base_price
 				rep_gained += int(randi_range(0, 4) * Shop.reputation_mult)
 				if is_popular:
 					rep_gained += int(randi_range(10,40) * Shop.reputation_mult)
+					money_gained += randi_range(10, 25)
 			_:
 				money_gained += int(current_client.base_price / 2)
 				var err = client_attribute_number + client_color_number
@@ -823,6 +843,13 @@ func _on_return_button_2_mouse_entered() -> void:
 
 
 func _on_trendy_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		$HubCanvas/TrendyButton/TrendyPopup.popup()
+	else:
+		$HubCanvas/TrendyButton/TrendyPopup.hide()
+
+
+func _on_request_trendy_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$HubCanvas/TrendyButton/TrendyPopup.popup()
 	else:

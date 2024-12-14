@@ -125,6 +125,7 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -464,7 +465,6 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -668,6 +668,56 @@ theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Available Items[/center]"
+
+[node name="RequestTrendyButton" type="TextureButton" parent="RequestCanvas/TabletBg"]
+offset_left = 122.0
+offset_top = 697.0
+offset_right = 469.0
+offset_bottom = 771.0
+toggle_mode = true
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TrendyPopup" type="PopupPanel" parent="RequestCanvas/TabletBg/RequestTrendyButton"]
+auto_translate_mode = 1
+position = Vector2i(405, 440)
+size = Vector2i(820, 270)
+theme_override_styles/panel = SubResource("StyleBoxFlat_s5sfv")
+
+[node name="TrendyContainer" type="HBoxContainer" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup"]
+visible = false
+offset_top = 20.0
+offset_right = 820.0
+offset_bottom = 270.0
+
+[node name="Clothing" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing2" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing3" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="Clothing4" parent="RequestCanvas/TabletBg/RequestTrendyButton/TrendyPopup/TrendyContainer" instance=ExtResource("8_mc235")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RequestCanvas/TabletBg/RequestTrendyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]View Trending Clothes[/center]"
 
 [node name="CompleteRequestBg" type="TextureRect" parent="RequestCanvas"]
 visible = false
@@ -1217,6 +1267,7 @@ stream = ExtResource("21_olv4x")
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="toggled" from="RequestCanvas/TabletBg/RequestTrendyButton" to="." method="_on_request_trendy_button_toggled"]
 [connection signal="mouse_entered" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="mouse_entered" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Purchase1" to="." method="_on_purchase_1_mouse_entered"]
