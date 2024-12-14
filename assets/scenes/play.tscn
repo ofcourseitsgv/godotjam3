@@ -48,6 +48,7 @@ metadata/_edit_lock_ = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="PlayerName" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
@@ -506,6 +507,7 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -1240,9 +1242,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -403.5
-offset_top = -49.5
+offset_top = -460.0
 offset_right = 403.5
-offset_bottom = 49.5
+offset_bottom = -361.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -1255,12 +1257,38 @@ bbcode_enabled = true
 text = "[center]Your business has failed...[/center]"
 scroll_active = false
 
+[node name="Stats" type="RichTextLabel" parent="FailCanvas"]
+z_index = 20
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -830.0
+offset_top = -304.0
+offset_right = 830.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]Money Earned: $xxxxx
+Reputation Gained: xxxx rep.
+Days Lasted: xx days[/center]"
+scroll_active = false
+
 [node name="Panel" type="Panel" parent="FailCanvas"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="FailCanvas"]
 modulate = Color(1, 1, 1, 0.835294)
@@ -1270,6 +1298,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_4y6b2")
+metadata/_edit_lock_ = true
 
 [node name="HoverSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_71w03")

@@ -56,6 +56,8 @@ var loading_text_state := 0
 var store_items: Node
 
 var fail_flag := false
+var total_money_earned := 0
+var total_rep_gained := 0
 
 var showing_tutorial := false
 
@@ -100,6 +102,8 @@ func _ready() -> void:
 	npc_dialogue_text = $DialogueCanvas/NpcDialogue/TextureRect2/DialogueText
 	
 	available_rerolls = 0
+	total_money_earned = 0
+	total_rep_gained = 0
 	
 	update_loading_text()
 	
@@ -181,7 +185,12 @@ func _process(delta: float) -> void:
 
 func _fail_game():
 	$FailCanvas.visible = true
-	var x = await transition(1, [], [], 4)
+	var stats = $FailCanvas/Stats
+	var stats_string := "Money Earned: $" + str(total_money_earned) 
+	stats_string += "\nReputation Gained: " + str(total_rep_gained) + " rep."
+	stats_string += "\nDays Lasted: " + str(current_day - 1) + " days"
+	stats.text = _centered_text(stats_string)
+	var x = await transition(1, [], [], 10)
 	x.change_scene_to_file("res://assets/scenes/main_menu.tscn")
 
 func _input(event):
@@ -653,7 +662,8 @@ func _resolve_dialogue():
 		_display_rewards_text(money_gained, rep_gained)
 		Player.wallet += money_gained
 		Player.reputation += rep_gained
-		
+		total_money_earned += money_gained
+		total_rep_gained += rep_gained
 		
 		current_day += 1
 		chaching_sfx()

@@ -171,6 +171,7 @@ max_polyphony = 5
 stream = ExtResource("11_ya385")
 
 [node name="CreditsScreen" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Panel" type="Panel" parent="CreditsScreen"]
 anchors_preset = 15
