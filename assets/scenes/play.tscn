@@ -683,6 +683,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Panel" type="Panel" parent="ShopUpgradeCanvas"]
 anchors_preset = 15
@@ -798,7 +799,7 @@ bbcode_enabled = true
 text = "[center]Purchase[/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1"]
+[node name="Desc1" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -861,7 +862,7 @@ bbcode_enabled = true
 text = "[center]Purchase[/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2"]
+[node name="Desc2" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -924,7 +925,7 @@ bbcode_enabled = true
 text = "[center]Purchase[/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3"]
+[node name="Desc3" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -987,7 +988,7 @@ bbcode_enabled = true
 text = "[center]Purchase[/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4"]
+[node name="Desc4" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1078,4 +1079,8 @@ text = "[center]Return[/center]"
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Purchase1" to="." method="_on_purchase_1_pressed"]
+[connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2/Purchase2" to="." method="_on_purchase_2_pressed"]
+[connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3/Purchase3" to="." method="_on_purchase_3_pressed"]
+[connection signal="pressed" from="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Purchase4" to="." method="_on_purchase_4_pressed"]
 [connection signal="pressed" from="ApparelStoreCanvas/ReturnButton" to="." method="_on_return_button_pressed"]

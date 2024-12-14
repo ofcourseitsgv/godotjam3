@@ -139,7 +139,8 @@ func _process(delta: float) -> void:
 
 
 func _on_shop_upgrade_button_pressed() -> void:
-	print("TODO: shop upgrade")
+	#print("TODO: shop upgrade")
+	_display_shop_upgrades()
 	await transition(2, [$HubCanvas], [$ShopUpgradeCanvas, $HUD], 0.25)
 
 func _on_clothes_upgrade_button_pressed() -> void:
@@ -585,6 +586,35 @@ func _display_apparel_store():
 		store_items.add_child(new_pack_grid)
 		
 
+func _display_shop_upgrades():
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1.text = Shop.get_upgrade_title("crates")
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Desc1.text = Shop.get_upgrade_description("crates")
+	
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2.text = Shop.get_upgrade_title("wardrobe")
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2/Desc2.text = Shop.get_upgrade_description("wardrobe")
+	
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3.text = Shop.get_upgrade_title("decor")
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3/Desc3.text = Shop.get_upgrade_description("decor")
+	
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4.text = Shop.get_upgrade_title("social_media")
+	$ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Desc4.text = Shop.get_upgrade_description("social_media")
 
 func _on_return_button_pressed() -> void:
 	transition(2, [$ApparelStoreCanvas, $ShopUpgradeCanvas], [$HubCanvas], 0.25)
+
+
+func _on_purchase_1_pressed() -> void:
+	Shop.purchase_upgrade("crates")
+	_display_shop_upgrades()
+
+func _on_purchase_2_pressed() -> void:
+	Shop.purchase_upgrade("wardrobe")
+	_display_shop_upgrades()
+
+func _on_purchase_3_pressed() -> void:
+	Shop.purchase_upgrade("decor")
+	_display_shop_upgrades()
+
+func _on_purchase_4_pressed() -> void:
+	Shop.purchase_upgrade("social_media")
+	_display_shop_upgrades()
