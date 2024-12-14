@@ -45,7 +45,6 @@ metadata/_edit_lock_ = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 10
-visible = false
 
 [node name="PlayerName" type="RichTextLabel" parent="HUD"]
 offset_left = 8.0
@@ -125,7 +124,6 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -465,6 +463,7 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -1238,11 +1237,13 @@ stream = ExtResource("21_olv4x")
 [connection signal="pressed" from="HubCanvas/ShopUpgradeButton" to="." method="_on_shop_upgrade_button_pressed"]
 [connection signal="mouse_entered" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_mouse_entered"]
 [connection signal="pressed" from="HubCanvas/ClothesUpgradeButton" to="." method="_on_clothes_upgrade_button_pressed"]
+[connection signal="mouse_entered" from="HubCanvas/TrendyButton" to="." method="_on_trendy_button_mouse_entered"]
 [connection signal="toggled" from="HubCanvas/TrendyButton" to="." method="_on_trendy_button_toggled"]
 [connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="mouse_entered" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_mouse_entered"]
 [connection signal="pressed" from="RequestCanvas/TabletBg/ClientItemsBg/Buttons/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="mouse_entered" from="RequestCanvas/TabletBg/RequestTrendyButton" to="." method="_on_request_trendy_button_mouse_entered"]
 [connection signal="toggled" from="RequestCanvas/TabletBg/RequestTrendyButton" to="." method="_on_request_trendy_button_toggled"]
 [connection signal="mouse_entered" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="pressed" from="ShopUpgradeCanvas/ReturnButton" to="." method="_on_return_button_pressed"]

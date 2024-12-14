@@ -26,6 +26,9 @@ func _process(delta: float) -> void:
 		$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 		$ClickSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 	
+	if not $BGM.playing:
+		$BGM.play()
+	
 	if Input.is_action_just_pressed("toggle_tutorial"):
 		if not showing_tutorial:
 			var tutorial = preload("res://assets/scenes/tutorial.tscn").instantiate()

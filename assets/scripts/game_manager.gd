@@ -100,7 +100,7 @@ func _ready() -> void:
 	update_loading_text()
 	
 	$FailCanvas.visible = false
-	
+	var x: AudioStreamPlayer = $Bgm
 	$Bgm.play()
 	
 	update_trends()
@@ -110,6 +110,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not $Bgm.playing:
+		$Bgm.play()
 	update_hud()
 	$Bgm.volume_db = linear_to_db(GlobalOptions.music_volume)
 	$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
@@ -850,6 +852,7 @@ func _on_return_button_2_mouse_entered() -> void:
 
 
 func _on_trendy_button_toggled(toggled_on: bool) -> void:
+	click_sfx()
 	if toggled_on:
 		$HubCanvas/TrendyButton/TrendyPopup.popup()
 	else:
@@ -857,7 +860,16 @@ func _on_trendy_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_request_trendy_button_toggled(toggled_on: bool) -> void:
+	click_sfx()
 	if toggled_on:
 		$HubCanvas/TrendyButton/TrendyPopup.popup()
 	else:
 		$HubCanvas/TrendyButton/TrendyPopup.hide()
+
+
+func _on_trendy_button_mouse_entered() -> void:
+	hover_sfx()
+
+
+func _on_request_trendy_button_mouse_entered() -> void:
+	hover_sfx()
