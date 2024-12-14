@@ -14,6 +14,8 @@ var available_rerolls: int
 var current_client: Client
 var is_popular := false
 
+var has_new_pack := false
+
 var new_trendy_chance := 15
 var has_trends_updated := false
 var has_selected_trendy := false
@@ -26,10 +28,10 @@ var player_speaker_text: RichTextLabel
 var player_dialogue_text: RichTextLabel
 var npc_speaker_text: RichTextLabel
 var npc_dialogue_text: RichTextLabel
-const NUM_START_DIALOGUES = 2
-const NUM_SUCCESS_DIALOGUES = 2
-const NUM_OKAY_DIALOGUES = 2
-const NUM_FAIL_DIALOGUES = 2
+const NUM_START_DIALOGUES = 4
+const NUM_SUCCESS_DIALOGUES = 3
+const NUM_OKAY_DIALOGUES = 4
+const NUM_FAIL_DIALOGUES = 5
 
 const MAX_DAYS = 60
 
@@ -154,6 +156,8 @@ func _process(delta: float) -> void:
 						other_clothing.set_disabled()
 			c.just_deselected = false
 	
+	$RequestCanvas/TabletBg/ClientItemsBg/Buttons/RerollButton.text = "Re-Gather (" + str(available_rerolls) + "/" + str(Shop.max_rerolls) + ")"
+	
 	# upgrade store layout
 	for g: PackGridPurchasable in store_items.get_children():
 		if g.just_purchased:
@@ -177,7 +181,7 @@ func _process(delta: float) -> void:
 
 func _fail_game():
 	$FailCanvas.visible = true
-	var x = await transition(1, [], [], 2)
+	var x = await transition(1, [], [], 4)
 	x.change_scene_to_file("res://assets/scenes/main_menu.tscn")
 
 func _input(event):
@@ -660,8 +664,9 @@ func _display_rewards_text(money: int, rep: int):
 		rewards += "+$" + str(money) + ",  "
 	rewards += "+" if rep >= 0 else ""
 	rewards += str(rep) + " rep"
-	if current_day % 5 == 0:
+	if has_new_pack:
 		rewards += "\nNew apparel pack available!"
+		has_new_pack = false
 	if has_trends_updated:
 		rewards += "\n\nThe current trends have changed!"
 	rewards += "[/center]"
@@ -693,8 +698,11 @@ func _update_progression():
 		client_color_bag.append(new_col)
 		print("new color: " + str(new_col))
 	
-	# every 5 days, add new pack
-	if current_day % 5 == 0:
+	# each day, 19% chance to unlock new pack
+	var new_pack_roll = randi_range(1, 100)
+	const new_pack_chance = 19
+	if new_pack_roll <= new_pack_chance:
+		has_new_pack = true
 		var packs = Shop.all_packs.duplicate()
 		packs.shuffle()
 		var picked_pack

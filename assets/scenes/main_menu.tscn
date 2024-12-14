@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cab2tsib78lo4"]
+[gd_scene load_steps=13 format=3 uid="uid://cab2tsib78lo4"]
 
 [ext_resource type="FontFile" uid="uid://dhihjkq7t2vni" path="res://assets/fonts/Coming_Soon/ComingSoon-Regular.ttf" id="1_8lr7f"]
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_kjd3y"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ce1jijw03ladr" path="res://assets/art/Light_button.png" id="6_qhc88"]
 [ext_resource type="AudioStream" uid="uid://dpa8ip7g8s4sy" path="res://assets/audio/button-hover.ogg" id="10_jjurs"]
 [ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="11_ya385"]
+[ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="12_aevgj"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_kjd3y")
@@ -169,8 +170,93 @@ max_polyphony = 5
 [node name="ClickSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_ya385")
 
+[node name="CreditsScreen" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CreditsScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="RichTextLabel" parent="CreditsScreen"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -381.0
+offset_top = 36.0
+offset_right = 381.0
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_fonts/bold_font = ExtResource("4_hs33e")
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center][b]Credits[/b][/center]"
+
+[node name="MusicVolText" type="RichTextLabel" parent="CreditsScreen"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -932.0
+offset_top = -864.0
+offset_right = 932.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("12_aevgj")
+theme_override_fonts/bold_font = ExtResource("4_hs33e")
+theme_override_font_sizes/normal_font_size = 55
+theme_override_font_sizes/bold_font_size = 70
+bbcode_enabled = true
+text = "[center]Programmer
+Gyle
+
+Art Assets
+Salteabun
+
+Composer / Sound Designer
+Gyle[/center]"
+scroll_active = false
+
+[node name="ReturnFromCreditsButton" type="TextureButton" parent="CreditsScreen"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -216.0
+offset_right = 245.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_may6n")
+texture_pressed = ExtResource("5_3utn0")
+texture_hover = ExtResource("6_qhc88")
+
+[node name="ReturnFromCredits" type="RichTextLabel" parent="CreditsScreen/ReturnFromCreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_right = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_hs33e")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Return[/center]"
+
 [connection signal="mouse_entered" from="CanvasLayer/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/OptionsButton" to="." method="_on_options_button_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="CreditsScreen/ReturnFromCreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="pressed" from="CreditsScreen/ReturnFromCreditsButton" to="." method="_on_return_from_credits_button_pressed"]

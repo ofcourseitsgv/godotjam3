@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dfx2cud6lkkex"]
+[gd_scene load_steps=26 format=3 uid="uid://dfx2cud6lkkex"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_manager.gd" id="1_bq4hd"]
 [ext_resource type="Texture2D" uid="uid://cevgw1kq8gnxn" path="res://assets/art/shop-bg-2.png" id="2_fwga3"]
@@ -14,10 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://dcnot8aw53gfb" path="res://assets/tempAssets/clothing.tscn" id="8_mc235"]
 [ext_resource type="AudioStream" uid="uid://bka0lmyoukkbc" path="res://assets/audio/Play-final2.mp3" id="8_qigwv"]
 [ext_resource type="Texture2D" uid="uid://b2slnxss7sa4t" path="res://assets/art/client-items-bg.png" id="10_41gul"]
+[ext_resource type="Texture2D" uid="uid://cvusc166gehpb" path="res://assets/art/Namebx_.png" id="10_e7ina"]
 [ext_resource type="Texture2D" uid="uid://ctvt7uel58pmj" path="res://assets/art/request-windows.png" id="11_0haxk"]
+[ext_resource type="Texture2D" uid="uid://mp7d6lpjb03m" path="res://assets/art/Textbx.png" id="11_634a1"]
 [ext_resource type="Texture2D" uid="uid://ktudgqcceu0j" path="res://assets/art/IMG_0670.png" id="11_ppjai"]
 [ext_resource type="PackedScene" uid="uid://6418m4gbc8aa" path="res://assets/scenes/pack_grid.tscn" id="12_4u0sy"]
 [ext_resource type="PackedScene" uid="uid://d08wk6r5haw02" path="res://assets/scenes/pack_grid_purchasable.tscn" id="18_vo7xu"]
+[ext_resource type="Texture2D" uid="uid://dvnrdukdhymdo" path="res://assets/art/fail-bg.png" id="19_4y6b2"]
 [ext_resource type="AudioStream" uid="uid://dpa8ip7g8s4sy" path="res://assets/audio/button-hover.ogg" id="19_71w03"]
 [ext_resource type="AudioStream" uid="uid://bv2lq2g6d6s5k" path="res://assets/audio/button-click.mp3" id="20_n1wdk"]
 [ext_resource type="AudioStream" uid="uid://crpc2nisjwfkc" path="res://assets/audio/chaching.mp3" id="21_olv4x"]
@@ -124,6 +127,7 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -328,7 +332,6 @@ layer = 4
 visible = false
 
 [node name="PlayerDialogue" type="Control" parent="DialogueCanvas"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,6 +340,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" type="TextureRect" parent="DialogueCanvas/PlayerDialogue"]
+visible = false
 layout_mode = 0
 offset_right = 448.0
 offset_bottom = 1080.0
@@ -344,19 +348,33 @@ texture = ExtResource("7_bvmy2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 704.0
-offset_right = 1240.0
-offset_bottom = 784.0
-color = Color(0.870588, 0.678431, 0.647059, 1)
+[node name="TextureRect" type="TextureRect" parent="DialogueCanvas/PlayerDialogue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -952.0
+offset_top = -546.0
+offset_right = -6.0
+offset_bottom = -221.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("10_e7ina")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="SpeakerText" type="RichTextLabel" parent="DialogueCanvas/PlayerDialogue/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 128.0
+offset_right = -96.0
+offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
@@ -368,20 +386,32 @@ theme_override_font_sizes/normal_font_size = 65
 theme_override_font_sizes/bold_font_size = 65
 bbcode_enabled = true
 text = "[color=4c2b21]Mira[/color]"
+scroll_active = false
 
-[node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/PlayerDialogue"]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 808.0
-offset_right = 1856.0
-offset_bottom = 1024.0
-color = Color(0.870588, 0.678431, 0.647059, 1)
+[node name="TextureRect2" type="TextureRect" parent="DialogueCanvas/PlayerDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = 590.0
+offset_right = 66.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_634a1")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DialogueText" type="RichTextLabel" parent="DialogueCanvas/PlayerDialogue/TextureRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 186.0
+offset_top = 202.0
+offset_right = -188.0
+offset_bottom = -228.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
@@ -391,10 +421,9 @@ theme_override_fonts/normal_font = ExtResource("2_il7yf")
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
 text = "Insert text here! I like to eat beans! Rehehehehe!"
-visible_characters = 0
-visible_ratio = 0.0
 
 [node name="NpcDialogue" type="Control" parent="DialogueCanvas"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -403,6 +432,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Npc" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
+visible = false
 layout_mode = 0
 offset_left = 1472.0
 offset_right = 1920.0
@@ -411,19 +441,25 @@ texture = ExtResource("7_bvmy2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+[node name="TextureRect" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 704.0
-offset_right = 792.0
-offset_bottom = 784.0
-color = Color(0.870588, 0.678431, 0.647059, 1)
+offset_left = 8.0
+offset_top = 534.0
+offset_right = 954.0
+offset_bottom = 859.0
+texture = ExtResource("10_e7ina")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="SpeakerText" type="RichTextLabel" parent="DialogueCanvas/NpcDialogue/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 128.0
+offset_right = -96.0
+offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
@@ -435,20 +471,27 @@ theme_override_font_sizes/normal_font_size = 65
 theme_override_font_sizes/bold_font_size = 65
 bbcode_enabled = true
 text = "[color=4c2b21]Mira[/color]"
+scroll_active = false
 
-[node name="TextureRect2" type="ColorRect" parent="DialogueCanvas/NpcDialogue"]
+[node name="TextureRect2" type="TextureRect" parent="DialogueCanvas/NpcDialogue"]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 808.0
-offset_right = 1408.0
-offset_bottom = 1024.0
-color = Color(0.870588, 0.678431, 0.647059, 1)
+offset_left = -84.0
+offset_top = 590.0
+offset_right = 1986.0
+offset_bottom = 1225.0
+texture = ExtResource("11_634a1")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DialogueText" type="RichTextLabel" parent="DialogueCanvas/NpcDialogue/TextureRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 186.0
+offset_top = 202.0
+offset_right = -188.0
+offset_bottom = -228.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.439216)
@@ -463,7 +506,6 @@ visible_ratio = 0.0
 
 [node name="RequestCanvas" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="BG" type="TextureRect" parent="RequestCanvas"]
 modulate = Color(0.64, 0.598933, 0.5696, 0.686275)
@@ -669,6 +711,7 @@ bbcode_enabled = true
 text = "[center]Available Items[/center]"
 
 [node name="RequestTrendyButton" type="TextureButton" parent="RequestCanvas/TabletBg"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 697.0
 offset_right = 387.0
@@ -1218,6 +1261,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="FailCanvas"]
+modulate = Color(1, 1, 1, 0.835294)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_4y6b2")
 
 [node name="HoverSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_71w03")

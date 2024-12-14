@@ -52,14 +52,64 @@
 		}
 	],
 	
-	"success_0": [
+	"generic_start_2": [
 		{
-			"speaker": "client",
-			"text": "omg this is awesome ily tysm heres ur money"
+			"speaker": "player",
+			"text": "After a nice cup of coffee and some good rest, I'm ready for the day!"
 		},
 		{
 			"speaker": "player",
-			"text": "hehehehe MONEY!!!! *dances*"
+			"text": "I can get used to this lifestyle already."
+		},
+		{
+			"speaker": "client",
+			"text": "Howdy! This is a nice place ya got here. It's pretty cozy."
+		},
+		{
+			"speaker": "player",
+			"text": "Haha, thank you! How may I help you?"
+		},
+		{
+			"speaker": "client",
+			"text": "I'm lookin' for a nice little fit that I can get for a future endeavor of mine! I gotta dress to impress!"
+		},
+		{
+			"speaker": "player",
+			"text": "Hoo boy, I got just the wardrobe you need!"
+		}
+	],
+	
+	"generic_start_3": [
+		{
+			"speaker": "player",
+			"text": "*yawns*"
+		},
+		{
+			"speaker": "player",
+			"text": "That was a good sleep, especially after yesterday... Let's see how today goes."
+		},
+		{
+			"speaker": "client",
+			"text": "Hello there! I'm here for a new outfit!"
+		},
+		{
+			"speaker": "player",
+			"text": "You came to the right place! What kind of style are you going for?"
+		}
+	],
+	
+	"success_0": [
+		{
+			"speaker": "client",
+			"text": "Oh. My. Gosh. This is awesome! I love you, thank you so much. Here's an extra tip, because more people NEED to go here."
+		},
+		{
+			"speaker": "player",
+			"text": "I'm so happy to hear that, and thank you for the tip! It would help if you leave a 5 star rating on Kelp!"
+		},
+		{
+			"speaker": "client",
+			"text": "I am one step ahead of you, don't even worry about it."
 		}
 	],
 	
@@ -77,6 +127,21 @@
 			"text": "LOVE IT! THIS IS PERFECT!!! You really know your stuff!! I gotta tell all my friends about this place. Here's some extra tip!"
 		}
 	],
+	
+	"success_2": [
+		{
+			"speaker": "player",
+			"text": "There you go, all done! You look fabulous in that."
+		},
+		{
+			"speaker": "client",
+			"text": "Why, thank you so much! This ensemble is lovely! This shop is so charming, I have to go here again."
+		},
+		{
+			"speaker": "player",
+			"text": "Aww, you flatter me! Heheh."
+		}
+	],
 
 	"fail_0": [
 		{
@@ -85,7 +150,7 @@
 		},
 		{
 			"speaker":"client",
-			"text": "erm... what the scallop"
+			"text": "Eh, it... it's fine, I suppose."
 		}
 	],
 	
@@ -105,6 +170,55 @@
 		{
 			"speaker": "client",
 			"text": "I really appreciate the fit, though!"
+		}
+	],
+	
+	"fail_2": [
+		{
+			"speaker": "client",
+			"text": "Hmm..."
+		},
+		{
+			"speaker": "player",
+			"text": "What's up? Is there anything you need?"
+		},
+		{
+			"speaker": "client",
+			"text": "This is...certainly something. It is quite unique. It is the most outfit ever."
+		},
+		{
+			"speaker": "player",
+			"text": "(I'm not sure what that means, but they probably don't like it...)"
+		}
+	],
+	
+	"fail_3": [
+		{
+			"speaker": "client",
+			"text": "Sorry chief... but this isn't exactly what I was looking for."
+		},
+		{
+			"speaker": "player",
+			"text": "(Darn it... Can't say that I didn't try, though.)"
+		},
+		{
+			"speaker": "player",
+			"text": "I'm sorry about that. I hope you have a great rest of your day!"
+		}
+	],
+	
+	"fail_4": [
+		{
+			"speaker": "client",
+			"text": "..."
+		},
+		{
+			"speaker": "player",
+			"text": "..."
+		},
+		{
+			"speaker": "player",
+			"text": "(This is awkward... but I'm gonna take this silence as dissatisfaction.)"
 		}
 	],
 
@@ -134,7 +248,45 @@
 		},
 		{
 			"speaker": "client",
-			"text": "Of course I like it, this will definitely work!"
+			"text": "Of course I like it! Yes, this will work."
+		}
+	],
+	
+	"okay_2": [
+		{
+			"speaker": "client",
+			"text": "Oooh..."
+		},
+		{
+			"speaker": "player",
+			"text": "What are your thoughts?"
+		},
+		{
+			"speaker": "client",
+			"text": "This is... Well..."
+		},
+		{
+			"speaker": "client",
+			"text": "It's pretty darn good, that's what it is. I can get used to a look like this."
+		},
+		{
+			"speaker": "player",
+			"text": "Phew, you scared me! Haha! Thank you for stopping by!"
+		}
+	],
+	
+	"okay_3": [
+		{
+			"speaker": "client",
+			"text": "Not too shabby..."
+		},
+		{
+			"speaker": "player",
+			"text": "Hey, I'll take that!"
+		},
+		{
+			"speaker": "client",
+			"text": "This is a nice place you have here! I'll be coming back soon, just you wait."
 		}
 	]
 }

@@ -17,6 +17,8 @@ func _ready() -> void:
 	logo_start_pos = $Logo.position
 	$BGM.volume_db = linear_to_db(GlobalOptions.music_volume)
 	$BGM.play()
+	$CreditsScreen.visible = false
+	$CrossfadeCanvas.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -84,3 +86,11 @@ func _on_options_button_mouse_entered() -> void:
 
 func _on_start_button_mouse_entered() -> void:
 	_hover_sfx()
+
+
+func _on_credits_button_pressed() -> void:
+	$CreditsScreen.visible = true
+
+
+func _on_return_from_credits_button_pressed() -> void:
+	$CreditsScreen.visible = false

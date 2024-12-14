@@ -18,7 +18,7 @@
 					"clothing_name": "Nice Orange Dress",
 					"file": "",
 					"cost": 0,
-					"attributes": [2, 7],
+					"attributes": [2, 3],
 					"colors": [1],
 					"type": 2
 				},
@@ -35,7 +35,7 @@
 					"file": "",
 					"cost": 0,
 					"attributes": [1],
-					"colors": [6, 3],
+					"colors": [6, 3, 0],
 					"type": 0
 				},
 				{
@@ -50,7 +50,7 @@
 					"clothing_name": "Tall Top Hat",
 					"file": "",
 					"cost": 0,
-					"attributes": [3, 8],
+					"attributes": [3],
 					"colors": [7],
 					"type": 4
 				}
@@ -77,7 +77,7 @@
 					"cost": 0,
 					"attributes": [0, 4],
 					"colors": [7],
-					"type": 0
+					"type": 1
 				},
 				{
 					"clothing_name": "Knitted Gloves",
@@ -94,6 +94,14 @@
 					"attributes": [4],
 					"colors": [0],
 					"type": 4
+				},
+				{
+					"clothing_name": "Pink Socks",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 2, 4],
+					"colors": [9],
+					"type": 5
 				}
 			]
 		},
@@ -102,7 +110,7 @@
 			"pack": "formal",
 			"display_name": "Formal Pack",
 			"owned_by_default": 0,
-			"cost": 300,
+			"cost": 350,
 			"clothes": [
 				{
 					"clothing_name": "Suit",
@@ -135,6 +143,22 @@
 					"attributes": [3],
 					"colors": [6],
 					"type": 3
+				},
+				{
+					"clothing_name": "Red High Heels",
+					"file": "",
+					"cost": 0,
+					"attributes": [3],
+					"colors": [0],
+					"type": 3
+				},
+				{
+					"clothing_name": "Very Fancy Watch",
+					"file": "",
+					"cost": 0,
+					"attributes": [3],
+					"colors": [2],
+					"type": 5
 				}
 			]
 		},
@@ -143,7 +167,7 @@
 			"pack": "gym",
 			"display_name": "Gym Essentials",
 			"owned_by_default": 0,
-			"cost": 200,
+			"cost": 175,
 			"clothes": [
 				{
 					"clothing_name": "Running Shorts",
@@ -154,7 +178,7 @@
 					"type": 1
 				},
 				{
-					"clothing_name": "Just a Tank Top.",
+					"clothing_name": "Just a Tank Top",
 					"file": "",
 					"cost": 0,
 					"attributes": [0, 5, 7],
@@ -175,6 +199,79 @@
 					"cost": 0,
 					"attributes": [7],
 					"colors": [9],
+					"type": 5
+				},
+				{
+					"clothing_name": "Fitted Tee",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 4, 7],
+					"colors": [4, 7],
+					"type": 0
+				},
+				{
+					"clothing_name": "Drawstring Bag",
+					"file": "",
+					"cost": 0,
+					"attributes": [7],
+					"colors": [2, 4],
+					"type": 5
+				},
+				{
+					"clothing_name": "HydroBottle",
+					"file": "",
+					"cost": 0,
+					"attributes": [7],
+					"colors": [3],
+					"type": 5
+				}
+			]
+		},
+		
+		{
+			"pack": "school",
+			"display_name": "Back to School!",
+			"owned_by_default": 0,
+			"cost": 90,
+			"clothes": [
+				{
+					"clothing_name": "Khakis",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 8],
+					"colors": [2],
+					"type": 1
+				},
+				{
+					"clothing_name": "White Polo Shirt",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 8],
+					"colors": [6],
+					"type": 0
+				},
+				{
+					"clothing_name": "Navy Blue Polo Shirt",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 8],
+					"colors": [4],
+					"type": 0
+				},
+				{
+					"clothing_name": "Checkered Blouse",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 2, 8],
+					"colors": [0, 7],
+					"type": 1
+				},
+				{
+					"clothing_name": "Simple Backpack",
+					"file": "",
+					"cost": 0,
+					"attributes": [7, 8],
+					"colors": [8],
 					"type": 5
 				}
 			]
@@ -217,8 +314,162 @@
 					"attributes": [0, 6],
 					"colors": [8],
 					"type": 0
+				},
+				{
+					"clothing_name": "Checkered Deck of Playing Cards",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": [0, 7, 6],
+					"type": 5
+				},
+				{
+					"clothing_name": "Computer Mouse Cursor",
+					"file": "",
+					"cost": 0,
+					"attributes": [1],
+					"colors": [7],
+					"type": 4
+				},
+				{
+					"clothing_name": "Generic Game HUD",
+					"file": "",
+					"cost": 0,
+					"attributes": [1, 6],
+					"colors": [7, 8, 6],
+					"type": 4
+				},
+				{
+					"clothing_name": "Plauge Doctor Mask",
+					"file": "",
+					"cost": 0,
+					"attributes": [6],
+					"colors": [7],
+					"type": 4
 				}
 			]
-		}
+		},
+		
+		{
+			"pack": "beach",
+			"display_name": "By the Beach",
+			"owned_by_default": 0,
+			"cost": 255,
+			"clothes": [
+				{
+					"clothing_name": "Flowery Button-Up",
+					"file": "",
+					"cost": 0,
+					"attributes": [5, 7],
+					"colors": [3, 2, 0, 1, 9, 5],
+					"type": 0
+				},
+				{
+					"clothing_name": "Flowery Shorts",
+					"file": "",
+					"cost": 0,
+					"attributes": [5, 7],
+					"colors": [3, 2, 0, 1, 9, 5],
+					"type": 1
+				},
+				{
+					"clothing_name": "Slim Shades",
+					"file": "",
+					"cost": 0,
+					"attributes": [5],
+					"colors": [7],
+					"type": 5
+				},
+				{
+					"clothing_name": "Fake Coconut Cup (w/ Straw)",
+					"file": "",
+					"cost": 0,
+					"attributes": [1, 5],
+					"colors": [8, 4, 6],
+					"type": 5
+				},
+				{
+					"clothing_name": "Sun Cap",
+					"file": "",
+					"cost": 0,
+					"attributes": [5],
+					"colors": [2],
+					"type": 4
+				},
+				{
+					"clothing_name": "Green Sandals",
+					"file": "",
+					"cost": 0,
+					"attributes": [5],
+					"colors": [3],
+					"type": 3
+				},
+				{
+					"clothing_name": "Purple Slippers",
+					"file": "",
+					"cost": 0,
+					"attributes": [5],
+					"colors": [3],
+					"type": 3
+				}
+			]
+		},
+		
+		{
+			"pack": "silly",
+			"display_name": "The Silly Goofy Kit: Remastered",
+			"owned_by_default": 0,
+			"cost": 175,
+			"clothes": [
+				{
+					"clothing_name": "Clown Nose",
+					"file": "",
+					"cost": 0,
+					"attributes": [1],
+					"colors": [0],
+					"type": 5
+				},
+				{
+					"clothing_name": "Wiggy's Wig",
+					"file": "",
+					"cost": 0,
+					"attributes": [1, 6],
+					"colors": [8, 7],
+					"type": 5
+				},
+				{
+					"clothing_name": "Santa Hat",
+					"file": "",
+					"cost": 0,
+					"attributes": [1],
+					"colors": [0, 6],
+					"type": 4
+				},
+				{
+					"clothing_name": "Green Screen Body Suit",
+					"file": "",
+					"cost": 0,
+					"attributes": [0, 1, 6],
+					"colors": [3, 3],
+					"type": 2
+				},
+				{
+					"clothing_name": "Invisible Pants...?",
+					"file": "",
+					"cost": 0,
+					"attributes": [],
+					"colors": [],
+					"type": 1
+				},
+				{
+					"clothing_name": "Oversized Orange Boots",
+					"file": "",
+					"cost": 0,
+					"attributes": [1],
+					"colors": [1],
+					"type": 3
+				}
+			]
+		},
 	]
 }
