@@ -89,6 +89,7 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -388,6 +389,7 @@ texture = ExtResource("3_dx30f")
 metadata/_edit_lock_ = true
 
 [node name="Client" type="TextureRect" parent="RequestCanvas"]
+visible = false
 offset_left = 192.0
 offset_top = 432.0
 offset_right = 320.0
@@ -681,18 +683,34 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
-visible = false
+
+[node name="Panel" type="Panel" parent="ShopUpgradeCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="ReturnButton" type="TextureButton" parent="ShopUpgradeCanvas"]
-offset_left = 1427.0
-offset_top = 938.0
-offset_right = 1896.0
-offset_bottom = 1038.0
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -234.5
+offset_top = -168.0
+offset_right = 234.5
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
 stretch_mode = 6
+metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ReturnButton"]
 layout_mode = 1
@@ -707,6 +725,281 @@ theme_override_fonts/normal_font = ExtResource("4_jhvn3")
 theme_override_font_sizes/normal_font_size = 63
 bbcode_enabled = true
 text = "[center]Return[/center]"
+
+[node name="ShopUpgradeBg" type="TextureRect" parent="ShopUpgradeCanvas"]
+z_index = 1
+offset_left = -248.0
+offset_right = 1970.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("7_skquw")
+expand_mode = 1
+stretch_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopUpgradeCanvas/ShopUpgradeBg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 704.0
+offset_top = 112.0
+offset_right = -498.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Upgrade1" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 50
+text = "Storage Crates - $xxxx"
+fit_content = true
+scroll_active = false
+
+[node name="Purchase1" type="TextureButton" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1"]
+z_index = 5
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -36.5
+offset_bottom = 36.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1/Purchase1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 14.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Purchase[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 25
+text = "\"Gives you 1 more Re-Gather to change your clothing options!\"
+You currently have x."
+
+[node name="Upgrade2" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 50
+text = "Bigger Wardrobe - $xxxx"
+fit_content = true
+scroll_active = false
+
+[node name="Purchase2" type="TextureButton" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2"]
+z_index = 5
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -36.5
+offset_bottom = 36.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2/Purchase2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 14.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Purchase[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 25
+text = "\"Adds 1 more clothing option per available selection.\"
+You currently have x."
+
+[node name="Upgrade3" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 50
+text = "Nicer Decorations - $xxxx"
+fit_content = true
+scroll_active = false
+
+[node name="Purchase3" type="TextureButton" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3"]
+z_index = 5
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -36.5
+offset_bottom = 36.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3/Purchase3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 14.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Purchase[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 25
+text = "\"+0.2x multiplier to any reputation gained.\"
+You currently have x."
+
+[node name="Upgrade4" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 50
+text = "Social Media Post - $xxxx"
+fit_content = true
+scroll_active = false
+
+[node name="Purchase4" type="TextureButton" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4"]
+z_index = 5
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -36.5
+offset_bottom = 36.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_kcxah")
+texture_pressed = ExtResource("6_ao1w7")
+texture_hover = ExtResource("7_3w4tq")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4/Purchase4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 14.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_jhvn3")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Purchase[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUpgradeCanvas/ShopUpgradeBg/VBoxContainer/Upgrade4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 25
+text = "\"+2% chance to get a famous client! They'll boost your rep a lot.\"
+You currently have x."
 
 [node name="ApparelStoreCanvas" type="CanvasLayer" parent="."]
 layer = 4
