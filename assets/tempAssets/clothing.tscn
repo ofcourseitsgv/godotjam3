@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcnot8aw53gfb"]
+[gd_scene load_steps=7 format=3 uid="uid://dcnot8aw53gfb"]
 
 [ext_resource type="Script" path="res://assets/tempAssets/clothing.gd" id="1_c3bkd"]
 [ext_resource type="Texture2D" uid="uid://70ypirtyon6o" path="res://assets/art/clothing1.png" id="2_skdsn"]
 [ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="3_so3im"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c15dm"]
+bg_color = Color(0, 0, 0, 0.678431)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kucej"]
+bg_color = Color(0.3672, 0.68, 0.47668, 0.686275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxb4h"]
+bg_color = Color(0.73, 0.542633, 0.5256, 0.756863)
 
 [node name="Clothing" type="Control"]
 z_index = 7
@@ -22,6 +31,9 @@ offset_right = 64.0
 offset_bottom = 128.0
 grow_horizontal = 2
 tooltip_text = "Hewwo"
+theme_override_styles/disabled = SubResource("StyleBoxFlat_c15dm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kucej")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xxb4h")
 toggle_mode = true
 icon = ExtResource("2_skdsn")
 icon_alignment = 1

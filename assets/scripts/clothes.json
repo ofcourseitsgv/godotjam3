@@ -16,15 +16,15 @@
 				},
 				{
 					"clothing_name": "Nice Orange Dress",
-					"file": "clothing2.png",
+					"file": "",
 					"cost": 0,
 					"attributes": [2, 7],
 					"colors": [1],
 					"type": 2
 				},
 				{
-					"clothing_name": "Shiny Blue Tee",
-					"file": "clothing3.png",
+					"clothing_name": "Comfy Blue Tee",
+					"file": "",
 					"cost": 0,
 					"attributes": [0, 4],
 					"colors": [4],
@@ -61,22 +61,22 @@
 			"pack": "basic_boys",
 			"display_name": "Basic Boys",
 			"owned_by_default": 0,
-			"cost": 100,
+			"cost": 105,
 			"clothes": [
 				{
 					"clothing_name": "basic 1",
 					"file": "",
 					"cost": 0,
-					"attributes": [],
-					"colors": [],
+					"attributes": [0, 2],
+					"colors": [7],
 					"type": 1
 				},
 				{
 					"clothing_name": "basic 2",
 					"file": "",
 					"cost": 0,
-					"attributes": [],
-					"colors": [],
+					"attributes": [0, 5],
+					"colors": [6],
 					"type": 3
 				}
 			]
@@ -100,7 +100,7 @@
 					"clothing_name": "formal 2",
 					"file": "",
 					"cost": 0,
-					"attributes": [3],
+					"attributes": [3, 0],
 					"colors": [6, 7],
 					"type": 2
 				}

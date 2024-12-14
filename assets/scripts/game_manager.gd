@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_day := 0
+var current_day := 1
 var my_items: Node
 var client_items: Node
 
@@ -10,6 +10,7 @@ var client_items_array: Array
 var available_rerolls: int
 
 var current_client: Client
+var is_popular := false
 
 var master_dialogue: Dictionary
 var current_dialogue: Array
@@ -24,6 +25,8 @@ const NUM_SUCCESS_DIALOGUES = 2
 const NUM_OKAY_DIALOGUES = 2
 const NUM_FAIL_DIALOGUES = 2
 
+const MAX_DAYS = 60
+
 var prerequest_flag = false
 var postrequest_flag = false
 
@@ -32,6 +35,7 @@ var pack_grid_purchasable_prefab = preload("res://assets/scenes/pack_grid_purcha
 var clothing_prefab = preload("res://assets/tempAssets/clothing.tscn")
 
 const random_names = ["Jerry", "Sally", "Salt", "Gyle", "Slugon", "Bagel"]
+const popular_client_names = ["Benguet", "Angel"]
 
 var client_base_pay = 15
 var client_attribute_bag = [Enums.Attributes.SILLY, Enums.Attributes.CUTE, Enums.Attributes.FORMAL, Enums.Attributes.SIMPLE]
@@ -42,6 +46,8 @@ var client_color_number = 1
 var loading_text_state := 0
 
 var store_items: Node
+
+var fail_flag := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -55,6 +61,7 @@ func _ready() -> void:
 	$HubCanvas/NameEditors/ShopNameEdit.text = Shop.shop_name
 	
 	$HUD.visible = true
+	$HUD/RewardsText.visible = false
 	
 	$BgShop.visible = true
 	
@@ -135,8 +142,18 @@ func _process(delta: float) -> void:
 			_display_apparel_store()
 	
 	if Player.wallet <= 0 or Player.reputation <= 0:
-		print("end game")
+		fail_flag = true
+	
+	if fail_flag:
+		fail_flag = false
+		_fail_game()
 
+func _fail_game():
+	$HUD/RewardsText.text = "Your business failed..."
+	$HUD/RewardsText
+	await transition(1, [], [], 3)
+	get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+	
 
 func _on_shop_upgrade_button_pressed() -> void:
 	#print("TODO: shop upgrade")
@@ -149,12 +166,15 @@ func _on_clothes_upgrade_button_pressed() -> void:
 	await transition(2, [$HubCanvas], [$ApparelStoreCanvas, $HUD], 0.25)
 
 func _on_start_button_pressed() -> void:
-	current_day += 1
 	await transition(2, [$HubCanvas, $HubCanvas/NameEditors], [$HUD, $DialogueCanvas, $RequestCanvas/TabletBg], 0.5)
 	
 	# progression
 	_update_progression()
 	
+	var popular_roll = randi_range(1, 100)
+	if popular_roll <= Shop.popular_client_chance:
+		print("POPULAR CLIENT!")
+		is_popular = true
 	var att_num = randi_range(1, client_attribute_number)
 	var col_num = randi_range(1, client_color_number)
 	generate_random_client(client_base_pay, client_attribute_bag, att_num, client_color_bag, col_num)
@@ -230,7 +250,11 @@ func generate_client(client_name = "", client_base_price = 0, client_attributes 
 	current_client = Client.new(client_name, client_base_price, client_attributes, client_colors)
 
 func generate_random_client(base_price = 20, attribute_bag = [], num_attributes = 0, color_bag = [], num_colors = 0):
-	var random_name = random_names.pick_random()
+	var random_name: String
+	if is_popular:
+		random_name = popular_client_names.pick_random()
+	else:
+		random_name = random_names.pick_random()
 	
 	var att_bag_duplicate = attribute_bag.duplicate()
 	var col_bag_duplicate = color_bag.duplicate()
@@ -246,10 +270,11 @@ func generate_random_client(base_price = 20, attribute_bag = [], num_attributes 
 	for i in num_colors:
 		selected_cols.append(col_bag_duplicate.pop_front())
 	
-	var selected_price = base_price + (randi_range(0, 5) * 5)
+	var selected_price = base_price
+	for _i in range(num_attributes + num_colors):
+		selected_price += randi_range(1, 6) * (num_attributes + num_colors)
 
-	generate_client(random_name, base_price, selected_atts, selected_cols)
-	
+	generate_client(random_name, selected_price, selected_atts, selected_cols)
 
 func update_client_display(client: Client):
 	#var tooltip := ""
@@ -271,7 +296,7 @@ func update_client_display(client: Client):
 	
 	#$RequestCanvas/Client.tooltip_text = tooltip
 	
-	$RequestCanvas/ClientName.text = "[center]" + client.name + "[/center]"
+	$RequestCanvas/ClientName.text = _centered_text(_format_popular_client_text(client.name)) if is_popular else _centered_text(client.name)
 	$RequestCanvas/ClientNeeds.text = needs_text
 
 func client_check():
@@ -326,10 +351,14 @@ func update_check_display(chosen_atts: Array, chosen_cols: Array):
 	properties_text += "Attributes: "
 	for a in chosen_atts:
 		properties_text += Enums.attribute_to_string(a) + ", "
+	if chosen_atts.is_empty():
+		properties_text += "none--"
 	properties_text = properties_text.left(-2)
 	properties_text += "\nColors: "
 	for c in chosen_cols:
 		properties_text += Enums.color_to_string(c)+ ", "
+	if chosen_cols.is_empty():
+		properties_text += "none--"
 	properties_text = properties_text.left(-2)
 	#$RequestCanvas/CompleteRequestBg/Screen/SelectedPropertiesName.text = _format_dialogue_text(_centered_text("Selected Properties"))
 	$RequestCanvas/CompleteRequestBg/Screen/SelectedProperties.text = _format_dialogue_text(properties_text)
@@ -420,7 +449,7 @@ func transition(mode: int, from_canvases = [], to_canvases = [], fadetime = 1.0)
 			# end / to black
 			tween.tween_property($CrossfadeCanvas/Crossfade, "modulate", Color(1,1,1,1), fadetime)
 			tween.play()
-			await _wait(fadetime)
+			await _wait(fadetime + 1)
 			
 			return
 		2:
@@ -462,7 +491,7 @@ func _progress_dialogue():
 				$DialogueCanvas/NpcDialogue.visible = true
 				npc_dialogue_text.visible_characters = 0
 				npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-				npc_speaker_text.text = current_client.name
+				npc_speaker_text.text = current_client.name if not is_popular else _format_popular_client_text(current_client.name)
 		else:
 			#print("finish dialogue")
 			in_dialogue = false
@@ -486,7 +515,7 @@ func start_dialogue(dialogue_name: String):
 		$DialogueCanvas/NpcDialogue.visible = true
 		npc_dialogue_text.visible_characters = 0
 		npc_dialogue_text.text = current_dialogue[current_dialogue_index]["text"]
-		npc_speaker_text.text = current_client.name
+		npc_speaker_text.text = current_client.name if not is_popular else _format_popular_client_text(current_client.name)
 
 func _typewriter_effect():
 	var visible_characters
@@ -512,6 +541,9 @@ func _typewriter_effect():
 			_:
 				dialogue_box.visible_characters += 1
 
+func _format_popular_client_text(s: String):
+	return "[color=ffcf40]" + s + "[/color]"
+
 func _format_dialogue_text(s: String):
 	return "[color=4c2b21]" + s + "[/color]"
 
@@ -529,28 +561,59 @@ func _resolve_dialogue():
 		#start_request()
 	elif postrequest_flag:
 		postrequest_flag = false
+		var money_gained := 0
+		var rep_gained := 0
 		match current_client.satisfied_val:
 			Client.SatisfactionValue.SATISFIED:
-				Player.wallet += current_client.base_price + (randi_range(2, 6) * 5)
-				Player.reputation += randi_range(5,10)
+				money_gained += current_client.base_price + (randi_range(2, 6) * 5)
+				rep_gained += int(randi_range(5,10) * Shop.reputation_mult)
+				if is_popular:
+					rep_gained += int(randi_range(50,100) * Shop.reputation_mult)
 			Client.SatisfactionValue.OKAY:
-				Player.wallet += current_client.base_price
-				Player.reputation += randi_range(0, 4)
+				money_gained += current_client.base_price
+				rep_gained += int(randi_range(0, 4) * Shop.reputation_mult)
+				if is_popular:
+					rep_gained += int(randi_range(10,40) * Shop.reputation_mult)
 			_:
-				#Player.wallet += current_client.base_price
+				money_gained += int(current_client.base_price / 2)
 				var err = client_attribute_number + client_color_number
 				for _i in err:
-					Player.reputation -= randi_range(0, 4)
+					rep_gained -= int(randi_range(0, 4) * Shop.reputation_mult)
+				if is_popular:
+					rep_gained -= int(randi_range(10, 10 + err * 3) * Shop.reputation_mult)
 		await transition(2, [$DialogueCanvas, $RequestCanvas, $RequestCanvas/CompleteRequestBg, $DialogueCanvas/PlayerDialogue, $DialogueCanvas/NpcDialogue], [$HubCanvas], 0.5)
+		_display_rewards_text(money_gained, rep_gained)
+		Player.wallet += money_gained
+		Player.reputation += rep_gained
+		current_day += 1
+
+func _display_rewards_text(money: int, rep: int):
+	var rewards = "[center]"
+	if money > 0:
+		rewards += "+$" + str(money) + ",  "
+	rewards += "+" if rep >= 0 else ""
+	rewards += str(rep) + " rep[/center]"
+	$HUD/RewardsText.text = rewards
+	$HUD/RewardsText.modulate = Color(1,1,1,1)
+	$HUD/RewardsText.visible = true
+	await _wait(2)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($HUD/RewardsText, "modulate", Color(1,1,1,0), 3)
+	tween.play()
+	await _wait(3.1)
+	$HUD/RewardsText.visible = false
 
 func _update_progression():
-	if current_day % 2 == 0 and current_day % 4 != 0:
+	# every 3 days, add new attribute
+	if current_day % 3 == 0:
 		client_base_pay += 5
 		var all_atts = Enums.get_attributes()
 		var new_att = all_atts.pick_random()
 		client_attribute_bag.append(new_att)
 		print("new attribute: " + str(new_att))
 	
+	# every 4 days, add new color
 	if current_day % 4 == 0:
 		client_base_pay += 5
 		var all_cols = Enums.get_colors()
@@ -558,7 +621,8 @@ func _update_progression():
 		client_color_bag.append(new_col)
 		print("new color: " + str(new_col))
 	
-	if current_day % 7 == 0:
+	# every 6 days, increase max colors/attributes
+	if current_day % 6 == 0:
 		client_base_pay += 10
 		var c = randi_range(0, 5)
 		if c >= 0 and c <= 1:
@@ -567,6 +631,14 @@ func _update_progression():
 		else:
 			client_attribute_number += 1
 			print("+1 attribute")
+	
+	if current_day % 7 == 0:
+		print("Bills Day!")
+		# pay rent each week?
+	
+	if current_day >= MAX_DAYS:
+		print("LAST DAY!")
+		fail_flag = true
 
 func _display_apparel_store():
 	# clear items

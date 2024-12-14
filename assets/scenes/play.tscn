@@ -87,6 +87,30 @@ theme_override_font_sizes/normal_font_size = 42
 text = "Day X"
 scroll_active = false
 
+[node name="RewardsText" type="RichTextLabel" parent="HUD"]
+visible = false
+z_index = 20
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.5
+offset_top = -49.5
+offset_right = 403.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.486275)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_il7yf")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]+$60, +10 rep[/center]"
+scroll_active = false
+
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
 visible = false
@@ -172,6 +196,7 @@ texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
 stretch_mode = 6
+metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/StartButton"]
 layout_mode = 1
@@ -197,6 +222,7 @@ texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
 stretch_mode = 0
+metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/ShopUpgradeButton"]
 layout_mode = 1
@@ -222,6 +248,7 @@ texture_normal = ExtResource("5_kcxah")
 texture_pressed = ExtResource("6_ao1w7")
 texture_hover = ExtResource("7_3w4tq")
 stretch_mode = 0
+metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HubCanvas/ClothesUpgradeButton"]
 layout_mode = 1
