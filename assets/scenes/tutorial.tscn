@@ -1,3 +1,366 @@
-[gd_scene format=3 uid="uid://cvwl018wkyxmq"]
+[gd_scene load_steps=14 format=3 uid="uid://cvwl018wkyxmq"]
 
-[node name="Tutorial" type="Node2D"]
+[ext_resource type="Script" path="res://assets/scripts/tutorial.gd" id="1_f3ejd"]
+[ext_resource type="FontFile" uid="uid://d3sq1iry224is" path="res://assets/fonts/Cute_Dino/Cute Dino.ttf" id="2_u54us"]
+[ext_resource type="FontFile" uid="uid://4bhb5e1kjql6" path="res://assets/fonts/Sniglet/Sniglet-Regular.ttf" id="3_4m5ko"]
+[ext_resource type="Texture2D" uid="uid://bc54b2biduxie" path="res://assets/tempAssets/Green-Check-Mark-Transparent.png" id="3_sj71n"]
+[ext_resource type="Texture2D" uid="uid://bgdlq0w6oufto" path="res://assets/art/new-logo.png" id="4_blgq5"]
+[ext_resource type="Texture2D" uid="uid://h7ny4ds5pqq4" path="res://assets/art/screenshots/client-ask.png" id="5_hmb00"]
+[ext_resource type="Texture2D" uid="uid://c08d10vgefcsv" path="res://assets/art/screenshots/client-needs.png" id="6_k6en2"]
+[ext_resource type="Texture2D" uid="uid://dsg4i8dowrvoi" path="res://assets/art/screenshots/owned-items.png" id="7_0s6xy"]
+[ext_resource type="Texture2D" uid="uid://bc47lrcu5aqc8" path="res://assets/art/screenshots/available-items.png" id="8_eedve"]
+[ext_resource type="Texture2D" uid="uid://dvlv627hiq27d" path="res://assets/art/screenshots/selected-items.png" id="9_smmxl"]
+[ext_resource type="Texture2D" uid="uid://e6ar6apgualj" path="res://assets/art/screenshots/hub.png" id="10_t3utf"]
+[ext_resource type="Texture2D" uid="uid://cbpic1p7b6hhc" path="res://assets/art/screenshots/shop-upgrades.png" id="11_ufnga"]
+[ext_resource type="Texture2D" uid="uid://cfudcd1yb6vio" path="res://assets/art/screenshots/apparel-store.png" id="12_ckt11"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_f3ejd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Bg" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.06, 0.06, 0.819608)
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 150.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_u54us")
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center]Tutorial[/center]"
+metadata/_edit_lock_ = true
+
+[node name="Page0" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page0"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 624.0
+offset_right = 864.0
+offset_bottom = 896.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Welcome to Change of Pace! You are an amateur outfit designer trying to make a big business in the world. Your goal is to reach a high amount of \"reputation\" before two months pass."
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.5
+offset_top = -364.0
+offset_right = 316.5
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_blgq5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page1" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page1"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 624.0
+offset_right = 864.0
+offset_bottom = 896.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Each day, a client asks for an outfit. They will have specific \"attribute\" and \"color\" needs. You will need to make an outfit based on their needs and the available clothes you have."
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page1"]
+offset_left = 80.0
+offset_top = 150.0
+offset_right = 1313.0
+offset_bottom = 478.0
+texture = ExtResource("5_hmb00")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Page1"]
+offset_left = 1224.0
+offset_top = 304.0
+offset_right = 1800.0
+offset_bottom = 616.0
+texture = ExtResource("6_k6en2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page2" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text2" type="RichTextLabel" parent="CanvasLayer/Page2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -904.0
+offset_top = 336.0
+offset_right = -152.0
+offset_bottom = 681.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Your \"Owned Items\" shows you all of your owned clothes. This helps keep track of all the possible clothes you could randomly gather."
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page2"]
+offset_left = 826.0
+offset_top = 272.0
+offset_right = 1873.0
+offset_bottom = 768.0
+texture = ExtResource("7_0s6xy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page3" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text2" type="RichTextLabel" parent="CanvasLayer/Page3"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -552.0
+offset_top = 576.0
+offset_right = 960.0
+offset_bottom = 992.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "\"Available Items\" shows what clothes are currently available. You are only able to select clothes from this area here. If you don't like the current selection, you can Re-Gather your wardrobe to get new clothes from what you own.
+"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page3"]
+offset_left = 93.0
+offset_top = 152.0
+offset_right = 1129.0
+offset_bottom = 549.0
+texture = ExtResource("8_eedve")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page4" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page4"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 656.0
+offset_right = 864.0
+offset_bottom = 928.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "You want to select clothes that fit as many as the client's needs. It's okay to have extra attributes and colors; just make sure you don't miss too many needs!
+"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page4"]
+offset_left = 40.0
+offset_top = 128.0
+offset_right = 1273.0
+offset_bottom = 632.0
+texture = ExtResource("9_smmxl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Page4"]
+offset_left = 1296.0
+offset_top = 208.0
+offset_right = 1881.0
+offset_bottom = 536.0
+texture = ExtResource("6_k6en2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page5" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page5"]
+modulate = Color(0.662452, 0.662452, 0.662452, 1)
+offset_left = 312.0
+offset_top = 128.0
+offset_right = 1545.0
+offset_bottom = 818.0
+texture = ExtResource("10_t3utf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page5"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 704.0
+offset_right = 864.0
+offset_bottom = 976.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "After each day, you gain money (and potentially reputation). You can use this money to buy Shop Upgrades, or get some new Apparel Packs.
+"
+fit_content = true
+scroll_active = false
+
+[node name="Page6" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page6"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -864.0
+offset_top = 408.0
+offset_right = -56.0
+offset_bottom = 680.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Shop Upgrades are upgrades that help your overral run, such as more Re-Gathers."
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page6"]
+offset_left = 968.0
+offset_top = 176.0
+offset_right = 1769.0
+offset_bottom = 832.0
+texture = ExtResource("11_ufnga")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page7" type="CanvasLayer" parent="CanvasLayer"]
+layer = 101
+visible = false
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Page7"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 80.0
+offset_top = 376.0
+offset_right = 864.0
+offset_bottom = 652.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5ko")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Apparel Packs allow you to get more clothes in your wardrobe, which can then be selected for your clients.
+"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Page7"]
+offset_left = 48.0
+offset_top = 240.0
+offset_right = 1004.0
+offset_bottom = 738.0
+texture = ExtResource("12_ckt11")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NavButtons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -264.0
+offset_right = 248.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="Left" type="TextureButton" parent="CanvasLayer/NavButtons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_right = 84.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture_normal = ExtResource("3_sj71n")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Right" type="TextureButton" parent="CanvasLayer/NavButtons"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("3_sj71n")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="pressed" from="CanvasLayer/NavButtons/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/NavButtons/Right" to="." method="_on_right_pressed"]

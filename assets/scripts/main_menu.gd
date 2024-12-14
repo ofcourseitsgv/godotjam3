@@ -7,6 +7,8 @@ var time := 0.0
 
 var is_transitioning = false
 
+var showing_tutorial := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	logo_start_pos = $Logo.position
@@ -23,6 +25,14 @@ func _process(delta: float) -> void:
 		$BGM.volume_db = linear_to_db(GlobalOptions.music_volume)
 		$HoverSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
 		$ClickSfx.volume_db = linear_to_db(GlobalOptions.sfx_volume)
+	
+	if Input.is_action_just_pressed("toggle_tutorial"):
+		if not showing_tutorial:
+			var tutorial = preload("res://assets/scenes/tutorial.tscn").instantiate()
+			add_child(tutorial)
+			showing_tutorial = true
+		else:
+			showing_tutorial = false
 
 func _on_options_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://assets/scenes/options.tscn")

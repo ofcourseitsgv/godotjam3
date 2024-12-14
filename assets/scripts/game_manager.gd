@@ -51,6 +51,8 @@ var store_items: Node
 
 var fail_flag := false
 
+var showing_tutorial := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	my_items = $RequestCanvas/TabletBg/MyItemsBg/ScrollContainer/MasterGrid
@@ -113,7 +115,7 @@ func _process(delta: float) -> void:
 		# typewriter effect
 		_typewriter_effect()
 		
-		if Input.is_action_just_pressed("dialogue_key"):
+		if Input.is_action_just_pressed("dialogue_key") and not showing_tutorial:
 			_progress_dialogue()
 	
 	# disable other clothes of same type if one is selected
@@ -154,6 +156,14 @@ func _process(delta: float) -> void:
 	if fail_flag:
 		fail_flag = false
 		_fail_game()
+	
+	if Input.is_action_just_pressed("toggle_tutorial"):
+		if not showing_tutorial:
+			var tutorial = preload("res://assets/scenes/tutorial.tscn").instantiate()
+			add_child(tutorial)
+			showing_tutorial = true
+		else:
+			showing_tutorial = false
 
 func _fail_game():
 	$FailCanvas.visible = true

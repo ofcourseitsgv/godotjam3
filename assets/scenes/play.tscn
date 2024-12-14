@@ -116,7 +116,6 @@ scroll_active = false
 
 [node name="HubCanvas" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="Panel" type="Panel" parent="HubCanvas"]
 anchors_preset = 8
@@ -713,6 +712,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="ShopUpgradeCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Panel" type="Panel" parent="ShopUpgradeCanvas"]
 anchors_preset = 15

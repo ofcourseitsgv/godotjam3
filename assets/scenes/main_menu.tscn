@@ -23,22 +23,21 @@ centered = false
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -462.5
-offset_top = 159.0
-offset_right = 462.5
-offset_bottom = 278.0
+offset_left = -152.0
+offset_top = 920.0
+offset_right = 872.0
+offset_bottom = 1039.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_offset_x = 3
 theme_override_fonts/normal_font = ExtResource("1_8lr7f")
-theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[center]Change of Pace[/center]"
+text = "[center](Press [ T ] to toggle tutorial window)[/center]"
 
 [node name="StartButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
